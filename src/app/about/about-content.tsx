@@ -55,7 +55,7 @@ export function AboutPageContent() {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
             About
           </span>
-          <h1 className="mt-4 text-[clamp(2.5rem,6vw,5rem)] font-display font-bold uppercase tracking-tight">
+          <h1 className="mt-4 text-[clamp(2rem,6vw,5rem)] font-display font-bold uppercase tracking-tight">
             About Polar26
           </h1>
           <p className="mt-6 text-xl sm:text-2xl text-muted-foreground max-w-2xl leading-relaxed font-display uppercase tracking-tight">

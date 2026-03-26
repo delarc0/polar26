@@ -18,8 +18,13 @@ export function ParallaxBreak({ src, alt }: ParallaxBreakProps) {
     const image = imageRef.current;
     if (!section || !image) return;
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const isMobile = window.innerWidth < 640;
+
     const tween = gsap.to(image, {
-      y: -60,
+      y: isMobile ? -30 : -60,
       ease: "none",
       scrollTrigger: {
         trigger: section,

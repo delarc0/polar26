@@ -11,40 +11,46 @@ export function HeroSection() {
     const el = heroRef.current;
     if (!el) return;
 
-    const tl = gsap.timeline({ delay: 0.3 });
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const tl = gsap.timeline({ delay: prefersReducedMotion ? 0 : 0.3 });
 
-    tl.from(".hero-overline", {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-    })
-      .from(
-        ".hero-title .line",
-        {
-          y: "110%",
-          duration: 1.2,
-          ease: "power3.out",
-          stagger: 0.15,
-        },
-        "-=0.3"
-      )
-      .from(
-        ".hero-tagline",
-        {
-          opacity: 0,
-          y: 20,
-          duration: 0.6,
-        },
-        "-=0.5"
-      )
-      .from(
-        ".hero-scroll",
-        {
-          opacity: 0,
-          duration: 0.6,
-        },
-        "-=0.2"
-      );
+    if (prefersReducedMotion) {
+      // Skip animations, just ensure elements are visible
+      gsap.set([".hero-overline", ".hero-title .line", ".hero-tagline", ".hero-scroll"], { opacity: 1, y: 0 });
+    } else {
+      tl.from(".hero-overline", {
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+      })
+        .from(
+          ".hero-title .line",
+          {
+            y: "110%",
+            duration: 1.2,
+            ease: "power3.out",
+            stagger: 0.15,
+          },
+          "-=0.3"
+        )
+        .from(
+          ".hero-tagline",
+          {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+          },
+          "-=0.5"
+        )
+        .from(
+          ".hero-scroll",
+          {
+            opacity: 0,
+            duration: 0.6,
+          },
+          "-=0.2"
+        );
+    }
 
     return () => {
       tl.kill();
@@ -81,7 +87,7 @@ export function HeroSection() {
         {/* Title */}
         <div className="hero-title overflow-hidden">
           <div className="overflow-hidden">
-            <h1 className="line text-[clamp(3.5rem,10vw,10rem)] font-display font-extrabold uppercase tracking-[-0.03em] leading-[0.85]">
+            <h1 className="line text-[clamp(2.75rem,10vw,10rem)] font-display font-extrabold uppercase tracking-[-0.03em] leading-[0.85]">
               Polar26
             </h1>
           </div>
@@ -89,7 +95,7 @@ export function HeroSection() {
 
         {/* Tagline */}
         <p className="hero-tagline mt-6 sm:mt-8 text-lg sm:text-xl text-muted-foreground max-w-lg">
-          We turn bold ideas into visual stories that cut through the noise.
+          We make brands impossible to ignore.
         </p>
       </div>
 

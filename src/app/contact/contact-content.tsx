@@ -17,7 +17,7 @@ export function ContactPageContent() {
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
               Contact
             </span>
-            <h1 className="mt-4 text-[clamp(2.5rem,6vw,5rem)] font-display font-bold uppercase tracking-tight">
+            <h1 className="mt-4 text-[clamp(2rem,6vw,5rem)] font-display font-bold uppercase tracking-tight">
               Let&apos;s Talk
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-lg">
@@ -25,7 +25,7 @@ export function ContactPageContent() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 lg:gap-20">
             <div ref={formRef} className="lg:col-span-3">
               <ContactForm />
             </div>

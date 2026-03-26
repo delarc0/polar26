@@ -3,13 +3,13 @@
 import Image from "next/image";
 
 const CLIENTS = [
-  { name: "Pirelli", src: "/images/clients/pirelli.webp", width: 307, height: 80 },
-  { name: "Nordea", src: "/images/clients/nordea.webp", width: 187, height: 80 },
-  { name: "Honda HRC", src: "/images/clients/honda-hrc.webp", width: 66, height: 80 },
-  { name: "Yamaha", src: "/images/clients/yamaha.webp", width: 231, height: 80 },
-  { name: "Mekonomen", src: "/images/clients/mekonomen.webp", width: 161, height: 80 },
-  { name: "Fysiolollo", src: "/images/clients/fysiolollo.webp", width: 166, height: 80 },
-  { name: "Son of a Coder", src: "/images/clients/sonofacoder.webp", width: 226, height: 80 },
+  { name: "Pirelli", src: "/images/clients/pirelli.webp", width: 376, height: 80, className: "h-8 sm:h-10" },
+  { name: "Nordea", src: "/images/clients/nordea.webp", width: 187, height: 80, className: "h-10 sm:h-12" },
+  { name: "Honda HRC", src: "/images/clients/honda-hrc.webp", width: 66, height: 80, className: "h-8 sm:h-10" },
+  { name: "Yamaha", src: "/images/clients/yamaha.webp", width: 231, height: 80, className: "h-8 sm:h-10" },
+  { name: "Mekonomen", src: "/images/clients/mekonomen.webp", width: 161, height: 80, className: "h-8 sm:h-10" },
+  { name: "Fysiolollo", src: "/images/clients/fysiolollo.webp", width: 166, height: 80, className: "h-8 sm:h-10" },
+  { name: "Son of a Coder", src: "/images/clients/sonofacoder.webp", width: 226, height: 80, className: "h-8 sm:h-10" },
 ];
 
 export function ClientLogoMarquee() {
@@ -23,7 +23,7 @@ export function ClientLogoMarquee() {
         alt={client.name}
         width={client.width}
         height={client.height}
-        className="h-6 sm:h-8 w-auto brightness-0 invert opacity-40"
+        className={`${client.className} w-auto brightness-0 invert opacity-40`}
       />
     </div>
   ));

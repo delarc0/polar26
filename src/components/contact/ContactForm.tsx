@@ -58,7 +58,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 sm:space-y-6">
       <div>
         <Label htmlFor="name" className="text-sm text-muted-foreground">
           Name *
@@ -131,7 +131,7 @@ export function ContactForm() {
           id="message"
           {...register("message")}
           placeholder="Tell us about your project"
-          rows={5}
+          rows={4}
           className="mt-1.5 bg-secondary border-white/[0.06] text-foreground placeholder:text-muted-foreground resize-none"
         />
         {errors.message && (

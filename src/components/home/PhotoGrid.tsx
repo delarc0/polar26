@@ -1,16 +1,18 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState } from "react";
 import Image from "next/image";
-import { Play } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { GALLERY_ITEMS, type GalleryItem, type GalleryVideo } from "@/data/gallery";
 
 function VideoCard({ item }: { item: GalleryVideo }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const playVideo = useCallback(() => {
     videoRef.current?.play();
+    setIsPlaying(true);
   }, []);
 
   const pauseVideo = useCallback(() => {
@@ -18,22 +20,22 @@ function VideoCard({ item }: { item: GalleryVideo }) {
     if (!video) return;
     video.pause();
     video.currentTime = 0;
+    setIsPlaying(false);
   }, []);
+
+  const toggleVideo = useCallback(() => {
+    if (isPlaying) pauseVideo();
+    else playVideo();
+  }, [isPlaying, playVideo, pauseVideo]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        const video = videoRef.current;
-        if (!video) return;
-        if (video.paused) video.play();
-        else {
-          video.pause();
-          video.currentTime = 0;
-        }
+        toggleVideo();
       }
     },
-    []
+    [toggleVideo]
   );
 
   return (
@@ -42,10 +44,9 @@ function VideoCard({ item }: { item: GalleryVideo }) {
       role="button"
       tabIndex={0}
       aria-label={`Play video: ${item.alt}`}
+      onClick={toggleVideo}
       onMouseEnter={playVideo}
       onMouseLeave={pauseVideo}
-      onFocus={playVideo}
-      onBlur={pauseVideo}
       onKeyDown={handleKeyDown}
     >
       <video
@@ -60,9 +61,9 @@ function VideoCard({ item }: { item: GalleryVideo }) {
         preload="none"
         className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
       />
-      {/* Play icon - hidden on hover/focus when video plays */}
+      {/* Play/Pause icon */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0 group-focus:opacity-0">
+        <div className={`w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 ${isPlaying ? "opacity-0 group-hover:opacity-0" : "opacity-100"}`}>
           <Play size={20} className="text-white ml-0.5" fill="white" aria-hidden="true" />
         </div>
       </div>
