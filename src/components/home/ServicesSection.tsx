@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { gsap, ScrollTrigger } from "@/lib/gsap-config";
 import { SERVICES } from "@/data/services";
 import { RevealText } from "@/components/shared/RevealText";
@@ -26,30 +25,23 @@ const ICON_MAP: Record<string, React.ElementType> = {
 function ServiceCard({ service, index }: { service: (typeof SERVICES)[number]; index: number }) {
 	const Icon = ICON_MAP[service.icon];
 	return (
-		<div className="service-card flex-shrink-0 w-[85vw] sm:w-[60vw] lg:w-[40vw] h-[70vh] relative group overflow-hidden">
-			<Image
-				src={service.image}
-				alt={service.title}
-				fill
-				sizes="(max-width: 640px) 85vw, (max-width: 1024px) 60vw, 40vw"
-				className="object-cover transition-transform duration-700 group-hover:scale-105"
-			/>
-			<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-			<div className="absolute top-6 left-6 text-[7rem] font-display font-extrabold uppercase text-white/[0.04] leading-none select-none pointer-events-none">
+		<div className="service-card flex-shrink-0 w-[85vw] sm:w-[60vw] lg:w-[40vw] h-[70vh] relative group border border-white/[0.06] bg-[#111] hover:border-polar-lime/30 transition-colors duration-500 overflow-hidden">
+			<div className="absolute top-6 right-6 text-[8rem] sm:text-[10rem] font-display font-extrabold uppercase text-white/[0.03] leading-none select-none pointer-events-none group-hover:text-polar-lime/[0.06] transition-colors duration-700">
 				{String(index + 1).padStart(2, "0")}
 			</div>
 
-			<div className="absolute inset-x-0 bottom-0 p-8 sm:p-10">
+			<div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(ellipse_at_bottom_left,_rgba(189,255,0,0.04)_0%,_transparent_60%)]" />
+
+			<div className="relative z-[1] flex flex-col justify-end h-full p-8 sm:p-10">
 				{Icon && (
-					<div className="w-12 h-12 border border-polar-lime/40 bg-polar-lime/5 flex items-center justify-center mb-5 group-hover:bg-polar-lime/15 transition-colors duration-500">
-						<Icon size={20} aria-hidden="true" className="text-polar-lime" />
+					<div className="w-12 h-12 border border-white/10 bg-white/[0.03] flex items-center justify-center mb-6 group-hover:border-polar-lime/40 group-hover:bg-polar-lime/10 transition-all duration-500">
+						<Icon size={20} aria-hidden="true" className="text-white/40 group-hover:text-polar-lime transition-colors duration-500" />
 					</div>
 				)}
 				<h3 className="text-2xl sm:text-3xl font-display font-bold uppercase text-white">
 					{service.title}
 				</h3>
-				<p className="mt-2 text-sm text-white/60 leading-relaxed max-w-sm">
+				<p className="mt-3 text-sm text-white/40 leading-relaxed max-w-sm group-hover:text-white/60 transition-colors duration-500">
 					{service.description}
 				</p>
 			</div>
@@ -84,7 +76,7 @@ export function ServicesSection() {
 			},
 		});
 
-		cards.forEach((card, i) => {
+		cards.forEach((card) => {
 			gsap.fromTo(
 				card,
 				{ opacity: 0, scale: 0.9 },
