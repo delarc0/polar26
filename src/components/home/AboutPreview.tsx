@@ -37,7 +37,7 @@ export function AboutPreview() {
             className="relative aspect-[4/3] overflow-hidden"
           >
             <Image
-              src="/images/patrik-portrait.jpg"
+              src="/images/patrik-portrait.webp"
               alt="Patrik Nordstrom"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

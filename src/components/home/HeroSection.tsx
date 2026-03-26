@@ -51,6 +51,7 @@ export function HeroSection() {
 				".hero-title .line",
 				{
 					y: "0%",
+					opacity: 1,
 					duration: 1.4,
 					ease: "power4.out",
 					stagger: 0.2,

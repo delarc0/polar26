@@ -13,6 +13,10 @@ const contactSchema = z.object({
 });
 
 const TO = "hello@polar26.com";
+const FROM = process.env.RESEND_FROM || "Polar26 <onboarding@resend.dev>";
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 function buildEmail({
   name,
@@ -96,17 +100,13 @@ export async function POST(req: NextRequest) {
     const html = buildEmail({ name, email, company, projectType, message });
 
     after(async () => {
-      const apiKey = process.env.RESEND_API_KEY;
-      if (!apiKey) {
+      if (!resend) {
         console.error("RESEND_API_KEY is not configured");
         return;
       }
       try {
-        const resend = new Resend(apiKey);
-        const from =
-          process.env.RESEND_FROM || "Polar26 <onboarding@resend.dev>";
         await resend.emails.send({
-          from,
+          from: FROM,
           to: TO,
           replyTo: email,
           subject,

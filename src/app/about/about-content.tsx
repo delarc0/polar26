@@ -290,7 +290,7 @@ export function AboutPageContent() {
 						>
 							<div ref={imageInnerRef} className="absolute inset-0 will-change-transform">
 								<Image
-									src="/images/patrik-portrait.jpg"
+									src="/images/patrik-portrait.webp"
 									alt="Patrik Nordstrom"
 									fill
 									sizes="(max-width: 1024px) 100vw, 50vw"
