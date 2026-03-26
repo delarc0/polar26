@@ -22,26 +22,62 @@ const ICON_MAP: Record<string, React.ElementType> = {
 	Camera,
 };
 
+const CARD_GRADIENTS = [
+	"radial-gradient(ellipse at 20% 80%, rgba(189,255,0,0.07) 0%, transparent 50%)",
+	"radial-gradient(ellipse at 80% 20%, rgba(189,255,0,0.06) 0%, transparent 50%)",
+	"radial-gradient(ellipse at 50% 90%, rgba(189,255,0,0.07) 0%, transparent 50%)",
+	"radial-gradient(ellipse at 10% 30%, rgba(189,255,0,0.06) 0%, transparent 50%)",
+	"radial-gradient(ellipse at 90% 70%, rgba(189,255,0,0.07) 0%, transparent 50%)",
+	"radial-gradient(ellipse at 40% 10%, rgba(189,255,0,0.06) 0%, transparent 50%)",
+];
+
+const HOVER_GRADIENTS = [
+	"radial-gradient(ellipse at 20% 80%, rgba(189,255,0,0.15) 0%, transparent 50%)",
+	"radial-gradient(ellipse at 80% 20%, rgba(189,255,0,0.14) 0%, transparent 50%)",
+	"radial-gradient(ellipse at 50% 90%, rgba(189,255,0,0.15) 0%, transparent 50%)",
+	"radial-gradient(ellipse at 10% 30%, rgba(189,255,0,0.14) 0%, transparent 50%)",
+	"radial-gradient(ellipse at 90% 70%, rgba(189,255,0,0.15) 0%, transparent 50%)",
+	"radial-gradient(ellipse at 40% 10%, rgba(189,255,0,0.14) 0%, transparent 50%)",
+];
+
 function ServiceCard({ service, index }: { service: (typeof SERVICES)[number]; index: number }) {
 	const Icon = ICON_MAP[service.icon];
+	const num = String(index + 1).padStart(2, "0");
+
 	return (
-		<div className="service-card flex-shrink-0 w-[85vw] sm:w-[60vw] lg:w-[40vw] h-[70vh] relative group border border-white/[0.06] bg-[#111] hover:border-polar-lime/30 transition-colors duration-500 overflow-hidden">
-			<div className="absolute top-6 right-6 text-[8rem] sm:text-[10rem] font-display font-extrabold uppercase text-white/[0.03] leading-none select-none pointer-events-none group-hover:text-polar-lime/[0.06] transition-colors duration-700">
-				{String(index + 1).padStart(2, "0")}
+		<div
+			className="service-card flex-shrink-0 w-[85vw] sm:w-[60vw] lg:w-[40vw] h-[70vh] relative group overflow-hidden border border-white/[0.06] hover:border-polar-lime/20 transition-all duration-700"
+			style={{ backgroundImage: CARD_GRADIENTS[index], backgroundColor: "#0f0f0f" }}
+		>
+			<div className="footer-topo absolute inset-0 opacity-[0.04] group-hover:opacity-[0.07] transition-opacity duration-700" />
+
+			<div
+				className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+				style={{ backgroundImage: HOVER_GRADIENTS[index] }}
+			/>
+
+			<div className="absolute top-6 left-8 text-[9rem] sm:text-[12rem] font-display font-extrabold text-white/[0.03] leading-none select-none pointer-events-none group-hover:text-polar-lime/[0.05] transition-colors duration-700">
+				{num}
 			</div>
 
-			<div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(ellipse_at_bottom_left,_rgba(189,255,0,0.04)_0%,_transparent_60%)]" />
+			<div className="relative z-[1] flex flex-col h-full p-8 sm:p-10">
+				<div className="flex-1 flex items-center justify-center">
+					{Icon && (
+						<div className="relative">
+							<div className="absolute inset-0 scale-[3] rounded-full bg-polar-lime/[0.03] blur-2xl group-hover:bg-polar-lime/[0.08] group-hover:scale-[4] transition-all duration-700" />
+							<div className="relative w-20 h-20 border border-white/[0.08] bg-white/[0.02] flex items-center justify-center group-hover:border-polar-lime/30 group-hover:bg-polar-lime/[0.06] transition-all duration-500">
+								<Icon size={32} aria-hidden="true" className="text-white/30 group-hover:text-polar-lime transition-colors duration-500" />
+							</div>
+						</div>
+					)}
+				</div>
 
-			<div className="relative z-[1] flex flex-col justify-end h-full p-8 sm:p-10">
-				{Icon && (
-					<div className="w-12 h-12 border border-white/10 bg-white/[0.03] flex items-center justify-center mb-6 group-hover:border-polar-lime/40 group-hover:bg-polar-lime/10 transition-all duration-500">
-						<Icon size={20} aria-hidden="true" className="text-white/40 group-hover:text-polar-lime transition-colors duration-500" />
-					</div>
-				)}
-				<h3 className="text-2xl sm:text-3xl font-display font-bold uppercase text-white">
+				<div className="w-12 h-px bg-white/10 group-hover:w-20 group-hover:bg-polar-lime/40 transition-all duration-500 mb-6" />
+
+				<h3 className="text-2xl sm:text-3xl font-display font-bold uppercase text-white leading-tight">
 					{service.title}
 				</h3>
-				<p className="mt-3 text-sm text-white/40 leading-relaxed max-w-sm group-hover:text-white/60 transition-colors duration-500">
+				<p className="mt-3 text-sm text-white/35 leading-relaxed max-w-sm group-hover:text-white/60 transition-colors duration-500">
 					{service.description}
 				</p>
 			</div>
