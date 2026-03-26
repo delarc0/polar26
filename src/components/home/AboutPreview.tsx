@@ -37,8 +37,8 @@ export function AboutPreview() {
             className="relative aspect-[4/3] overflow-hidden"
           >
             <Image
-              src="/images/patrik-portrait.jpg"
-              alt="Patrik Nordstrom"
+              src="/images/patrik-gimbal-van.jpg"
+              alt="Patrik on set with gimbal"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
