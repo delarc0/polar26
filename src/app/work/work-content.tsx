@@ -2,7 +2,6 @@
 
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { WorkGrid } from "@/components/work/WorkGrid";
-import { CTASection } from "@/components/home/CTASection";
 
 export function WorkPageContent() {
   const headingRef = useScrollReveal<HTMLDivElement>();
@@ -32,7 +31,6 @@ export function WorkPageContent() {
         </div>
       </section>
 
-      <CTASection />
     </>
   );
 }

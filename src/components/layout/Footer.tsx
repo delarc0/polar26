@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { NAV_LINKS } from "@/data/navigation";
 import { SITE } from "@/data/site";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -28,6 +29,8 @@ const PARTNER_LOGOS = [
 ];
 
 export function Footer() {
+	const pathname = usePathname();
+	const isContactPage = pathname === "/contact";
 	const footerRef = useRef<HTMLElement>(null);
 	const riderRef = useRef<HTMLDivElement>(null);
 	const marqueeRef = useRef<HTMLDivElement>(null);
@@ -137,9 +140,19 @@ export function Footer() {
 					className="absolute inset-x-0 top-[8%] sm:top-[5%] z-[2] flex flex-col items-center text-center px-6 pointer-events-none"
 				>
 					<h2 className="font-display text-[clamp(2rem,6vw,5rem)] font-extrabold uppercase leading-[0.85]">
-						Ready to
-						<br />
-						<span className="text-polar-lime">stand out?</span>
+						{isContactPage ? (
+							<>
+								Explore our
+								<br />
+								<span className="text-polar-lime">work</span>
+							</>
+						) : (
+							<>
+								Ready to
+								<br />
+								<span className="text-polar-lime">stand out?</span>
+							</>
+						)}
 					</h2>
 				</div>
 
@@ -196,14 +209,25 @@ export function Footer() {
 			</div>
 
 			<div className="relative z-10 flex justify-center -mt-6 pt-2 pb-4">
-				<a
-					ref={buttonRef}
-					href={`mailto:${SITE.email}`}
-					className="inline-flex items-center gap-3 px-6 py-3 text-xs sm:text-sm font-display font-bold tracking-[0.15em] uppercase bg-polar-lime text-[#111] hover:bg-white transition-colors rounded-full cursor-pointer group"
-				>
-					Business Enquiries
-					<span className="block w-4 h-px bg-current transition-all duration-300 group-hover:w-8" />
-				</a>
+				{isContactPage ? (
+					<Link
+						ref={buttonRef}
+						href="/work"
+						className="inline-flex items-center gap-3 px-6 py-3 text-xs sm:text-sm font-display font-bold tracking-[0.15em] uppercase bg-polar-lime text-[#111] hover:bg-white transition-colors rounded-full cursor-pointer group"
+					>
+						View Portfolio
+						<span className="block w-4 h-px bg-current transition-all duration-300 group-hover:w-8" />
+					</Link>
+				) : (
+					<a
+						ref={buttonRef}
+						href={`mailto:${SITE.email}`}
+						className="inline-flex items-center gap-3 px-6 py-3 text-xs sm:text-sm font-display font-bold tracking-[0.15em] uppercase bg-polar-lime text-[#111] hover:bg-white transition-colors rounded-full cursor-pointer group"
+					>
+						Business Enquiries
+						<span className="block w-4 h-px bg-current transition-all duration-300 group-hover:w-8" />
+					</a>
+				)}
 			</div>
 
 			<div className="bg-[#0A0A0A]">
