@@ -115,6 +115,35 @@
   animation: marquee-scroll-reverse 30s linear infinite;
 }
 
+/* Footer mask */
+.footer-mask {
+  -webkit-mask-image: url('/footer-mask-desktop.svg');
+  mask-image: url('/footer-mask-desktop.svg');
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+@media (max-width: 639px) {
+  .footer-mask {
+    -webkit-mask-image: url('/footer-mask-mobile.svg');
+    mask-image: url('/footer-mask-mobile.svg');
+  }
+}
+
+/* Terrain topo overlay */
+.footer-topo {
+  background-image:
+    repeating-radial-gradient(circle at 25% 25%, transparent 0, transparent 30px, rgba(255,255,255,0.35) 30px, rgba(255,255,255,0.35) 31px, transparent 31px, transparent 60px),
+    repeating-radial-gradient(circle at 75% 20%, transparent 0, transparent 45px, rgba(255,255,255,0.25) 45px, rgba(255,255,255,0.25) 46px, transparent 46px, transparent 90px),
+    repeating-radial-gradient(circle at 50% 60%, transparent 0, transparent 25px, rgba(255,255,255,0.3) 25px, rgba(255,255,255,0.3) 26px, transparent 26px, transparent 50px),
+    repeating-radial-gradient(circle at 20% 80%, transparent 0, transparent 55px, rgba(255,255,255,0.2) 55px, rgba(255,255,255,0.2) 56px, transparent 56px, transparent 110px),
+    repeating-radial-gradient(circle at 80% 70%, transparent 0, transparent 35px, rgba(255,255,255,0.28) 35px, rgba(255,255,255,0.28) 36px, transparent 36px, transparent 70px);
+}
+
 /* Clip-path portfolio hover */
 .clip-reveal {
   clip-path: ellipse(0% 0% at 50% 50%);
@@ -149,6 +178,61 @@
   .clip-reveal {
     clip-path: ellipse(100% 100% at 50% 50%) !important;
   }
+}
+
+/* Film grain overlay */
+.film-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  mix-blend-mode: overlay;
+}
+
+/* Floating label inputs */
+.floating-field {
+  position: relative;
+}
+
+.floating-field input,
+.floating-field textarea,
+.floating-field select {
+  padding-top: 1.25rem;
+  padding-bottom: 0.5rem;
+}
+
+.floating-field label {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.floating-field textarea ~ label {
+  top: 1.25rem;
+}
+
+.floating-field input:focus ~ label,
+.floating-field input:not(:placeholder-shown) ~ label,
+.floating-field textarea:focus ~ label,
+.floating-field textarea:not(:placeholder-shown) ~ label,
+.floating-field select:focus ~ label,
+.floating-field select:not([value=""]) ~ label {
+  top: 0.5rem;
+  transform: translateY(0);
+  font-size: 0.625rem;
+  color: var(--color-polar-lime);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* Scrollbar hide utility */

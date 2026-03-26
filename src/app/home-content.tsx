@@ -5,17 +5,16 @@ import { ClientLogoMarquee } from "@/components/home/ClientLogoMarquee";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { PhotoGrid } from "@/components/home/PhotoGrid";
 import { AboutPreview } from "@/components/home/AboutPreview";
-import { CTASection } from "@/components/home/CTASection";
-
+import { MarketingFramework } from "@/components/home/MarketingFramework";
 export function HomeContent() {
   return (
     <>
       <HeroSection />
       <ClientLogoMarquee />
       <ServicesSection />
+      <MarketingFramework />
       <PhotoGrid />
-<AboutPreview />
-      <CTASection />
+      <AboutPreview />
     </>
   );
 }

@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { ArrowRight } from "lucide-react";
+import { RevealText } from "@/components/shared/RevealText";
 
 export function AboutPreview() {
   const leftRef = useScrollReveal<HTMLDivElement>({ delay: 0 });
@@ -18,25 +17,18 @@ export function AboutPreview() {
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
               About Us
             </span>
-            <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.75rem)] font-display font-bold uppercase tracking-tight">
+            <RevealText
+              as="h2"
+              className="mt-4 text-[clamp(1.75rem,3vw,2.75rem)] font-display font-bold uppercase"
+            >
               Bold ideas deserve bold execution
-            </h2>
+            </RevealText>
             <p className="mt-6 text-muted-foreground leading-relaxed">
               Founded by Patrik Nordstrom, Polar26 is a creative agency built on
               the belief that great work comes from the intersection of strategy
               and raw creative energy. From brand films to full-scale digital
               campaigns, we make things that people actually remember.
             </p>
-            <Link
-              href="/about"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-polar-lime hover:text-foreground transition-colors group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-polar-lime"
-            >
-              Learn More
-              <ArrowRight
-                size={14}
-                className="group-hover:translate-x-1 transition-transform"
-              />
-            </Link>
           </div>
 
           {/* Photo */}
@@ -45,8 +37,8 @@ export function AboutPreview() {
             className="relative aspect-[4/3] overflow-hidden"
           >
             <Image
-              src="/images/patrik-gimbal-van.jpg"
-              alt="Patrik on set with gimbal"
+              src="/images/patrik-portrait.jpg"
+              alt="Patrik Nordstrom"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"

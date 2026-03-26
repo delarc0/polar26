@@ -5,7 +5,7 @@ export function ContactInfo() {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-display font-bold uppercase tracking-tight">
+        <h2 className="text-lg font-display font-bold uppercase">
           Get In Touch
         </h2>
         <p className="mt-2 text-sm text-muted-foreground leading-relaxed">

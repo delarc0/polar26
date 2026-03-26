@@ -54,14 +54,13 @@ export function Navbar() {
         </ul>
         <div className="md:hidden" />
 
-        {/* Logo - Center */}
         <Link href="/" className="justify-self-center block">
           <Image
             src="/polar26logo.webp"
             alt={SITE.name}
             width={320}
             height={86}
-            className="w-[100px] sm:w-[120px] h-auto"
+            className="w-[120px] sm:w-[140px] h-auto"
             priority
           />
         </Link>
@@ -69,7 +68,7 @@ export function Navbar() {
         {/* Mobile Toggle - Right */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden justify-self-end text-foreground p-2 min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:text-polar-lime"
+          className="md:hidden justify-self-end text-foreground p-2 min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:text-polar-lime cursor-pointer"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}

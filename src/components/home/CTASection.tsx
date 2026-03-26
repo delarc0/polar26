@@ -12,7 +12,7 @@ export function CTASection() {
         ref={ref}
         className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 text-center"
       >
-        <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-display font-bold uppercase tracking-tight leading-[0.9]">
+        <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-display font-bold uppercase leading-[0.9]">
           Ready to
           <br />
           <span className="text-polar-lime">stand out?</span>

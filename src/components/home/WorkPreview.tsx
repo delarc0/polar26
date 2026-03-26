@@ -26,7 +26,7 @@ export function WorkPreview() {
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
               Selected Work
             </span>
-            <h2 className="mt-4 text-[clamp(2rem,4vw,3.5rem)] font-display font-bold uppercase tracking-tight">
+            <h2 className="mt-4 text-[clamp(2rem,4vw,3.5rem)] font-display font-bold uppercase">
               Recent Projects
             </h2>
           </div>

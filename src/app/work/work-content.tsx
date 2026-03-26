@@ -17,7 +17,7 @@ export function WorkPageContent() {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
             Portfolio
           </span>
-          <h1 className="mt-4 text-[clamp(2rem,6vw,5rem)] font-display font-bold uppercase tracking-tight">
+          <h1 className="mt-4 text-[clamp(2rem,6vw,5rem)] font-display font-bold uppercase">
             Our Work
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-lg">
