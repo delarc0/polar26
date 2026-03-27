@@ -3,9 +3,9 @@ import { HomeContent } from "./home-content";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Polar26 | Creative Agency - Videography & Brand Strategy",
+  title: "Polar26 | From Brand to Business",
   description:
-    "Polar26 is a creative agency based in Sweden specializing in videography, photography, brand strategy, and content production for brands that want to stand out.",
+    "Polar26 is a creative agency in Sweden specializing in videography, brand activation, content strategy, digital marketing, and commercial photography.",
   alternates: {
     canonical: "https://polar26.com",
   },

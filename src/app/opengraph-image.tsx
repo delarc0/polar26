@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Polar26 - Creative Agency";
+export const alt = "Polar26 - From brand to business";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -55,7 +55,7 @@ export default async function Image() {
             letterSpacing: "0.02em",
           }}
         >
-          Creative Agency
+          From brand to business.
         </div>
 
         {/* Bottom accent */}

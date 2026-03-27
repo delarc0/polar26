@@ -5,7 +5,7 @@ import { SITE } from "@/data/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Meet Patrik Nordstrom and the Polar26 creative agency. We specialize in videography, brand strategy, and content that moves people.",
+    "Meet Patrik Nordstrom, founder of Polar26. A brand consultant, videographer, and content strategist with over a decade of experience. We believe in creative that moves people.",
   alternates: {
     canonical: "https://polar26.com/about",
   },

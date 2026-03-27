@@ -3,7 +3,7 @@ export const SITE = {
   url: "https://polar26.com",
   email: "hello@polar26.com",
   description:
-    "Polar26 is a creative agency specializing in videography, brand strategy, and content that cuts through the noise.",
+    "Polar26 is a creative agency specializing in videography, brand strategy, and content production. From brand to business.",
   location: "Sweden",
   social: {
     instagram: "https://www.instagram.com/patrik.pov",
