@@ -17,6 +17,7 @@ export function Lightbox({ items, activeIndex, onClose, onNavigate }: LightboxPr
 	const backdropRef = useRef<HTMLDivElement>(null);
 	const contentRef = useRef<HTMLDivElement>(null);
 	const videoRef = useRef<HTMLVideoElement>(null);
+	const closeButtonRef = useRef<HTMLButtonElement>(null);
 	const item = items[activeIndex];
 
 	const goNext = useCallback(() => {
@@ -30,6 +31,7 @@ export function Lightbox({ items, activeIndex, onClose, onNavigate }: LightboxPr
 	useEffect(() => {
 		gsap.fromTo(backdropRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3 });
 		gsap.fromTo(contentRef.current, { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" });
+		closeButtonRef.current?.focus();
 	}, []);
 
 	useEffect(() => {
@@ -59,8 +61,9 @@ export function Lightbox({ items, activeIndex, onClose, onNavigate }: LightboxPr
 	if (!item) return null;
 
 	return (
-		<div ref={backdropRef} className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center" onClick={onClose}>
+		<div ref={backdropRef} role="dialog" aria-modal="true" aria-label={`Gallery: ${item.alt}`} className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center" onClick={onClose}>
 			<button
+				ref={closeButtonRef}
 				onClick={onClose}
 				className="absolute top-6 right-6 z-10 w-12 h-12 flex items-center justify-center text-white/60 hover:text-white transition-colors cursor-pointer"
 				aria-label="Close lightbox"

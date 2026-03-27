@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -14,6 +14,8 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
+  const closeMobile = useCallback(() => setMobileOpen(false), []);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -21,8 +23,23 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+    closeMobile();
+  }, [pathname, closeMobile]);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") closeMobile();
+      };
+      window.addEventListener("keydown", onKey);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", onKey);
+      };
+    }
+    document.body.style.overflow = "";
+  }, [mobileOpen, closeMobile]);
 
   return (
     <header
@@ -34,7 +51,6 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 h-16 sm:h-20 grid grid-cols-3 items-center">
-        {/* Desktop Nav - Left */}
         <ul className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
@@ -65,20 +81,23 @@ export function Navbar() {
           />
         </Link>
 
-        {/* Mobile Toggle - Right */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="md:hidden justify-self-end text-foreground p-2 min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:text-polar-lime cursor-pointer"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
         <div className="hidden md:block" />
       </nav>
 
-      {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-[#0A0A0A]/95 backdrop-blur-md border-t border-white/[0.06]">
+        <div
+          className="md:hidden bg-[#0A0A0A]/95 backdrop-blur-md border-t border-white/[0.06]"
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
           <ul className="flex flex-col items-center gap-6 py-8">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>

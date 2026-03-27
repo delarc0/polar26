@@ -154,7 +154,7 @@ export function PhotoGrid() {
 					start: "top top",
 					end: () => `+=${getScrollDistance()}`,
 					pin: true,
-					scrub: 1,
+					scrub: true,
 					invalidateOnRefresh: true,
 					anticipatePin: 1,
 					onUpdate: (self) => {
@@ -166,7 +166,34 @@ export function PhotoGrid() {
 			});
 		}, section);
 
-		return () => ctx.revert();
+		let lastWidth = track.scrollWidth;
+		const ro = new ResizeObserver(() => {
+			const newWidth = track.scrollWidth;
+			if (newWidth !== lastWidth) {
+				lastWidth = newWidth;
+				ScrollTrigger.refresh();
+			}
+		});
+		ro.observe(track);
+
+		const images = track.querySelectorAll("img");
+		let loaded = 0;
+		const onLoad = () => {
+			loaded++;
+			if (loaded === images.length) ScrollTrigger.refresh();
+		};
+		images.forEach((img) => {
+			if (img.complete) {
+				loaded++;
+			} else {
+				img.addEventListener("load", onLoad, { once: true });
+			}
+		});
+
+		return () => {
+			ro.disconnect();
+			ctx.revert();
+		};
 	}, []);
 
 	return (

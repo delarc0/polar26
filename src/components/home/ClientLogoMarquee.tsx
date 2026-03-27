@@ -20,7 +20,7 @@ type TextClient = {
 type Client = ImageClient | TextClient;
 
 const CLIENTS: Client[] = [
-	{ type: "image", name: "Pirelli", src: "/images/clients/pirelli.webp", width: 376, height: 80, className: "h-8 sm:h-10" },
+	{ type: "image", name: "Pirelli", src: "/images/clients/pirelli.webp", width: 80, height: 80, className: "h-8 sm:h-10" },
 	{ type: "image", name: "Yamaha", src: "/images/clients/yamaha.webp", width: 500, height: 107, className: "h-8 sm:h-10" },
 	{ type: "image", name: "Fysiolollo", src: "/images/clients/fysiolollo.webp", width: 166, height: 80, className: "h-8 sm:h-10" },
 	{ type: "image", name: "Son of a Coder", src: "/images/clients/sonofacoder.webp", width: 226, height: 80, className: "h-8 sm:h-10" },
@@ -56,7 +56,9 @@ export function ClientLogoMarquee() {
 
 				<div className="flex w-max animate-marquee">
 					{set}
-					{set}
+					<div aria-hidden="true" className="flex">
+						{set}
+					</div>
 				</div>
 			</div>
 		</section>

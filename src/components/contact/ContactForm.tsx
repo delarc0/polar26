@@ -67,7 +67,12 @@ export function ContactForm() {
 				reset();
 				setSubmitted(true);
 			} else {
-				setError("Something went wrong. Please try again.");
+				try {
+					const body = await res.json();
+					setError(body.error || "Something went wrong. Please try again.");
+				} catch {
+					setError("Something went wrong. Please try again.");
+				}
 			}
 		} catch {
 			setError("Could not send message. Please try again.");
@@ -76,7 +81,7 @@ export function ContactForm() {
 
 	if (submitted) {
 		return (
-			<div className="py-12 text-center">
+			<div className="py-12 text-center" role="status" aria-live="polite">
 				<p className="text-lg font-display font-bold uppercase text-polar-lime">
 					Message sent
 				</p>
@@ -121,19 +126,26 @@ export function ContactForm() {
 			</FloatingField>
 
 			<FloatingField id="projectType" label="Project Type">
-				<select
-					id="projectType"
-					{...register("projectType")}
-					className={cn(inputClasses, "appearance-none cursor-pointer")}
-					defaultValue=""
-				>
-					<option value="" disabled hidden></option>
-					{PROJECT_TYPES.map((type) => (
-						<option key={type} value={type}>
-							{type}
-						</option>
-					))}
-				</select>
+				<div className="relative">
+					<select
+						id="projectType"
+						{...register("projectType")}
+						className={cn(inputClasses, "appearance-none cursor-pointer pr-10")}
+						defaultValue=""
+					>
+						<option value="" disabled hidden></option>
+						{PROJECT_TYPES.map((type) => (
+							<option key={type} value={type}>
+								{type}
+							</option>
+						))}
+					</select>
+					<div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+						<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+							<path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground" />
+						</svg>
+					</div>
+				</div>
 			</FloatingField>
 
 			<FloatingField id="message" label="Message *" error={errors.message?.message}>

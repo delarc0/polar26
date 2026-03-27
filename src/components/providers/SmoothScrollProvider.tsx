@@ -12,7 +12,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
 		if (prefersReducedMotion) return;
 
 		const lenis = new Lenis({
-			lerp: 0.1,
+			lerp: 0.08,
 			smoothWheel: true,
 			autoRaf: false,
 		});
@@ -26,14 +26,22 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
 		gsap.ticker.add(tickerCallback);
 		gsap.ticker.lagSmoothing(0);
 
-		// Refresh ScrollTrigger after dynamic components mount
-		const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 500);
+		const timers = [
+			setTimeout(() => ScrollTrigger.refresh(), 300),
+			setTimeout(() => ScrollTrigger.refresh(), 1000),
+			setTimeout(() => ScrollTrigger.refresh(), 2500),
+		];
 
-		const onResize = () => ScrollTrigger.refresh();
+		let resizeTimer: ReturnType<typeof setTimeout>;
+		const onResize = () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 150);
+		};
 		window.addEventListener("resize", onResize);
 
 		return () => {
-			clearTimeout(refreshTimer);
+			timers.forEach(clearTimeout);
+			clearTimeout(resizeTimer);
 			window.removeEventListener("resize", onResize);
 			gsap.ticker.remove(tickerCallback);
 			lenis.destroy();
