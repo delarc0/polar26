@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap } from "@/lib/gsap-config";
 import type { GalleryItem } from "@/data/gallery";
+import { useScrollLock } from "@/components/providers/SmoothScrollProvider";
 
 interface LightboxProps {
 	items: GalleryItem[];
@@ -18,6 +19,7 @@ export function Lightbox({ items, activeIndex, onClose, onNavigate }: LightboxPr
 	const contentRef = useRef<HTMLDivElement>(null);
 	const videoRef = useRef<HTMLVideoElement>(null);
 	const closeButtonRef = useRef<HTMLButtonElement>(null);
+	const { lockScroll, unlockScroll } = useScrollLock();
 	const item = items[activeIndex];
 
 	const goNext = useCallback(() => {
@@ -51,12 +53,12 @@ export function Lightbox({ items, activeIndex, onClose, onNavigate }: LightboxPr
 			if (e.key === "ArrowLeft") goPrev();
 		};
 		window.addEventListener("keydown", onKey);
-		document.body.style.overflow = "hidden";
+		lockScroll();
 		return () => {
 			window.removeEventListener("keydown", onKey);
-			document.body.style.overflow = "";
+			unlockScroll();
 		};
-	}, [onClose, goNext, goPrev]);
+	}, [onClose, goNext, goPrev, lockScroll, unlockScroll]);
 
 	if (!item) return null;
 

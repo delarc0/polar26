@@ -86,7 +86,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     width: 1536,
     height: 2048,
   },
-{
+  {
     type: "image",
     src: "/images/gallery/dirtbike-wheelie.webp",
     alt: "Rider popping a wheelie on a KLX110 dirtbike",

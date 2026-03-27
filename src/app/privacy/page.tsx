@@ -22,7 +22,7 @@ export default function PrivacyPage() {
 
 				<div className="mt-10 space-y-8 text-sm text-muted-foreground leading-relaxed">
 					<p>
-						Last updated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+						Last updated: March 2026
 					</p>
 
 					<div className="space-y-4">

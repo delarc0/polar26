@@ -21,7 +21,7 @@ const SOCIAL_LINKS = [
 ];
 
 const PARTNER_LOGOS = [
-	{ name: "Pirelli", src: "/images/clients/pirelli.webp", width: 80, height: 80 },
+	{ name: "Pirelli", src: "/images/clients/pirelli.webp", width: 377, height: 80 },
 	{ name: "Yamaha", src: "/images/clients/yamaha.webp", width: 500, height: 107 },
 	{ name: "Fysiolollo", src: "/images/clients/fysiolollo.webp", width: 166, height: 80 },
 	{ name: "Son of a Coder", src: "/images/clients/sonofacoder.webp", width: 226, height: 80 },

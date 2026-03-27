@@ -177,16 +177,17 @@ export function PhotoGrid() {
 		ro.observe(track);
 
 		const images = track.querySelectorAll("img");
-		let loaded = 0;
-		const onLoad = () => {
-			loaded++;
-			if (loaded === images.length) ScrollTrigger.refresh();
+		let settled = 0;
+		const onSettle = () => {
+			settled++;
+			if (settled === images.length) ScrollTrigger.refresh();
 		};
 		images.forEach((img) => {
 			if (img.complete) {
-				loaded++;
+				settled++;
 			} else {
-				img.addEventListener("load", onLoad, { once: true });
+				img.addEventListener("load", onSettle, { once: true });
+				img.addEventListener("error", onSettle, { once: true });
 			}
 		});
 

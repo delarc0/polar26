@@ -8,11 +8,13 @@ import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/data/navigation";
 import { SITE } from "@/data/site";
 import { cn } from "@/lib/utils";
+import { useScrollLock } from "@/components/providers/SmoothScrollProvider";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const { lockScroll, unlockScroll } = useScrollLock();
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
@@ -28,18 +30,17 @@ export function Navbar() {
 
   useEffect(() => {
     if (mobileOpen) {
-      document.body.style.overflow = "hidden";
+      lockScroll();
       const onKey = (e: KeyboardEvent) => {
         if (e.key === "Escape") closeMobile();
       };
       window.addEventListener("keydown", onKey);
       return () => {
-        document.body.style.overflow = "";
+        unlockScroll();
         window.removeEventListener("keydown", onKey);
       };
     }
-    document.body.style.overflow = "";
-  }, [mobileOpen, closeMobile]);
+  }, [mobileOpen, closeMobile, lockScroll, unlockScroll]);
 
   return (
     <header
