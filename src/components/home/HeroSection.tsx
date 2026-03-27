@@ -20,8 +20,9 @@ export function HeroSection() {
 			return;
 		}
 
+		let videoTween: gsap.core.Tween | undefined;
 		if (video) {
-			gsap.to(video, {
+			videoTween = gsap.to(video, {
 				yPercent: 30,
 				ease: "none",
 				scrollTrigger: {
@@ -95,6 +96,8 @@ export function HeroSection() {
 		});
 
 		return () => {
+			videoTween?.scrollTrigger?.kill();
+			videoTween?.kill();
 			tl.kill();
 			fadeOut.kill();
 		};

@@ -62,10 +62,11 @@ export function Footer() {
 		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 		if (prefersReducedMotion) return;
 
+		const tweens: gsap.core.Tween[] = [];
 		const triggers: ScrollTrigger[] = [];
 
 		if (rider) {
-			gsap.to(rider, {
+			const riderTween = gsap.to(rider, {
 				yPercent: -8,
 				ease: "none",
 				scrollTrigger: {
@@ -75,13 +76,13 @@ export function Footer() {
 					scrub: true,
 				},
 			});
-			triggers.push(ScrollTrigger.getAll().pop()!);
+			tweens.push(riderTween);
 		}
 
 		if (marquee) {
 			const marqueeTrack = marquee.querySelector(".animate-marquee");
 			if (marqueeTrack) {
-				ScrollTrigger.create({
+				const marqueeTrigger = ScrollTrigger.create({
 					trigger: footer,
 					start: "top bottom",
 					end: "bottom bottom",
@@ -91,11 +92,12 @@ export function Footer() {
 						(marqueeTrack as HTMLElement).style.animationDuration = `${clamped}s`;
 					},
 				});
-				triggers.push(ScrollTrigger.getAll().pop()!);
+				triggers.push(marqueeTrigger);
 			}
 		}
 
 		return () => {
+			tweens.forEach((t) => { t.scrollTrigger?.kill(); t.kill(); });
 			triggers.forEach((t) => t.kill());
 		};
 	}, []);

@@ -166,7 +166,7 @@ export function AboutPageContent() {
 		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 		if (prefersReducedMotion) return;
 
-		gsap.fromTo(
+		const scaleTween = gsap.fromTo(
 			inner,
 			{ scale: 1.15 },
 			{
@@ -181,7 +181,7 @@ export function AboutPageContent() {
 			}
 		);
 
-		ScrollTrigger.create({
+		const revealTrigger = ScrollTrigger.create({
 			trigger: container,
 			start: "top 80%",
 			once: true,
@@ -193,6 +193,12 @@ export function AboutPageContent() {
 				);
 			},
 		});
+
+		return () => {
+			scaleTween.scrollTrigger?.kill();
+			scaleTween.kill();
+			revealTrigger.kill();
+		};
 	}, []);
 
 	useEffect(() => {

@@ -53,15 +53,24 @@ export function ContactForm() {
 		resolver: zodResolver(schema),
 	});
 
+	const [error, setError] = useState("");
+
 	const onSubmit = async (data: FormData) => {
-		const res = await fetch("/api/contact", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(data),
-		});
-		if (res.ok) {
-			reset();
-			setSubmitted(true);
+		setError("");
+		try {
+			const res = await fetch("/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(data),
+			});
+			if (res.ok) {
+				reset();
+				setSubmitted(true);
+			} else {
+				setError("Something went wrong. Please try again.");
+			}
+		} catch {
+			setError("Could not send message. Please try again.");
 		}
 	};
 
@@ -136,6 +145,10 @@ export function ContactForm() {
 					className={textareaClasses}
 				/>
 			</FloatingField>
+
+			{error && (
+				<p role="alert" className="text-sm text-red-400 text-center">{error}</p>
+			)}
 
 			<button
 				ref={buttonRef}
