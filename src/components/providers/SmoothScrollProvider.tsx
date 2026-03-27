@@ -14,17 +14,28 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
 		const lenis = new Lenis({
 			lerp: 0.1,
 			smoothWheel: true,
+			autoRaf: false,
 		});
 		lenisRef.current = lenis;
 
 		lenis.on("scroll", ScrollTrigger.update);
 
-		gsap.ticker.add((time: number) => {
+		const tickerCallback = (time: number) => {
 			lenis.raf(time * 1000);
-		});
+		};
+		gsap.ticker.add(tickerCallback);
 		gsap.ticker.lagSmoothing(0);
 
+		// Refresh ScrollTrigger after dynamic components mount
+		const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 500);
+
+		const onResize = () => ScrollTrigger.refresh();
+		window.addEventListener("resize", onResize);
+
 		return () => {
+			clearTimeout(refreshTimer);
+			window.removeEventListener("resize", onResize);
+			gsap.ticker.remove(tickerCallback);
 			lenis.destroy();
 			lenisRef.current = null;
 		};
