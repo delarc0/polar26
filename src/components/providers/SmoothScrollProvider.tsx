@@ -60,20 +60,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
 		gsap.ticker.add(tickerCallback);
 		gsap.ticker.lagSmoothing(0);
 
-		let refreshTimer: ReturnType<typeof setTimeout>;
-		const debouncedRefresh = () => {
-			clearTimeout(refreshTimer);
-			refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
-		};
-
-		const initialTimer = setTimeout(() => ScrollTrigger.refresh(), 500);
-
-		const mainEl = document.querySelector("main");
-		let mo: MutationObserver | undefined;
-		if (mainEl) {
-			mo = new MutationObserver(debouncedRefresh);
-			mo.observe(mainEl, { childList: true, subtree: true });
-		}
+		const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 800);
 
 		let resizeTimer: ReturnType<typeof setTimeout>;
 		const onResize = () => {
@@ -83,10 +70,8 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
 		window.addEventListener("resize", onResize);
 
 		return () => {
-			clearTimeout(initialTimer);
 			clearTimeout(refreshTimer);
 			clearTimeout(resizeTimer);
-			mo?.disconnect();
 			window.removeEventListener("resize", onResize);
 			gsap.ticker.remove(tickerCallback);
 			lenis.destroy();
@@ -97,8 +82,8 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
 	}, []);
 
 	return (
-		<ScrollContext value={{ lockScroll, unlockScroll }}>
+		<ScrollContext.Provider value={{ lockScroll, unlockScroll }}>
 			{children}
-		</ScrollContext>
+		</ScrollContext.Provider>
 	);
 }
