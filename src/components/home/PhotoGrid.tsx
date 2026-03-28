@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Play } from "lucide-react";
 import { gsap, ScrollTrigger } from "@/lib/gsap-config";
@@ -116,7 +116,10 @@ export function PhotoGrid() {
 	const progressRef = useRef<HTMLDivElement>(null);
 	const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-	useEffect(() => {
+	// useLayoutEffect so ctx.revert() runs BEFORE React removes DOM nodes.
+	// ScrollTrigger pin reparents elements into a wrapper div; if React
+	// tries removeChild first, it crashes with "not a child of this node".
+	useLayoutEffect(() => {
 		const section = sectionRef.current;
 		const track = trackRef.current;
 		const heading = headingRef.current;
