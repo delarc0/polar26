@@ -83,8 +83,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/waterfall-adventure.webp",
     alt: "Two explorers wading beneath a towering waterfall",
     category: "Lifestyle",
-    width: 1536,
-    height: 2048,
+    width: 1000,
+    height: 1333,
   },
   {
     type: "image",
@@ -99,8 +99,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/workshop.webp",
     alt: "Patrik leading a creative workshop",
     category: "Events",
-    width: 1600,
-    height: 2133,
+    width: 1200,
+    height: 1599,
   },
   {
     type: "video",

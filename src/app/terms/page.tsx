@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
-	title: "Terms of Service",
-	description: `Terms of service for ${SITE.name}.`,
+	title: "Terms of Service - Creative Agency",
+	description: `Terms of service for ${SITE.name}. Usage terms, intellectual property rights, and liability info for polar26.com. Straightforward legal stuff, no surprises.`,
 	alternates: {
 		canonical: "https://polar26.com/terms",
+	},
+	openGraph: {
+		url: "https://polar26.com/terms",
 	},
 };
 

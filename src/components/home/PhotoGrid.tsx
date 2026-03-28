@@ -19,19 +19,12 @@ function VideoSlide({
 	const [isPlaying, setIsPlaying] = useState(false);
 
 	return (
-		<div
-			className="relative flex-shrink-0 h-[55vh] sm:h-[65vh] lg:h-[70vh] rounded-sm overflow-hidden cursor-pointer group"
+		<button
+			type="button"
+			className="relative flex-shrink-0 h-[55vh] sm:h-[65vh] lg:h-[70vh] rounded-sm overflow-hidden cursor-pointer group border-0 p-0 bg-transparent text-left"
 			style={{ aspectRatio: `${item.width}/${item.height}` }}
-			role="button"
-			tabIndex={0}
-			aria-label={`View: ${item.alt}`}
+			aria-label={item.category}
 			onClick={onClick}
-			onKeyDown={(e) => {
-				if (e.key === "Enter" || e.key === " ") {
-					e.preventDefault();
-					onClick();
-				}
-			}}
 			onMouseEnter={() => {
 				videoRef.current?.play();
 				setIsPlaying(true);
@@ -71,7 +64,7 @@ function VideoSlide({
 			<span className="absolute bottom-4 left-4 text-[11px] font-medium tracking-[0.2em] uppercase text-polar-lime opacity-0 group-hover:opacity-100 transition-opacity duration-500">
 				{item.category}
 			</span>
-		</div>
+		</button>
 	);
 }
 
@@ -80,19 +73,12 @@ function ImageSlide({
 	onClick,
 }: { item: GalleryItem & { type: "image" }; onClick: () => void }) {
 	return (
-		<div
-			className="relative flex-shrink-0 h-[55vh] sm:h-[65vh] lg:h-[70vh] rounded-sm overflow-hidden cursor-pointer group"
+		<button
+			type="button"
+			className="relative flex-shrink-0 h-[55vh] sm:h-[65vh] lg:h-[70vh] rounded-sm overflow-hidden cursor-pointer group border-0 p-0 bg-transparent text-left"
 			style={{ aspectRatio: `${item.width}/${item.height}` }}
-			role="button"
-			tabIndex={0}
-			aria-label={`View: ${item.alt}`}
+			aria-label={item.category}
 			onClick={onClick}
-			onKeyDown={(e) => {
-				if (e.key === "Enter" || e.key === " ") {
-					e.preventDefault();
-					onClick();
-				}
-			}}
 		>
 			<Image
 				src={item.src}
@@ -105,7 +91,7 @@ function ImageSlide({
 			<span className="absolute bottom-4 left-4 text-[11px] font-medium tracking-[0.2em] uppercase text-polar-lime opacity-0 group-hover:opacity-100 transition-opacity duration-500">
 				{item.category}
 			</span>
-		</div>
+		</button>
 	);
 }
 

@@ -31,6 +31,21 @@ export default function HomePage() {
           }),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            name: "Polar26 Showreel",
+            description:
+              "Creative showreel by Polar26 - a Swedish agency specializing in videography, brand activation, and content strategy.",
+            thumbnailUrl: `${SITE.url}/videos/hero-banner-poster.webp`,
+            contentUrl: `${SITE.url}/videos/hero-banner.mp4`,
+            uploadDate: "2026-01-01",
+          }),
+        }}
+      />
       <HomeContent />
     </>
   );

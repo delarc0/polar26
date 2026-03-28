@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
-	title: "Privacy Policy",
-	description: `Privacy policy for ${SITE.name}. Learn how we collect, use, and protect your personal information.`,
+	title: "Privacy Policy - Creative Agency",
+	description: `Privacy policy for ${SITE.name}. How we handle your data, what we collect through our contact form, and why we use cookie-free analytics. No tracking, no nonsense.`,
 	alternates: {
 		canonical: "https://polar26.com/privacy",
+	},
+	openGraph: {
+		url: "https://polar26.com/privacy",
 	},
 };
 

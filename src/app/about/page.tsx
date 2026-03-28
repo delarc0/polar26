@@ -3,11 +3,14 @@ import { AboutPageContent } from "./about-content";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About - Creative Agency & Brand Studio",
   description:
-    "Meet Patrik Nordstrom, founder of Polar26. A brand consultant, videographer, and content strategist with over a decade of experience. We believe in creative that moves people.",
+    "Meet Patrik Nordstrom, founder of Polar26. Brand consultant, videographer, and content strategist with over a decade of experience.",
   alternates: {
     canonical: "https://polar26.com/about",
+  },
+  openGraph: {
+    url: "https://polar26.com/about",
   },
 };
 

@@ -150,7 +150,7 @@ export function Footer() {
 				<div ref={riderRef} className="absolute left-1/2 -translate-x-1/2 -bottom-[64%] w-[120%] sm:w-[105%] lg:w-[90%] h-[160%] z-[3] pointer-events-none select-none will-change-transform">
 					<Image
 						src="/images/footer-rider.webp"
-						alt=""
+						alt="Motocross rider silhouette"
 						fill
 						className="object-contain object-bottom"
 						sizes="50vw"
