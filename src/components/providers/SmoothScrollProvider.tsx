@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useRef, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap-config";
 
@@ -21,6 +22,7 @@ export function useScrollLock() {
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
 	const lenisRef = useRef<Lenis | null>(null);
 	const lockCountRef = useRef(0);
+	const pathname = usePathname();
 
 	const lockScroll = useCallback(() => {
 		lockCountRef.current++;
@@ -80,6 +82,19 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
 			document.body.style.overflow = "";
 		};
 	}, []);
+
+	// Reset scroll and refresh triggers on route change
+	useEffect(() => {
+		const lenis = lenisRef.current;
+		if (lenis) {
+			lenis.scrollTo(0, { immediate: true });
+		} else {
+			window.scrollTo(0, 0);
+		}
+
+		const timer = setTimeout(() => ScrollTrigger.refresh(), 100);
+		return () => clearTimeout(timer);
+	}, [pathname]);
 
 	return (
 		<ScrollContext.Provider value={{ lockScroll, unlockScroll }}>
