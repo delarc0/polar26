@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { after } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
 import { escapeHtml, encodeNonAsciiHtml } from "@/lib/sanitize";
@@ -149,31 +148,29 @@ export async function POST(req: NextRequest) {
       attachments.push({ filename: file.name, content: buffer });
     }
 
-    after(async () => {
-      // Create Notion entry
-      if (NOTION_API_KEY && NOTION_DB_ID) {
-        try {
-          await createNotionPage(parsed.data);
-        } catch (err) {
-          console.error("Notion page creation failed:", err);
-        }
+    // Create Notion entry (must complete before response on serverless)
+    if (NOTION_API_KEY && NOTION_DB_ID) {
+      try {
+        await createNotionPage(parsed.data);
+      } catch (err) {
+        console.error("Notion page creation failed:", err);
       }
+    }
 
-      // Send email with attachments
-      if (resend && attachments.length > 0) {
-        try {
-          await resend.emails.send({
-            from: FROM,
-            to: TO,
-            subject: `Edit Request: ${parsed.data.summary}`,
-            html: buildEmail(parsed.data, true),
-            attachments,
-          });
-        } catch (err) {
-          console.error("Email send failed:", err);
-        }
+    // Send email with attachments
+    if (resend && attachments.length > 0) {
+      try {
+        await resend.emails.send({
+          from: FROM,
+          to: TO,
+          subject: `Edit Request: ${parsed.data.summary}`,
+          html: buildEmail(parsed.data, true),
+          attachments,
+        });
+      } catch (err) {
+        console.error("Email send failed:", err);
       }
-    });
+    }
 
     return NextResponse.json({ success: true });
   } catch {
