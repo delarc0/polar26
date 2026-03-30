@@ -14,7 +14,7 @@ const editSchema = z.object({
 
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
 const NOTION_DB_ID = process.env.NOTION_EDIT_DB_ID;
-const TO = "hello@polar26.com";
+const TO = "erik@lab37.io";
 const FROM = process.env.RESEND_FROM || "Polar26 <onboarding@resend.dev>";
 const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
