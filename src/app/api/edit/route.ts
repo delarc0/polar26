@@ -149,12 +149,16 @@ export async function POST(req: NextRequest) {
     }
 
     // Create Notion entry (must complete before response on serverless)
+    let notionError: string | null = null;
     if (NOTION_API_KEY && NOTION_DB_ID) {
       try {
         await createNotionPage(parsed.data);
       } catch (err) {
+        notionError = err instanceof Error ? err.message : String(err);
         console.error("Notion page creation failed:", err);
       }
+    } else {
+      notionError = `Missing env: API_KEY=${!!NOTION_API_KEY}, DB_ID=${!!NOTION_DB_ID}`;
     }
 
     // Send email with attachments
@@ -172,7 +176,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, notionError });
   } catch {
     return NextResponse.json(
       { error: "Something went wrong" },
