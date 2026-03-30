@@ -43,9 +43,14 @@ function FloatingField({
 	);
 }
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB per file
+const MAX_FILES = 5;
+const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/webp", "image/svg+xml", "application/pdf", "image/gif"];
+
 export function EditRequestForm() {
 	const [submitted, setSubmitted] = useState(false);
 	const [error, setError] = useState("");
+	const [files, setFiles] = useState<File[]>([]);
 	const buttonRef = useMagnetic<HTMLButtonElement>(0.2);
 	const {
 		register,
@@ -56,16 +61,33 @@ export function EditRequestForm() {
 		resolver: zodResolver(schema),
 	});
 
+	const handleFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const selected = Array.from(e.target.files || []);
+		const valid = selected.filter(
+			(f) => ALLOWED_TYPES.includes(f.type) && f.size <= MAX_FILE_SIZE
+		);
+		setFiles((prev) => [...prev, ...valid].slice(0, MAX_FILES));
+		e.target.value = "";
+	};
+
+	const removeFile = (index: number) => {
+		setFiles((prev) => prev.filter((_, i) => i !== index));
+	};
+
 	const onSubmit = async (data: FormData) => {
 		setError("");
 		try {
+			const body = new globalThis.FormData();
+			Object.entries(data).forEach(([k, v]) => body.append(k, v));
+			files.forEach((f) => body.append("files", f));
+
 			const res = await fetch("/api/edit", {
 				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(data),
+				body,
 			});
 			if (res.ok) {
 				reset();
+				setFiles([]);
 				setSubmitted(true);
 			} else {
 				setError("Something went wrong. Please try again.");
@@ -161,6 +183,47 @@ export function EditRequestForm() {
 					className={textareaClasses}
 				/>
 			</FloatingField>
+
+			<div>
+				<label
+					htmlFor="files"
+					className="flex items-center justify-center gap-2 w-full h-24 border border-dashed border-white/[0.12] bg-secondary/50 text-sm text-muted-foreground hover:border-polar-lime/40 hover:text-foreground transition-all cursor-pointer"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+					{files.length > 0 ? `${files.length} file${files.length > 1 ? "s" : ""} attached` : "Attach files (optional)"}
+				</label>
+				<input
+					id="files"
+					type="file"
+					multiple
+					accept={ALLOWED_TYPES.join(",")}
+					onChange={handleFiles}
+					className="sr-only"
+				/>
+				<p className="mt-1.5 text-[11px] text-white/25">
+					PNG, JPG, WebP, SVG, PDF, GIF. Max 10MB each, up to 5 files.
+				</p>
+				{files.length > 0 && (
+					<div className="mt-3 flex flex-wrap gap-2">
+						{files.map((f, i) => (
+							<span
+								key={`${f.name}-${i}`}
+								className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs bg-secondary border border-white/[0.06] text-foreground"
+							>
+								{f.name.length > 25 ? `${f.name.slice(0, 22)}...` : f.name}
+								<button
+									type="button"
+									onClick={() => removeFile(i)}
+									className="text-white/40 hover:text-red-400 transition-colors cursor-pointer"
+									aria-label={`Remove ${f.name}`}
+								>
+									&times;
+								</button>
+							</span>
+						))}
+					</div>
+				)}
+			</div>
 
 			{error && (
 				<p role="alert" className="text-sm text-red-400 text-center">{error}</p>

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { after } from "next/server";
+import { Resend } from "resend";
 import { z } from "zod";
-import { escapeHtml } from "@/lib/sanitize";
+import { escapeHtml, encodeNonAsciiHtml } from "@/lib/sanitize";
 
 const editSchema = z.object({
   pageSection: z.string().min(1).max(50),
@@ -13,6 +14,11 @@ const editSchema = z.object({
 
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
 const NOTION_DB_ID = process.env.NOTION_EDIT_DB_ID;
+const TO = "hello@polar26.com";
+const FROM = process.env.RESEND_FROM || "Polar26 <onboarding@resend.dev>";
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 async function createNotionPage(data: z.infer<typeof editSchema>) {
   const res = await fetch("https://api.notion.com/v1/pages", {
@@ -65,10 +71,68 @@ async function createNotionPage(data: z.infer<typeof editSchema>) {
   }
 }
 
+function buildEmail(data: z.infer<typeof editSchema>, hasFiles: boolean) {
+  const html = `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#0A0A0A;font-family:-apple-system,sans-serif;">
+  <table width="100%" style="background:#0A0A0A;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="560" style="max-width:560px;width:100%;">
+        <tr><td style="padding-bottom:32px;">
+          <span style="font-size:20px;font-weight:700;letter-spacing:4px;color:#BDFF00;">POLAR26</span>
+        </td></tr>
+        <tr><td style="padding-bottom:24px;">
+          <h1 style="margin:0;font-size:22px;color:#fff;">Edit Request: ${escapeHtml(data.summary)}</h1>
+        </td></tr>
+        <tr><td>
+          <table width="100%" style="background:#121212;border:1px solid #333;">
+            <tr>
+              <td style="padding:12px 16px;color:#999;font-size:13px;">Page</td>
+              <td style="padding:12px 16px;color:#FAFAFA;font-size:14px;">${escapeHtml(data.pageSection)}</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 16px;color:#999;font-size:13px;">Type</td>
+              <td style="padding:12px 16px;color:#FAFAFA;font-size:14px;">${escapeHtml(data.requestType)}</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 16px;color:#999;font-size:13px;">Priority</td>
+              <td style="padding:12px 16px;color:#FAFAFA;font-size:14px;">${escapeHtml(data.priority)}</td>
+            </tr>
+            <tr><td colspan="2" style="padding:16px;border-top:1px solid #333;">
+              <p style="color:#999;font-size:13px;margin:0 0 8px;">Description</p>
+              <p style="color:#FAFAFA;font-size:14px;line-height:1.6;margin:0;white-space:pre-wrap;">${escapeHtml(data.description)}</p>
+            </td></tr>
+            ${hasFiles ? `<tr><td colspan="2" style="padding:12px 16px;border-top:1px solid #333;">
+              <p style="color:#BDFF00;font-size:13px;margin:0;">Files attached to this email</p>
+            </td></tr>` : ""}
+          </table>
+        </td></tr>
+        <tr><td style="padding-top:24px;">
+          <p style="margin:0;font-size:13px;color:#666;">From: Patrik Nordstrom</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  return encodeNonAsciiHtml(html);
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const parsed = editSchema.safeParse(body);
+    const formData = await req.formData();
+
+    const fields = {
+      pageSection: formData.get("pageSection") as string,
+      requestType: formData.get("requestType") as string,
+      priority: formData.get("priority") as string,
+      summary: formData.get("summary") as string,
+      description: formData.get("description") as string,
+    };
+
+    const parsed = editSchema.safeParse(fields);
 
     if (!parsed.success) {
       return NextResponse.json(
@@ -77,15 +141,37 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const files = formData.getAll("files") as File[];
+    const attachments: { filename: string; content: Buffer }[] = [];
+    for (const file of files.slice(0, 5)) {
+      if (file.size > 10 * 1024 * 1024) continue;
+      const buffer = Buffer.from(await file.arrayBuffer());
+      attachments.push({ filename: file.name, content: buffer });
+    }
+
     after(async () => {
-      if (!NOTION_API_KEY || !NOTION_DB_ID) {
-        console.error("Notion env vars not configured");
-        return;
+      // Create Notion entry
+      if (NOTION_API_KEY && NOTION_DB_ID) {
+        try {
+          await createNotionPage(parsed.data);
+        } catch (err) {
+          console.error("Notion page creation failed:", err);
+        }
       }
-      try {
-        await createNotionPage(parsed.data);
-      } catch (err) {
-        console.error("Notion page creation failed:", err);
+
+      // Send email with attachments
+      if (resend && attachments.length > 0) {
+        try {
+          await resend.emails.send({
+            from: FROM,
+            to: TO,
+            subject: `Edit Request: ${parsed.data.summary}`,
+            html: buildEmail(parsed.data, true),
+            attachments,
+          });
+        } catch (err) {
+          console.error("Email send failed:", err);
+        }
       }
     });
 
