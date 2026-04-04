@@ -26,6 +26,8 @@ const CLIENTS: Client[] = [
 	{ type: "image", name: "Son of a Coder", src: "/images/clients/sonofacoder.webp", width: 226, height: 80, className: "h-8 sm:h-10" },
 ];
 
+const PRIORITY_CLIENTS = new Set(["Pirelli", "Yamaha"]);
+
 export function ClientLogoMarquee() {
 	const set = CLIENTS.map((client) => (
 		<div
@@ -38,6 +40,7 @@ export function ClientLogoMarquee() {
 					alt={client.name}
 					width={client.width}
 					height={client.height}
+					priority={PRIORITY_CLIENTS.has(client.name)}
 					className={`${client.className} w-auto brightness-0 invert opacity-40`}
 				/>
 			) : (

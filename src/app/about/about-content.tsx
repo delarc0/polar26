@@ -286,6 +286,23 @@ export function AboutPageContent() {
 									(gold 2016, 2017) and has competed in several motorcycle
 									racing series.
 								</p>
+								<p className="bio-paragraph">
+									He founded Polar26 with a clear mission: help brands stop
+									blending in. Today, the agency works with clients across
+									motorsport, lifestyle, and consumer goods — from initial brand
+									strategy to final frame delivery. Every project is built on
+									the belief that great creative does not just look good, it
+									drives real business results.
+								</p>
+							</div>
+							<div className="mt-8 pt-6 border-t border-white/[0.06]">
+								<p className="text-xs text-muted-foreground">
+									<span className="text-foreground font-medium">Patrik Nordstrom</span>
+									{" "}— Founder &amp; Creative Director, Polar26
+								</p>
+								<p className="mt-1 text-xs text-muted-foreground">
+									Published January 2026
+								</p>
 							</div>
 						</div>
 
@@ -298,9 +315,11 @@ export function AboutPageContent() {
 								<Image
 									src="/images/patrik-portrait.webp"
 									alt="Patrik Nordstrom"
-									fill
+									width={800}
+									height={1067}
+									priority
 									sizes="(max-width: 1024px) 100vw, 50vw"
-									className="object-cover"
+									className="object-cover absolute inset-0 w-full h-full"
 								/>
 							</div>
 							<div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/30 to-transparent" />

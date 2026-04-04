@@ -10,6 +10,7 @@ const contactSchema = z.object({
   company: z.string().max(100).optional(),
   projectType: z.string().max(100).optional(),
   message: z.string().min(1, "Message is required").max(5000),
+  turnstileToken: z.string().min(1, "Security check required"),
 });
 
 const TO = "hello@polar26.com";
@@ -82,6 +83,17 @@ function buildEmail({
   return encodeNonAsciiHtml(html);
 }
 
+async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY ?? "1x0000000000000000000000000000000AA";
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ secret, response: token, remoteip: ip }),
+  });
+  const data = await res.json() as { success: boolean };
+  return data.success;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -94,7 +106,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { name, email, company, projectType, message } = parsed.data;
+    const { name, email, company, projectType, message, turnstileToken } = parsed.data;
+
+    const ip = req.headers.get("cf-connecting-ip") ?? req.headers.get("x-forwarded-for") ?? "unknown";
+    const turnstileOk = await verifyTurnstile(turnstileToken, ip);
+    if (!turnstileOk) {
+      return NextResponse.json({ error: "Security check failed. Please try again." }, { status: 400 });
+    }
 
     const subject = `Contact form: ${name}`;
     const html = buildEmail({ name, email, company, projectType, message });

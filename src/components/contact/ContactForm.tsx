@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useMagnetic } from "@/hooks/useMagnetic";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +14,7 @@ const schema = z.object({
 	company: z.string().optional(),
 	projectType: z.string().optional(),
 	message: z.string().min(1, "Message is required"),
+	turnstileToken: z.string().min(1, "Please complete the security check"),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -44,9 +46,11 @@ function FloatingField({
 export function ContactForm() {
 	const [submitted, setSubmitted] = useState(false);
 	const buttonRef = useMagnetic<HTMLButtonElement>(0.2);
+	const turnstileRef = useRef<TurnstileInstance>(null);
 	const {
 		register,
 		handleSubmit,
+		setValue,
 		formState: { errors, isSubmitting },
 		reset,
 	} = useForm<FormData>({
@@ -63,6 +67,7 @@ export function ContactForm() {
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(data),
 			});
+			turnstileRef.current?.reset();
 			if (res.ok) {
 				reset();
 				setSubmitted(true);
@@ -76,6 +81,7 @@ export function ContactForm() {
 			}
 		} catch {
 			setError("Could not send message. Please try again.");
+			turnstileRef.current?.reset();
 		}
 	};
 
@@ -157,6 +163,20 @@ export function ContactForm() {
 					className={textareaClasses}
 				/>
 			</FloatingField>
+
+			<div>
+				<Turnstile
+					ref={turnstileRef}
+					siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "1x00000000000000000000AA"}
+					onSuccess={(token) => setValue("turnstileToken", token)}
+					onExpire={() => setValue("turnstileToken", "")}
+					options={{ theme: "dark" }}
+				/>
+				{errors.turnstileToken && (
+					<p role="alert" className="mt-1 text-xs text-red-400">{errors.turnstileToken.message}</p>
+				)}
+				<input type="hidden" {...register("turnstileToken")} />
+			</div>
 
 			{error && (
 				<p role="alert" className="text-sm text-red-400 text-center">{error}</p>
