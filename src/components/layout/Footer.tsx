@@ -160,7 +160,6 @@ export function Footer() {
 				<div ref={riderRef} className="absolute left-1/2 -translate-x-1/2 -bottom-[64%] w-[120%] sm:w-[105%] lg:w-[90%] h-[160%] z-[3] pointer-events-none select-none will-change-transform">
 					<video
 						ref={videoRef}
-						src="/videos/footer-rider.mp4"
 						poster="/images/footer-rider.webp"
 						autoPlay
 						muted
@@ -168,9 +167,10 @@ export function Footer() {
 						playsInline
 						preload="metadata"
 						aria-hidden="true"
-						className="footer-video-mask absolute inset-0 w-full h-full object-contain object-bottom"
-					/>
-					<div className="absolute inset-x-0 bottom-0 h-[10%] bg-gradient-to-t from-[#111] to-transparent" />
+						className="absolute inset-0 w-full h-full object-contain object-bottom"
+					>
+						<source src="/videos/footer-rider.webm" type="video/webm" />
+					</video>
 				</div>
 
 				<div className="relative z-[4] min-h-[45vh] flex items-center justify-between px-6 sm:px-10 lg:px-16 pt-[12vh]">

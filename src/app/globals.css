@@ -134,26 +134,6 @@
   }
 }
 
-/* Footer video — vertical elliptical vignette that fades the
-   rectangular frame into the footer background. Tune the radii and
-   color-stops to widen/tighten the visible window around the subject. */
-.footer-video-mask {
-  -webkit-mask-image: radial-gradient(
-    ellipse 38% 58% at 50% 55%,
-    #000 15%,
-    rgba(0, 0, 0, 0.55) 45%,
-    transparent 70%
-  );
-  mask-image: radial-gradient(
-    ellipse 38% 58% at 50% 55%,
-    #000 15%,
-    rgba(0, 0, 0, 0.55) 45%,
-    transparent 70%
-  );
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-}
-
 /* Terrain topo overlay */
 .footer-topo {
   background-image:
