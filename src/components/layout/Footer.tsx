@@ -23,6 +23,8 @@ const SOCIAL_LINKS = [
 const PARTNER_LOGOS = [
 	{ name: "Pirelli", src: "/images/clients/pirelli.webp", width: 377, height: 80 },
 	{ name: "Yamaha", src: "/images/clients/yamaha.webp", width: 500, height: 107 },
+	{ name: "Speedway GP", src: "/images/clients/220301-SGP-Logo.webp", width: 600, height: 189 },
+	{ name: "MC Mässan 2027", src: "/images/clients/mcmassan-2027.webp", width: 472, height: 133 },
 	{ name: "Fysiolollo", src: "/images/clients/fysiolollo.webp", width: 166, height: 80 },
 	{ name: "Son of a Coder", src: "/images/clients/sonofacoder.webp", width: 226, height: 80 },
 ];
