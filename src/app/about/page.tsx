@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     url: "https://polar26.com/about",
+    images: [{ url: "https://polar26.com/opengraph-image", width: 1200, height: 630, alt: "Polar26 - Creative Agency" }],
   },
 };
 
@@ -25,11 +26,14 @@ export default function AboutPage() {
             "@type": "Person",
             name: SITE.founder.name,
             jobTitle: SITE.founder.title,
+            description: "Brand consultant, videographer, and content strategist with over a decade of experience in creative production.",
             worksFor: {
               "@type": "Organization",
               name: SITE.name,
               url: SITE.url,
             },
+            url: `${SITE.url}/about`,
+            datePublished: "2026-01-01",
           }),
         }}
       />

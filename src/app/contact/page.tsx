@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     url: "https://polar26.com/contact",
+    images: [{ url: "https://polar26.com/opengraph-image", width: 1200, height: 630, alt: "Polar26 - Creative Agency" }],
   },
 };
 

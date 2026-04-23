@@ -173,7 +173,7 @@ export function Footer() {
 
 				<div className="relative z-[4] min-h-[45vh] flex items-center justify-between px-6 sm:px-10 lg:px-16 pt-[12vh]">
 					<div ref={leftNavRef}>
-						<p className="text-[10px] uppercase tracking-[0.3em] text-white/25 mb-4">
+						<p className="text-[10px] uppercase tracking-[0.3em] text-white/50 mb-4">
 							Pages
 						</p>
 						<ul className="flex flex-col gap-1">
@@ -191,7 +191,7 @@ export function Footer() {
 					</div>
 
 					<div ref={rightNavRef} className="text-right">
-						<p className="text-[10px] uppercase tracking-[0.3em] text-white/25 mb-4">
+						<p className="text-[10px] uppercase tracking-[0.3em] text-white/50 mb-4">
 							Follow On
 						</p>
 						<ul className="flex flex-col gap-1">

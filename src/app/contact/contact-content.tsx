@@ -23,6 +23,30 @@ export function ContactPageContent() {
             <p className="mt-4 text-lg text-muted-foreground max-w-lg">
               Have a project in mind? We would love to hear about it.
             </p>
+            <div className="mt-6 space-y-3 text-sm text-muted-foreground max-w-xl leading-relaxed">
+              <p>
+                Whether you are launching a new brand, producing a commercial
+                campaign, planning a major event, or simply need a strategic
+                partner to sharpen your creative direction — we are here to help.
+              </p>
+              <p>
+                Tell us about your project using the form and we will get back
+                to you within 24 hours with an initial plan. We work with brands
+                of all sizes, from emerging startups to established international
+                names across motorsport, lifestyle, and consumer goods.
+              </p>
+              <p>
+                Prefer to reach out directly? Drop us a line at{" "}
+                <a
+                  href="mailto:hello@polar26.com"
+                  className="text-polar-lime hover:underline"
+                >
+                  hello@polar26.com
+                </a>
+                . We are based in Sweden and work with clients across Europe and
+                beyond.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 lg:gap-20">
