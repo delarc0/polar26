@@ -30,6 +30,7 @@ const PARTNER_LOGOS = [
 export function Footer() {
 	const footerRef = useRef<HTMLElement>(null);
 	const riderRef = useRef<HTMLDivElement>(null);
+	const videoRef = useRef<HTMLVideoElement>(null);
 	const marqueeRef = useRef<HTMLDivElement>(null);
 	const pathname = usePathname();
 	const buttonRef = useMagnetic<HTMLAnchorElement>(0.25);
@@ -59,7 +60,14 @@ export function Footer() {
 		if (!footer) return;
 
 		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-		if (prefersReducedMotion) return;
+		if (prefersReducedMotion) {
+			const video = videoRef.current;
+			if (video) {
+				video.pause();
+				video.removeAttribute("autoplay");
+			}
+			return;
+		}
 
 		const tweens: gsap.core.Tween[] = [];
 		const triggers: ScrollTrigger[] = [];
@@ -148,12 +156,17 @@ export function Footer() {
 				</div>
 
 				<div ref={riderRef} className="absolute left-1/2 -translate-x-1/2 -bottom-[64%] w-[120%] sm:w-[105%] lg:w-[90%] h-[160%] z-[3] pointer-events-none select-none will-change-transform">
-					<Image
-						src="/images/footer-rider.webp"
-						alt="Motocross rider silhouette"
-						fill
-						className="object-contain object-bottom"
-						sizes="50vw"
+					<video
+						ref={videoRef}
+						src="/videos/footer-rider.mp4"
+						poster="/images/footer-rider.webp"
+						autoPlay
+						muted
+						loop
+						playsInline
+						preload="metadata"
+						aria-hidden="true"
+						className="footer-video-mask absolute inset-0 w-full h-full object-contain object-bottom"
 					/>
 					<div className="absolute inset-x-0 bottom-0 h-[10%] bg-gradient-to-t from-[#111] to-transparent" />
 				</div>
