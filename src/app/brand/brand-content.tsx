@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Check, Copy } from "lucide-react";
+import Image from "next/image";
+import { Check, Copy, Download } from "lucide-react";
 
 const COLORS = [
 	{ hex: "#BDFF00", name: "Polar Lime", role: "Signature accent" },
@@ -67,6 +68,39 @@ const VOICE_DONT = [
 	"Award-winning, world-class, best-in-class.",
 	"Cookie-cutter campaigns or recycled decks.",
 	"Anything a boardroom would write.",
+] as const;
+
+const LOGO_VARIANTS = [
+	{
+		key: "lime",
+		label: "Primary",
+		note: "Default on dark backgrounds",
+		swatchClass: "bg-[#0A0A0A]",
+		previewSrc: "/brand-assets/polar26-logo-lime.png",
+		png: "/brand-assets/polar26-logo-lime.png",
+		svg: "/brand-assets/polar26-logo-lime.svg",
+		zip: "/brand-assets/polar26-logo-lime.zip",
+	},
+	{
+		key: "white",
+		label: "Mono \u00B7 Light",
+		note: "For dark photography & video",
+		swatchClass: "bg-[#262626]",
+		previewSrc: "/brand-assets/polar26-logo-white.png",
+		png: "/brand-assets/polar26-logo-white.png",
+		svg: "/brand-assets/polar26-logo-white.svg",
+		zip: "/brand-assets/polar26-logo-white.zip",
+	},
+	{
+		key: "black",
+		label: "Mono \u00B7 Dark",
+		note: "For light backgrounds & print",
+		swatchClass: "bg-[#FAFAFA]",
+		previewSrc: "/brand-assets/polar26-logo-black.png",
+		png: "/brand-assets/polar26-logo-black.png",
+		svg: "/brand-assets/polar26-logo-black.svg",
+		zip: "/brand-assets/polar26-logo-black.zip",
+	},
 ] as const;
 
 const PROCESS = [
@@ -356,6 +390,86 @@ export function BrandPageContent() {
 							</ul>
 						</div>
 					</div>
+				</div>
+			</section>
+
+			{/* LOGO & ELEMENTS */}
+			<section className="py-16 sm:py-24 border-t border-white/[0.06]">
+				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+					<div className="flex items-end justify-between gap-6 flex-wrap">
+						<div>
+							<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
+								Logo &amp; Elements
+							</span>
+							<h2 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] font-display font-bold uppercase">
+								Download Assets
+							</h2>
+							<p className="mt-3 max-w-xl text-sm text-muted-foreground leading-relaxed">
+								Primary wordmark in three colour treatments. SVG for web &amp; screen, PNG at 1x / 2x / 4x for everything else. Grab the ZIP for the full set.
+							</p>
+						</div>
+					</div>
+
+					<div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+						{LOGO_VARIANTS.map((v) => (
+							<div
+								key={v.key}
+								className="group bg-card border border-white/10 flex flex-col"
+							>
+								<div
+									className={`${v.swatchClass} relative aspect-[320/140] flex items-center justify-center p-10 overflow-hidden`}
+								>
+									<Image
+										src={v.previewSrc}
+										alt={`Polar26 logo \u2014 ${v.label}`}
+										width={640}
+										height={172}
+										className="w-full max-w-[220px] h-auto object-contain"
+										unoptimized
+									/>
+								</div>
+
+								<div className="p-5 border-t border-white/[0.06] flex flex-col gap-4">
+									<div>
+										<div className="font-display font-extrabold uppercase text-sm tracking-[0.04em]">
+											{v.label}
+										</div>
+										<div className="mt-1 text-xs text-muted-foreground leading-snug">
+											{v.note}
+										</div>
+									</div>
+
+									<div className="grid grid-cols-3 gap-2">
+										<a
+											href={v.svg}
+											download
+											className="flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-display font-bold tracking-[0.12em] uppercase border border-white/10 hover:border-polar-lime hover:text-polar-lime transition-colors"
+										>
+											<Download size={12} aria-hidden="true" /> SVG
+										</a>
+										<a
+											href={v.png}
+											download
+											className="flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-display font-bold tracking-[0.12em] uppercase border border-white/10 hover:border-polar-lime hover:text-polar-lime transition-colors"
+										>
+											<Download size={12} aria-hidden="true" /> PNG
+										</a>
+										<a
+											href={v.zip}
+											download
+											className="flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-display font-bold tracking-[0.12em] uppercase bg-polar-lime/10 text-polar-lime border border-polar-lime/30 hover:bg-polar-lime hover:text-background transition-colors"
+										>
+											<Download size={12} aria-hidden="true" /> ZIP
+										</a>
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+
+					<p className="mt-6 text-[11px] text-white/30 leading-relaxed max-w-xl">
+						Vector files are auto-traced from the master PNG &mdash; fine for web &amp; screen use, pixel-perfect only at screen scale. For large-format print or merch, request the native vector from hello@polar26.com.
+					</p>
 				</div>
 			</section>
 
