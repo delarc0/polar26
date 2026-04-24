@@ -103,6 +103,49 @@ const LOGO_VARIANTS = [
 	},
 ] as const;
 
+const MARK_VARIANTS = [
+	{
+		key: "natural",
+		label: "Natural",
+		note: "Full-tone illustration",
+		swatchClass: "bg-[#0A0A0A]",
+		previewSrc: "/brand-assets/polar26-mark-natural.png",
+		png: "/brand-assets/polar26-mark-natural.png",
+		svg: null,
+		zip: "/brand-assets/polar26-mark-natural.zip",
+	},
+	{
+		key: "lime",
+		label: "Lime",
+		note: "Silhouette on dark",
+		swatchClass: "bg-[#0A0A0A]",
+		previewSrc: "/brand-assets/polar26-mark-lime.png",
+		png: "/brand-assets/polar26-mark-lime.png",
+		svg: "/brand-assets/polar26-mark-lime.svg",
+		zip: "/brand-assets/polar26-mark-lime.zip",
+	},
+	{
+		key: "white",
+		label: "Mono \u00B7 Light",
+		note: "For dark photography & video",
+		swatchClass: "bg-[#262626]",
+		previewSrc: "/brand-assets/polar26-mark-white.png",
+		png: "/brand-assets/polar26-mark-white.png",
+		svg: "/brand-assets/polar26-mark-white.svg",
+		zip: "/brand-assets/polar26-mark-white.zip",
+	},
+	{
+		key: "black",
+		label: "Mono \u00B7 Dark",
+		note: "For light backgrounds & print",
+		swatchClass: "bg-[#FAFAFA]",
+		previewSrc: "/brand-assets/polar26-mark-black.png",
+		png: "/brand-assets/polar26-mark-black.png",
+		svg: "/brand-assets/polar26-mark-black.svg",
+		zip: "/brand-assets/polar26-mark-black.zip",
+	},
+] as const;
+
 const PROCESS = [
 	{
 		num: "01",
@@ -396,78 +439,153 @@ export function BrandPageContent() {
 			{/* LOGO & ELEMENTS */}
 			<section className="py-16 sm:py-24 border-t border-white/[0.06]">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-					<div className="flex items-end justify-between gap-6 flex-wrap">
-						<div>
-							<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
-								Logo &amp; Elements
+					<div>
+						<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
+							Logo &amp; Elements
+						</span>
+						<h2 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] font-display font-bold uppercase">
+							Download Assets
+						</h2>
+						<p className="mt-3 max-w-xl text-sm text-muted-foreground leading-relaxed">
+							Wordmark &amp; symbol in multiple colour treatments. SVG for web &amp; screen, PNG at 1x / 2x / 4x for everything else. Grab the ZIP for the full set.
+						</p>
+					</div>
+
+					{/* Wordmark */}
+					<div className="mt-12">
+						<div className="flex items-baseline justify-between gap-4 flex-wrap">
+							<h3 className="font-display font-extrabold uppercase text-base tracking-[0.12em]">
+								Wordmark
+							</h3>
+							<span className="text-[10px] tracking-[0.2em] uppercase text-white/40">
+								Primary lockup
 							</span>
-							<h2 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] font-display font-bold uppercase">
-								Download Assets
-							</h2>
-							<p className="mt-3 max-w-xl text-sm text-muted-foreground leading-relaxed">
-								Primary wordmark in three colour treatments. SVG for web &amp; screen, PNG at 1x / 2x / 4x for everything else. Grab the ZIP for the full set.
-							</p>
+						</div>
+						<div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+							{LOGO_VARIANTS.map((v) => (
+								<div
+									key={`logo-${v.key}`}
+									className="group bg-card border border-white/10 flex flex-col"
+								>
+									<div
+										className={`${v.swatchClass} relative aspect-[320/140] flex items-center justify-center p-10 overflow-hidden`}
+									>
+										<Image
+											src={v.previewSrc}
+											alt={`Polar26 wordmark \u2014 ${v.label}`}
+											width={640}
+											height={172}
+											className="w-full max-w-[220px] h-auto object-contain"
+											unoptimized
+										/>
+									</div>
+									<div className="p-5 border-t border-white/[0.06] flex flex-col gap-4">
+										<div>
+											<div className="font-display font-extrabold uppercase text-sm tracking-[0.04em]">
+												{v.label}
+											</div>
+											<div className="mt-1 text-xs text-muted-foreground leading-snug">
+												{v.note}
+											</div>
+										</div>
+										<div className="grid grid-cols-3 gap-2">
+											<a
+												href={v.svg}
+												download
+												className="flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-display font-bold tracking-[0.12em] uppercase border border-white/10 hover:border-polar-lime hover:text-polar-lime transition-colors"
+											>
+												<Download size={12} aria-hidden="true" /> SVG
+											</a>
+											<a
+												href={v.png}
+												download
+												className="flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-display font-bold tracking-[0.12em] uppercase border border-white/10 hover:border-polar-lime hover:text-polar-lime transition-colors"
+											>
+												<Download size={12} aria-hidden="true" /> PNG
+											</a>
+											<a
+												href={v.zip}
+												download
+												className="flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-display font-bold tracking-[0.12em] uppercase bg-polar-lime/10 text-polar-lime border border-polar-lime/30 hover:bg-polar-lime hover:text-background transition-colors"
+											>
+												<Download size={12} aria-hidden="true" /> ZIP
+											</a>
+										</div>
+									</div>
+								</div>
+							))}
 						</div>
 					</div>
 
-					<div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
-						{LOGO_VARIANTS.map((v) => (
-							<div
-								key={v.key}
-								className="group bg-card border border-white/10 flex flex-col"
-							>
+					{/* Symbol / Mark */}
+					<div className="mt-12">
+						<div className="flex items-baseline justify-between gap-4 flex-wrap">
+							<h3 className="font-display font-extrabold uppercase text-base tracking-[0.12em]">
+								Symbol
+							</h3>
+							<span className="text-[10px] tracking-[0.2em] uppercase text-white/40">
+								Standalone mark
+							</span>
+						</div>
+						<div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+							{MARK_VARIANTS.map((v) => (
 								<div
-									className={`${v.swatchClass} relative aspect-[320/140] flex items-center justify-center p-10 overflow-hidden`}
+									key={`mark-${v.key}`}
+									className="group bg-card border border-white/10 flex flex-col"
 								>
-									<Image
-										src={v.previewSrc}
-										alt={`Polar26 logo \u2014 ${v.label}`}
-										width={640}
-										height={172}
-										className="w-full max-w-[220px] h-auto object-contain"
-										unoptimized
-									/>
-								</div>
-
-								<div className="p-5 border-t border-white/[0.06] flex flex-col gap-4">
-									<div>
-										<div className="font-display font-extrabold uppercase text-sm tracking-[0.04em]">
-											{v.label}
+									<div
+										className={`${v.swatchClass} relative aspect-square flex items-center justify-center p-8 overflow-hidden`}
+									>
+										<Image
+											src={v.previewSrc}
+											alt={`Polar26 symbol \u2014 ${v.label}`}
+											width={600}
+											height={378}
+											className="w-full max-w-[140px] h-auto object-contain"
+											unoptimized
+										/>
+									</div>
+									<div className="p-4 border-t border-white/[0.06] flex flex-col gap-3">
+										<div>
+											<div className="font-display font-extrabold uppercase text-sm tracking-[0.04em]">
+												{v.label}
+											</div>
+											<div className="mt-1 text-[11px] text-muted-foreground leading-snug">
+												{v.note}
+											</div>
 										</div>
-										<div className="mt-1 text-xs text-muted-foreground leading-snug">
-											{v.note}
+										<div className={`grid ${v.svg ? "grid-cols-3" : "grid-cols-2"} gap-2`}>
+											{v.svg && (
+												<a
+													href={v.svg}
+													download
+													className="flex items-center justify-center gap-1 px-2 py-2 text-[10px] font-display font-bold tracking-[0.1em] uppercase border border-white/10 hover:border-polar-lime hover:text-polar-lime transition-colors"
+												>
+													<Download size={11} aria-hidden="true" /> SVG
+												</a>
+											)}
+											<a
+												href={v.png}
+												download
+												className="flex items-center justify-center gap-1 px-2 py-2 text-[10px] font-display font-bold tracking-[0.1em] uppercase border border-white/10 hover:border-polar-lime hover:text-polar-lime transition-colors"
+											>
+												<Download size={11} aria-hidden="true" /> PNG
+											</a>
+											<a
+												href={v.zip}
+												download
+												className="flex items-center justify-center gap-1 px-2 py-2 text-[10px] font-display font-bold tracking-[0.1em] uppercase bg-polar-lime/10 text-polar-lime border border-polar-lime/30 hover:bg-polar-lime hover:text-background transition-colors"
+											>
+												<Download size={11} aria-hidden="true" /> ZIP
+											</a>
 										</div>
 									</div>
-
-									<div className="grid grid-cols-3 gap-2">
-										<a
-											href={v.svg}
-											download
-											className="flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-display font-bold tracking-[0.12em] uppercase border border-white/10 hover:border-polar-lime hover:text-polar-lime transition-colors"
-										>
-											<Download size={12} aria-hidden="true" /> SVG
-										</a>
-										<a
-											href={v.png}
-											download
-											className="flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-display font-bold tracking-[0.12em] uppercase border border-white/10 hover:border-polar-lime hover:text-polar-lime transition-colors"
-										>
-											<Download size={12} aria-hidden="true" /> PNG
-										</a>
-										<a
-											href={v.zip}
-											download
-											className="flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-display font-bold tracking-[0.12em] uppercase bg-polar-lime/10 text-polar-lime border border-polar-lime/30 hover:bg-polar-lime hover:text-background transition-colors"
-										>
-											<Download size={12} aria-hidden="true" /> ZIP
-										</a>
-									</div>
 								</div>
-							</div>
-						))}
+							))}
+						</div>
 					</div>
 
-					<p className="mt-6 text-[11px] text-white/30 leading-relaxed max-w-xl">
+					<p className="mt-8 text-[11px] text-white/30 leading-relaxed max-w-xl">
 						Vector files are auto-traced from the master PNG &mdash; fine for web &amp; screen use, pixel-perfect only at screen scale. For large-format print or merch, request the native vector from hello@polar26.com.
 					</p>
 				</div>
