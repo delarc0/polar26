@@ -42,7 +42,7 @@ export default function HomePage() {
               "Creative showreel by Polar26 - a Swedish agency specializing in videography, brand activation, and content strategy.",
             thumbnailUrl: `${SITE.url}/videos/hero-banner-poster.webp`,
             contentUrl: `${SITE.url}/videos/hero-banner.mp4`,
-            uploadDate: "2026-01-01",
+            uploadDate: "2026-01-01T00:00:00+01:00",
           }),
         }}
       />
@@ -56,7 +56,7 @@ export default function HomePage() {
             description: "Yamaha motorsport film by Polar26 featuring rider Edvin on track.",
             thumbnailUrl: `${SITE.url}/videos/yamaha-edvin-poster.webp`,
             contentUrl: `${SITE.url}/videos/yamaha-edvin.mp4`,
-            uploadDate: "2026-01-01",
+            uploadDate: "2026-01-01T00:00:00+01:00",
           }),
         }}
       />
@@ -70,7 +70,7 @@ export default function HomePage() {
             description: "Slow motion action sports film by Polar26.",
             thumbnailUrl: `${SITE.url}/videos/stivian-slowmo-poster.webp`,
             contentUrl: `${SITE.url}/videos/stivian-slowmo.mp4`,
-            uploadDate: "2026-01-01",
+            uploadDate: "2026-01-01T00:00:00+01:00",
           }),
         }}
       />
@@ -84,7 +84,7 @@ export default function HomePage() {
             description: "Motorsport helmet close-up film by Polar26 for TinyRidR.",
             thumbnailUrl: `${SITE.url}/videos/tinyridr-helmet-poster.webp`,
             contentUrl: `${SITE.url}/videos/tinyridr-helmet.mp4`,
-            uploadDate: "2026-01-01",
+            uploadDate: "2026-01-01T00:00:00+01:00",
           }),
         }}
       />
