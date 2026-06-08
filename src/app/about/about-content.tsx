@@ -307,7 +307,7 @@ export function AboutPageContent() {
 
 						<div
 							ref={founderImageRef}
-							className="relative aspect-[3/4] overflow-hidden"
+							className="relative aspect-[3/4] overflow-hidden w-full max-w-sm mx-auto lg:mx-0 lg:ml-auto"
 							style={{ clipPath: "inset(100% 0 0 0)" }}
 						>
 							<div ref={imageInnerRef} className="absolute inset-0 will-change-transform">
