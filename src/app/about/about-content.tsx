@@ -280,10 +280,10 @@ export function AboutPageContent() {
 								</p>
 								<p className="bio-paragraph">
 									He is a former Swedish 3x3 Basketball Champion (gold 2016,
-									2017) and has competed in motorcycle racing. That world runs
-									deep, which is why Polar26 manages athletes with the same care
-									it builds brands: he knows what it takes to perform, and how to
-									turn a name into an icon.
+									2017), a motorcycle racer, and a seasoned adventurer at home
+									far off the map. That world runs deep, which is why Polar26
+									manages athletes with the same care it builds brands: he knows
+									what it takes to perform, and how to turn a name into an icon.
 								</p>
 								<p className="bio-paragraph">
 									He founded Polar26 with a clear mission: help brands stop
