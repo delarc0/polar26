@@ -13,8 +13,8 @@ export const SERVICES: Service[] = [
     image: "/images/gallery/ferrari-street.webp",
   },
   {
-    title: "Content Strategy",
-    description: "Content that drives real results.",
+    title: "Product Strategy",
+    description: "Make your product the obvious choice.",
     icon: "TrendingUp",
     image: "/images/gallery/motorsport-garage.webp",
   },

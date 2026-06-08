@@ -49,8 +49,8 @@ const VALUES = [
 	},
 	{
 		num: "03",
-		title: "Every Frame Matters",
-		body: "Whether it is a 15-second reel or a full brand film, we obsess over the details that separate good from unforgettable.",
+		title: "Every Action Matters",
+		body: "From the negotiating table to the final deadline, nothing is wasted. We move fast, decide sharply, and make every action count.",
 	},
 ] as const;
 

@@ -20,21 +20,19 @@ const VALUES = [
 		number: "02",
 	},
 	{
-		title: "Every Frame Matters",
+		title: "Every Action Matters",
 		description:
-			"Whether it is a 15-second reel or a full brand film, we obsess over the details that separate good from unforgettable.",
+			"From the negotiating table to the final deadline, nothing is wasted. We move fast, decide sharply, and make every action count.",
 		number: "03",
 	},
 ];
 
 const CAPABILITIES = [
-	"Brand Consulting",
+	"Brand Activation",
+	"Product Strategy",
+	"Strategic Partnerships",
 	"Athlete Management",
-	"Content Strategy",
 	"Content Production",
-	"Advertising",
-	"Content Marketing",
-	"Event Production",
 ];
 
 function ValueCard({ value, index }: { value: typeof VALUES[number]; index: number }) {

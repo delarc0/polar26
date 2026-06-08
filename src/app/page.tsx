@@ -5,7 +5,7 @@ import { SITE } from "@/data/site";
 export const metadata: Metadata = {
   title: "Polar26 | From Brand to Business",
   description:
-    "Polar26 is a creative agency in Sweden specializing in brand activation, content strategy, athlete management, and content production.",
+    "Polar26 is a creative agency in Sweden specializing in brand activation, product strategy, athlete management, and content production.",
   alternates: {
     canonical: "https://polar26.com",
   },
