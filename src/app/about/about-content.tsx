@@ -291,7 +291,7 @@ export function AboutPageContent() {
 									blending in. Today the agency works with clients across
 									motorsport, lifestyle, and consumer goods, from initial brand
 									strategy to long-term growth. Every project is built on
-									the belief that great creative does not just look good, it
+									the belief that the best work does not just look good, it
 									drives real business results.
 								</p>
 							</div>
