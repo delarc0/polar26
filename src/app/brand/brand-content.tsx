@@ -27,7 +27,7 @@ const TYPOGRAPHY = [
 		key: "body",
 		label: "Body \u00B7 Long-form",
 		sample:
-			"Bold ideas deserve bold execution. We push creative boundaries because that is where the magic happens \u2014 and we obsess over the details that separate good from unforgettable.",
+			"Bold ideas deserve bold execution. We push creative boundaries because that is where the magic happens, and we obsess over the details that separate good from unforgettable.",
 		meta: "Space Grotesk \u00B7 Medium 500 / Regular 400 \u00B7 Sentence case",
 		fontClass: "font-body font-medium",
 		sizeClass: "text-base leading-relaxed",
@@ -57,8 +57,8 @@ const VALUES = [
 const VOICE_DO = [
 	"From brand to business.",
 	"Position your brand to win.",
-	"Cinematic content that tells your story.",
-	"Images that stop the scroll.",
+	"From athlete to icon.",
+	"Speak to your audience.",
 	"No fluff. Just a real conversation.",
 ] as const;
 
@@ -151,7 +151,7 @@ const PROCESS = [
 		num: "01",
 		phase: "Research",
 		name: "Insight",
-		body: "Market, audience, competitor \u2014 before a single pixel.",
+		body: "Market, audience, competitor. Before a single pixel.",
 	},
 	{
 		num: "02",
@@ -228,7 +228,7 @@ export function BrandPageContent() {
 					</h1>
 					<p className="mt-8 text-xl sm:text-2xl text-muted-foreground max-w-3xl leading-relaxed">
 						A full-service creative agency that{" "}
-						<span className="text-polar-lime">moves people</span> &mdash; through sharp strategy,
+						<span className="text-polar-lime">moves people</span>, through sharp strategy,
 						striking visual content, and a perspective no boardroom can replicate.
 					</p>
 					<p className="mt-4 text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground">
@@ -472,7 +472,7 @@ export function BrandPageContent() {
 									>
 										<Image
 											src={v.previewSrc}
-											alt={`Polar26 wordmark \u2014 ${v.label}`}
+											alt={`Polar26 wordmark, ${v.label}`}
 											width={640}
 											height={172}
 											className="w-full max-w-[220px] h-auto object-contain"
@@ -538,7 +538,7 @@ export function BrandPageContent() {
 									>
 										<Image
 											src={v.previewSrc}
-											alt={`Polar26 symbol \u2014 ${v.label}`}
+											alt={`Polar26 symbol, ${v.label}`}
 											width={600}
 											height={378}
 											className="w-full max-w-[140px] h-auto object-contain"
@@ -586,7 +586,7 @@ export function BrandPageContent() {
 					</div>
 
 					<p className="mt-8 text-[11px] text-white/30 leading-relaxed max-w-xl">
-						Vector files are auto-traced from the master PNG &mdash; fine for web &amp; screen use, pixel-perfect only at screen scale. For large-format print or merch, request the native vector from hello@polar26.com.
+						Vector files are auto-traced from the master PNG, fine for web &amp; screen use, pixel-perfect only at screen scale. For large-format print or merch, request the native vector from hello@polar26.com.
 					</p>
 				</div>
 			</section>
