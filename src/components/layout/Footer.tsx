@@ -156,21 +156,6 @@ export function Footer() {
 					</h2>
 				</div>
 
-				{/* Mobile: full-bleed background video (un-keyed) */}
-				<div className="sm:hidden absolute inset-0 z-[0] overflow-hidden pointer-events-none select-none">
-					<video
-						src="/videos/footer-rider-bg.mp4"
-						autoPlay
-						muted
-						loop
-						playsInline
-						preload="metadata"
-						aria-hidden="true"
-						className="absolute inset-0 w-full h-full object-cover"
-					/>
-					<div className="absolute inset-0 bg-[#111]/75" />
-				</div>
-
 				{/* Desktop: keyed silhouette */}
 				<div ref={riderRef} className="hidden sm:block absolute left-1/2 -translate-x-1/2 -bottom-[64%] w-[105%] lg:w-[90%] h-[160%] z-[3] pointer-events-none select-none will-change-transform">
 					<video
