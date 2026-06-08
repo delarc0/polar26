@@ -5,6 +5,7 @@ import Image from "next/image";
 import { gsap, ScrollTrigger } from "@/lib/gsap-config";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { RevealText } from "@/components/shared/RevealText";
+import { SITE } from "@/data/site";
 
 const VALUES = [
 	{
@@ -302,6 +303,24 @@ export function AboutPageContent() {
 								<p className="mt-1 text-xs text-muted-foreground">
 									Published January 2026
 								</p>
+								<div className="mt-5 flex items-center gap-5">
+									<a
+										href={SITE.social.instagram}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-xs font-display font-bold uppercase tracking-[0.18em] text-muted-foreground hover:text-polar-lime transition-colors"
+									>
+										Instagram
+									</a>
+									<a
+										href={SITE.social.linkedin}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-xs font-display font-bold uppercase tracking-[0.18em] text-muted-foreground hover:text-polar-lime transition-colors"
+									>
+										LinkedIn
+									</a>
+								</div>
 							</div>
 						</div>
 
