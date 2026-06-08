@@ -226,7 +226,7 @@ export function AboutPageContent() {
 
 	return (
 		<>
-			<section className="pt-32 sm:pt-40 pb-16 sm:pb-24">
+			<section className="pt-32 sm:pt-40 pb-8 sm:pb-10">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
 					<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
 						About
@@ -251,7 +251,7 @@ export function AboutPageContent() {
 				</div>
 			</section>
 
-			<section className="py-16 sm:py-24">
+			<section className="pt-6 sm:pt-10 pb-16 sm:pb-24">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 						<div ref={bioRef}>
@@ -312,12 +312,12 @@ export function AboutPageContent() {
 						>
 							<div ref={imageInnerRef} className="absolute inset-0 will-change-transform">
 								<Image
-									src="/images/patrik-portrait.webp"
+									src="/images/patrik-portrait-bw.webp"
 									alt="Patrik Nordstrom"
-									width={800}
-									height={1067}
+									width={1024}
+									height={2048}
 									priority
-									sizes="(max-width: 1024px) 100vw, 50vw"
+									sizes="(max-width: 1024px) 100vw, 384px"
 									className="object-cover absolute inset-0 w-full h-full"
 								/>
 							</div>
