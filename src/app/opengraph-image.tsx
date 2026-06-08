@@ -6,7 +6,39 @@ export const alt = "Polar26 - From brand to business";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// Brand fonts (satori supports woff/ttf/otf, not woff2)
+const SYNE_URL =
+  "https://cdn.jsdelivr.net/npm/@fontsource/syne@5/files/syne-latin-800-normal.woff";
+const GROTESK_URL =
+  "https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5/files/space-grotesk-latin-400-normal.woff";
+
 export default async function Image() {
+  let fonts:
+    | { name: string; data: ArrayBuffer; weight: 400 | 800; style: "normal" }[]
+    | undefined;
+
+  try {
+    const [syne, grotesk] = await Promise.all([
+      fetch(SYNE_URL).then((r) => {
+        if (!r.ok) throw new Error("font fetch failed");
+        return r.arrayBuffer();
+      }),
+      fetch(GROTESK_URL).then((r) => {
+        if (!r.ok) throw new Error("font fetch failed");
+        return r.arrayBuffer();
+      }),
+    ]);
+    fonts = [
+      { name: "Syne", data: syne, weight: 800, style: "normal" },
+      { name: "Space Grotesk", data: grotesk, weight: 400, style: "normal" },
+    ];
+  } catch {
+    fonts = undefined;
+  }
+
+  const displayFamily = fonts ? "Syne" : "system-ui, sans-serif";
+  const bodyFamily = fonts ? "Space Grotesk" : "system-ui, sans-serif";
+
   return new ImageResponse(
     (
       <div
@@ -19,7 +51,7 @@ export default async function Image() {
           alignItems: "flex-start",
           padding: "80px",
           background: "#0A0A0A",
-          fontFamily: "system-ui, sans-serif",
+          fontFamily: bodyFamily,
         }}
       >
         {/* Accent line */}
@@ -35,7 +67,8 @@ export default async function Image() {
         {/* Title */}
         <div
           style={{
-            fontSize: "96px",
+            fontFamily: displayFamily,
+            fontSize: "150px",
             fontWeight: 800,
             color: "#FAFAFA",
             letterSpacing: "-0.03em",
@@ -82,6 +115,6 @@ export default async function Image() {
         </div>
       </div>
     ),
-    { ...size }
+    { ...size, ...(fonts ? { fonts } : {}) }
   );
 }
