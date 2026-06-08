@@ -228,7 +228,7 @@ export function BrandPageContent() {
 					</h1>
 					<p className="mt-8 text-xl sm:text-2xl text-muted-foreground max-w-3xl leading-relaxed">
 						A full-service creative agency that{" "}
-						<span className="text-polar-lime">moves people</span>, through sharp strategy,
+						<span className="text-polar-lime">grows businesses</span>, through sharp strategy,
 						striking visual content, and a perspective no boardroom can replicate.
 					</p>
 					<p className="mt-4 text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground">
