@@ -133,7 +133,7 @@ export function Footer() {
 			<div className="footer-mask relative overflow-hidden bg-[#111] min-h-[45vh]">
 				<div className="footer-topo absolute inset-0 opacity-[0.07]" />
 
-				<div ref={marqueeRef} className="absolute inset-x-0 bottom-[8%] sm:bottom-[10%] z-[1] pointer-events-none select-none">
+				<div ref={marqueeRef} className="absolute inset-x-0 bottom-[8%] sm:bottom-[10%] z-[5] pointer-events-none select-none">
 					<div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-[#111] to-transparent z-10" />
 					<div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-[#111] to-transparent z-10" />
 
@@ -173,7 +173,7 @@ export function Footer() {
 					</video>
 				</div>
 
-				<div className="relative z-[4] min-h-[45vh] flex items-center justify-between px-6 sm:px-10 lg:px-16 pt-[12vh]">
+				<div className="relative z-[4] min-h-[45vh] flex items-center justify-between px-6 sm:px-10 lg:px-16 pt-[12vh] pb-[16vh]">
 					<div ref={leftNavRef}>
 						<p className="text-[10px] uppercase tracking-[0.3em] text-white/50 mb-4">
 							Pages
