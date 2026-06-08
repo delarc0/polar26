@@ -246,7 +246,7 @@ export function AboutPageContent() {
 						delay={0.6}
 						stagger={0.04}
 					>
-						We believe in creative that moves people.
+						From brand to business.
 					</RevealText>
 				</div>
 			</section>
