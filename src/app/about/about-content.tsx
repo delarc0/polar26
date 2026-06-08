@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { Instagram, Linkedin } from "lucide-react";
 import { gsap, ScrollTrigger } from "@/lib/gsap-config";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { RevealText } from "@/components/shared/RevealText";
@@ -303,21 +304,25 @@ export function AboutPageContent() {
 								<p className="mt-1 text-xs text-muted-foreground">
 									Published January 2026
 								</p>
-								<div className="mt-5 flex items-center gap-5">
+								<div className="mt-6 flex flex-wrap items-center gap-3">
 									<a
 										href={SITE.social.instagram}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="text-xs font-display font-bold uppercase tracking-[0.18em] text-muted-foreground hover:text-polar-lime transition-colors"
+										aria-label="Patrik on Instagram"
+										className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-white/15 text-xs font-display font-bold uppercase tracking-[0.15em] text-foreground hover:border-polar-lime hover:bg-polar-lime hover:text-background transition-colors duration-300"
 									>
+										<Instagram size={15} strokeWidth={2} aria-hidden="true" />
 										Instagram
 									</a>
 									<a
 										href={SITE.social.linkedin}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="text-xs font-display font-bold uppercase tracking-[0.18em] text-muted-foreground hover:text-polar-lime transition-colors"
+										aria-label="Patrik on LinkedIn"
+										className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-white/15 text-xs font-display font-bold uppercase tracking-[0.15em] text-foreground hover:border-polar-lime hover:bg-polar-lime hover:text-background transition-colors duration-300"
 									>
+										<Linkedin size={15} strokeWidth={2} aria-hidden="true" />
 										LinkedIn
 									</a>
 								</div>
