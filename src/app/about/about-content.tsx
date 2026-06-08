@@ -269,8 +269,8 @@ export function AboutPageContent() {
 									Patrik is a brand consultant and content producer with over a
 									decade of experience in project management. From advertising
 									campaigns and large-scale events to building personal brands for
-									athletes, he has built reputations and told stories across every
-									medium.
+									athletes, he has built reputations and developed businesses across
+									every medium.
 								</p>
 								<p className="bio-paragraph">
 									With a postgraduate degree in communication and digital
