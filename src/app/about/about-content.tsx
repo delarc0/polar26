@@ -267,7 +267,7 @@ export function AboutPageContent() {
 							<div className="mt-6 space-y-4 text-muted-foreground leading-relaxed">
 								<p className="bio-paragraph">
 									Patrik is a brand consultant and content producer with over a
-									decade of experience in creative production. From advertising
+									decade of experience in project management. From advertising
 									campaigns and large-scale events to building personal brands for
 									athletes, he has built reputations and told stories across every
 									medium.
