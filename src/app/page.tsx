@@ -5,7 +5,7 @@ import { SITE } from "@/data/site";
 export const metadata: Metadata = {
   title: "Polar26 | From Brand to Business",
   description:
-    "Polar26 is a creative agency in Sweden specializing in videography, brand activation, content strategy, digital marketing, and commercial photography.",
+    "Polar26 is a creative agency in Sweden specializing in brand activation, content strategy, athlete management, and content production.",
   alternates: {
     canonical: "https://polar26.com",
   },
@@ -39,7 +39,7 @@ export default function HomePage() {
             "@type": "VideoObject",
             name: "Polar26 Showreel",
             description:
-              "Creative showreel by Polar26 - a Swedish agency specializing in videography, brand activation, and content strategy.",
+              "Creative showreel by Polar26, a Swedish agency specializing in brand activation, athlete management, and content production.",
             thumbnailUrl: `${SITE.url}/videos/hero-banner-poster.webp`,
             contentUrl: `${SITE.url}/videos/hero-banner.mp4`,
             uploadDate: "2026-01-01T00:00:00+01:00",

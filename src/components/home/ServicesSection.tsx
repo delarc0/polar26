@@ -3,15 +3,14 @@
 import { SERVICES } from "@/data/services";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { RevealText } from "@/components/shared/RevealText";
-import { ArrowUpRight, Video, Target, TrendingUp, Handshake, BarChart3, Camera } from "lucide-react";
+import { ArrowUpRight, Target, TrendingUp, Handshake, Trophy, Clapperboard } from "lucide-react";
 
 const ICON_MAP: Record<string, React.ElementType> = {
-	Video,
 	Target,
 	TrendingUp,
 	Handshake,
-	BarChart3,
-	Camera,
+	Trophy,
+	Clapperboard,
 };
 
 function ServiceRow({ service }: { service: (typeof SERVICES)[number] }) {

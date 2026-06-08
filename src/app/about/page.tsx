@@ -5,7 +5,7 @@ import { SITE } from "@/data/site";
 export const metadata: Metadata = {
   title: "About - Creative Agency & Brand Studio",
   description:
-    "Meet Patrik Nordstrom, founder of Polar26. Brand consultant, videographer, and content strategist with over a decade of experience.",
+    "Meet Patrik Nordstrom, founder of Polar26. Brand consultant and content producer with over a decade of experience working with brands and athletes.",
   alternates: {
     canonical: "https://polar26.com/about",
   },
@@ -26,7 +26,7 @@ export default function AboutPage() {
             "@type": "Person",
             name: SITE.founder.name,
             jobTitle: SITE.founder.title,
-            description: "Brand consultant, videographer, and content strategist with over a decade of experience in creative production.",
+            description: "Brand consultant and content producer with over a decade of experience working with brands and athletes.",
             worksFor: {
               "@type": "Organization",
               name: SITE.name,

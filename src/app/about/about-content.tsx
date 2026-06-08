@@ -28,14 +28,13 @@ const VALUES = [
 ];
 
 const CAPABILITIES = [
-	"Videography",
-	"Advertising",
 	"Brand Consulting",
+	"Athlete Management",
 	"Content Strategy",
-	"Event Production",
+	"Content Production",
+	"Advertising",
 	"Content Marketing",
-	"Digital Marketing",
-	"Commercial Photography",
+	"Event Production",
 ];
 
 function ValueCard({ value, index }: { value: typeof VALUES[number]; index: number }) {
@@ -269,10 +268,10 @@ export function AboutPageContent() {
 							</RevealText>
 							<div className="mt-6 space-y-4 text-muted-foreground leading-relaxed">
 								<p className="bio-paragraph">
-									Patrik is a brand consultant, videographer and content
-									strategist with over a decade of experience in creative
-									production. From advertising campaigns to large-scale event
-									production, he has built brands and told stories across every
+									Patrik is a brand consultant and content producer with over a
+									decade of experience in creative production. From advertising
+									campaigns and large-scale events to building personal brands for
+									athletes, he has built reputations and told stories across every
 									medium.
 								</p>
 								<p className="bio-paragraph">
@@ -282,14 +281,16 @@ export function AboutPageContent() {
 									thinking and raw creative instinct to every project.
 								</p>
 								<p className="bio-paragraph">
-									Outside work, he is a former Swedish 3x3 Basketball Champion
-									(gold 2016, 2017) and has competed in several motorcycle
-									racing series.
+									He is a former Swedish 3x3 Basketball Champion (gold 2016,
+									2017) and has competed in motorcycle racing. That world runs
+									deep, which is why Polar26 manages athletes with the same care
+									it builds brands: he knows what it takes to perform, and how to
+									turn a name into an icon.
 								</p>
 								<p className="bio-paragraph">
 									He founded Polar26 with a clear mission: help brands stop
-									blending in. Today, the agency works with clients across
-									motorsport, lifestyle, and consumer goods — from initial brand
+									blending in. Today the agency works with clients across
+									motorsport, lifestyle, and consumer goods, from initial brand
 									strategy to final frame delivery. Every project is built on
 									the belief that great creative does not just look good, it
 									drives real business results.
@@ -298,7 +299,7 @@ export function AboutPageContent() {
 							<div className="mt-8 pt-6 border-t border-white/[0.06]">
 								<p className="text-xs text-muted-foreground">
 									<span className="text-foreground font-medium">Patrik Nordstrom</span>
-									{" "}— Founder &amp; Creative Director, Polar26
+									{", "}Founder &amp; Creative Director, Polar26
 								</p>
 								<p className="mt-1 text-xs text-muted-foreground">
 									Published January 2026
