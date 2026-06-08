@@ -184,7 +184,7 @@ export function Footer() {
 						aria-hidden="true"
 						className="absolute inset-0 w-full h-full object-contain object-bottom"
 					>
-						<source src="/videos/footer-rider.webm" type="video/webm" />
+						<source src="/videos/footer-rider-alpha.webm" type="video/webm" />
 					</video>
 				</div>
 

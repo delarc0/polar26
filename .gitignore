@@ -44,6 +44,8 @@ next-env.d.ts
 /polar26-pics/
 /polar26-videos/
 /polar26-videos.zip
+# ProRes / master video sources kept locally, never deployed
+/public/videos/*.mov
 /herobanner.mp4
 /herobannerpatte.jpeg
 /polar26logo.png
