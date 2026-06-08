@@ -27,7 +27,7 @@ export function ContactPageContent() {
               <p>
                 Whether you are launching a new brand, producing a commercial
                 campaign, planning a major event, or simply need a strategic
-                partner to sharpen your creative direction — we are here to help.
+                partner to sharpen your creative direction, we are here to help.
               </p>
               <p>
                 Tell us about your project using the form and we will get back

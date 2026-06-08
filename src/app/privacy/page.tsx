@@ -54,7 +54,7 @@ export default function PrivacyPage() {
 						<h2 className="text-lg font-display font-bold text-foreground">Analytics</h2>
 						<p>
 							We use Plausible Analytics, a privacy-friendly analytics tool that does not use cookies and
-							does not collect personal data. All data is aggregated and anonymised — it is impossible to
+							does not collect personal data. All data is aggregated and anonymised, so it is impossible to
 							identify individual visitors. Plausible is hosted in the EU and is fully compliant with GDPR,
 							CCPA, and PECR. We use this data only to understand overall traffic trends and improve the
 							website experience.

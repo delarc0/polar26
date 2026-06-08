@@ -42,8 +42,8 @@ export default function TermsPage() {
 					<div className="space-y-4">
 						<h2 className="text-lg font-display font-bold text-foreground">Intellectual Property</h2>
 						<p>
-							All content on this website — including but not limited to text, images, videos, brand identity,
-							motion graphics, and design — is the property of {SITE.name} and is protected by Swedish and
+							All content on this website, including but not limited to text, images, videos, brand identity,
+							motion graphics, and design, is the property of {SITE.name} and is protected by Swedish and
 							international copyright laws. You may not reproduce, distribute, modify, transmit, republish, or
 							use any content without prior written permission from {SITE.name}. Unauthorised use may result in
 							legal action. Requests for licensing or collaboration should be directed to our contact email.

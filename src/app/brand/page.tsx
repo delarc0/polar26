@@ -3,7 +3,7 @@ import { BrandPageContent } from "./brand-content";
 
 export const metadata: Metadata = {
   title: "Brand",
-  description: "Polar26 brand one-pager — colors, type, voice, and process.",
+  description: "Polar26 brand one-pager: colors, type, voice, and process.",
 };
 
 export default function BrandPage() {
