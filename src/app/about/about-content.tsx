@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { Instagram, Linkedin } from "lucide-react";
 import { gsap, ScrollTrigger } from "@/lib/gsap-config";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { RevealText } from "@/components/shared/RevealText";
@@ -296,15 +295,7 @@ export function AboutPageContent() {
 									drives real business results.
 								</p>
 							</div>
-							<div className="mt-8 pt-6 border-t border-white/[0.06]">
-								<p className="text-xs text-muted-foreground">
-									<span className="text-foreground font-medium">Patrik Nordstrom</span>
-									{", "}Founder &amp; Creative Director, Polar26
-								</p>
-								<p className="mt-1 text-xs text-muted-foreground">
-									Published January 2026
-								</p>
-								<div className="mt-6 flex flex-wrap items-center gap-3">
+								<div className="mt-8 flex flex-wrap items-center gap-3">
 									<a
 										href={SITE.social.instagram}
 										target="_blank"
@@ -312,7 +303,11 @@ export function AboutPageContent() {
 										aria-label="Patrik on Instagram"
 										className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-white/15 text-xs font-display font-bold uppercase tracking-[0.15em] text-foreground hover:border-polar-lime hover:bg-polar-lime hover:text-background transition-colors duration-300"
 									>
-										<Instagram size={15} strokeWidth={2} aria-hidden="true" />
+										<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+											<rect x="2" y="2" width="20" height="20" rx="5" />
+											<circle cx="12" cy="12" r="4" />
+											<circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+										</svg>
 										Instagram
 									</a>
 									<a
@@ -322,10 +317,20 @@ export function AboutPageContent() {
 										aria-label="Patrik on LinkedIn"
 										className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-white/15 text-xs font-display font-bold uppercase tracking-[0.15em] text-foreground hover:border-polar-lime hover:bg-polar-lime hover:text-background transition-colors duration-300"
 									>
-										<Linkedin size={15} strokeWidth={2} aria-hidden="true" />
+										<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+											<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+										</svg>
 										LinkedIn
 									</a>
 								</div>
+							<div className="mt-8 pt-6 border-t border-white/[0.06]">
+								<p className="text-xs text-muted-foreground">
+									<span className="text-foreground font-medium">Patrik Nordstrom</span>
+									{", "}Founder &amp; Creative Director, Polar26
+								</p>
+								<p className="mt-1 text-xs text-muted-foreground">
+									Published June 2026
+								</p>
 							</div>
 						</div>
 
