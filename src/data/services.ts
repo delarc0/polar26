@@ -14,7 +14,7 @@ export const SERVICES: Service[] = [
   },
   {
     title: "Product Strategy",
-    description: "Make your product the obvious choice.",
+    description: "Shape your offer to fit the market.",
     icon: "TrendingUp",
     image: "/images/gallery/motorsport-garage.webp",
   },
