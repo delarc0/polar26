@@ -22,6 +22,7 @@ type Client = ImageClient | TextClient;
 const CLIENTS: Client[] = [
 	{ type: "image", name: "Pirelli", src: "/images/clients/pirelli.webp", width: 377, height: 80, className: "h-8 sm:h-10" },
 	{ type: "image", name: "Nordea", src: "/images/clients/Nordea_logo16.png", width: 790, height: 180, className: "h-7 sm:h-9" },
+	{ type: "image", name: "Mekonomen Company", src: "/images/clients/mekonomen-company.webp", width: 300, height: 170, className: "h-9 sm:h-11" },
 	{ type: "image", name: "Yamaha", src: "/images/clients/yamaha.webp", width: 500, height: 107, className: "h-8 sm:h-10" },
 	{ type: "image", name: "Speedway GP", src: "/images/clients/220301-SGP-Logo.webp", width: 600, height: 189, className: "h-8 sm:h-10" },
 	{ type: "image", name: "MC Mässan 2027", src: "/images/clients/mcmassan-2027.webp", width: 472, height: 133, className: "h-8 sm:h-10" },
