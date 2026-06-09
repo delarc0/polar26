@@ -14,6 +14,39 @@ const COLORS = [
 	{ hex: "#FAFAFA", name: "Pure", role: "Headlines / on-dark" },
 ] as const;
 
+const CSS_TOKENS = `:root {
+  --polar-lime: #BDFF00;
+  --ink: #0A0A0A;
+  --surface: #121212;
+  --edge: #262626;
+  --body: #9A9A9A;
+  --pure: #FAFAFA;
+}`;
+
+const TAILWIND_TOKENS = `colors: {
+  'polar-lime': '#BDFF00',
+  ink: '#0A0A0A',
+  surface: '#121212',
+  edge: '#262626',
+  body: '#9A9A9A',
+  pure: '#FAFAFA',
+}`;
+
+const LOGO_DOS = [
+	"Keep clear space around the logo, at least the height of the mark.",
+	"Use the lime or white logo on dark, the dark logo on light.",
+	"Scale it proportionally and keep it legible.",
+	"Use the supplied files: SVG for screen, PNG for raster.",
+] as const;
+
+const LOGO_DONTS = [
+	"Recolour the logo or change the lime.",
+	"Stretch, squash, or rotate it.",
+	"Add shadows, gradients, or outlines.",
+	"Place it on busy or low-contrast backgrounds.",
+	"Recreate or re-typeset the wordmark.",
+] as const;
+
 const TYPOGRAPHY = [
 	{
 		key: "display",
@@ -337,6 +370,52 @@ export function BrandPageContent() {
 						})}
 					</div>
 				</div>
+        {/* DEV TOKENS */}
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              { key: "css", label: "CSS variables", code: CSS_TOKENS },
+              { key: "tw", label: "Tailwind", code: TAILWIND_TOKENS },
+            ].map((t) => {
+              const tkey = `token-${t.key}`;
+              const isCopied = copiedKey === tkey;
+              return (
+                <button
+                  key={t.key}
+                  type="button"
+                  onClick={() => copy(t.code, tkey, `${t.label} copied`)}
+                  aria-label={`Copy ${t.label}`}
+                  className={`group text-left border bg-card p-5 transition-colors ${
+                    isCopied ? "border-polar-lime" : "border-white/10 hover:border-polar-lime"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+                      {t.label}
+                    </span>
+                    <span
+                      className={`inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-1 border ${
+                        isCopied
+                          ? "bg-polar-lime text-background border-polar-lime"
+                          : "border-white/10 text-muted-foreground"
+                      }`}
+                    >
+                      {isCopied ? (
+                        <Check className="h-3 w-3" strokeWidth={3} />
+                      ) : (
+                        <Copy className="h-3 w-3" strokeWidth={2.5} />
+                      )}
+                      {isCopied ? "Copied" : "Copy"}
+                    </span>
+                  </div>
+                  <pre className="text-[11px] leading-relaxed text-foreground/80 font-mono overflow-x-auto whitespace-pre">
+{t.code}
+                  </pre>
+                </button>
+              );
+            })}
+          </div>
+        </div>
 			</section>
 
 			{/* TYPOGRAPHY + VALUES */}
@@ -682,6 +761,52 @@ export function BrandPageContent() {
 							))}
 						</div>
 					</div>
+
+        {/* LOGO USAGE */}
+        <div className="mt-14">
+          <div className="flex items-baseline justify-between gap-4 flex-wrap">
+            <h3 className="font-display font-extrabold uppercase text-base tracking-[0.12em]">
+              Usage
+            </h3>
+            <span className="text-[10px] tracking-[0.2em] uppercase text-white/40">
+              Do&rsquo;s &amp; Don&rsquo;ts
+            </span>
+          </div>
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="border border-white/10 bg-card p-6">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="h-2.5 w-2.5 rounded-full bg-polar-lime" />
+                <span className="font-display font-bold text-sm tracking-[0.18em] uppercase">
+                  Do
+                </span>
+              </div>
+              <ul className="space-y-2.5">
+                {LOGO_DOS.map((d) => (
+                  <li key={d} className="flex gap-3 text-sm text-foreground/85 leading-snug">
+                    <span className="text-polar-lime font-bold">+</span>
+                    {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="border border-white/10 bg-card p-6">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#FF5A5A]" />
+                <span className="font-display font-bold text-sm tracking-[0.18em] uppercase">
+                  Don&rsquo;t
+                </span>
+              </div>
+              <ul className="space-y-2.5">
+                {LOGO_DONTS.map((d) => (
+                  <li key={d} className="flex gap-3 text-sm text-foreground/85 leading-snug">
+                    <span className="text-[#FF5A5A] font-bold">&times;</span>
+                    {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
 
 					<p className="mt-8 text-[11px] text-white/30 leading-relaxed max-w-xl">
 						Vector files are auto-traced from the master PNG, fine for web &amp; screen use, pixel-perfect only at screen scale. For large-format print or merch, request the native vector from hello@polar26.com.
