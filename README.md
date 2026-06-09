@@ -1,6 +1,6 @@
 # POLAR26
 
-**Creative agency website for Polar26 — videography, brand strategy, and content that cuts through the noise.**
+**Creative agency website for Polar26: brand activation, product strategy, athlete management, and content production.**
 
 [polar26.com](https://polar26.com)
 
