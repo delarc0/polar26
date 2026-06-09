@@ -9,6 +9,7 @@ type ImageClient = {
 	width: number;
 	height: number;
 	className: string;
+	color?: boolean;
 };
 
 type TextClient = {
@@ -28,6 +29,7 @@ const CLIENTS: Client[] = [
 	{ type: "image", name: "MC Mässan 2027", src: "/images/clients/mcmassan-2027.webp", width: 472, height: 133, className: "h-8 sm:h-10" },
 	{ type: "image", name: "Fysiolollo", src: "/images/clients/fysiolollo.webp", width: 166, height: 80, className: "h-8 sm:h-10" },
 	{ type: "image", name: "Son of a Coder", src: "/images/clients/sonofacoder.webp", width: 226, height: 80, className: "h-8 sm:h-10" },
+	{ type: "image", name: "PSB Pro Superbike", src: "/images/clients/psb-logo-color.png", width: 570, height: 251, className: "h-10 sm:h-12", color: true },
 ];
 
 const PRIORITY_CLIENTS = new Set(["Pirelli", "Nordea", "Yamaha", "Speedway GP", "MC Mässan 2027"]);
@@ -45,7 +47,7 @@ export function ClientLogoMarquee() {
 					width={client.width}
 					height={client.height}
 					priority={PRIORITY_CLIENTS.has(client.name)}
-					className={`${client.className} w-auto brightness-0 invert opacity-40`}
+					className={client.color ? `${client.className} w-auto opacity-90` : `${client.className} w-auto brightness-0 invert opacity-40`}
 				/>
 			) : (
 				<span className={`${client.className} text-white/40 whitespace-nowrap`}>

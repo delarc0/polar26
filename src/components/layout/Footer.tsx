@@ -20,7 +20,13 @@ const SOCIAL_LINKS = [
 	{ label: "LinkedIn", href: SITE.social.linkedin },
 ];
 
-const PARTNER_LOGOS = [
+const PARTNER_LOGOS: {
+	name: string;
+	src: string;
+	width: number;
+	height: number;
+	color?: boolean;
+}[] = [
 	{ name: "Pirelli", src: "/images/clients/pirelli.webp", width: 377, height: 80 },
 	{ name: "Nordea", src: "/images/clients/Nordea_logo16.png", width: 790, height: 180 },
 	{ name: "Mekonomen Company", src: "/images/clients/mekonomen-company.webp", width: 300, height: 170 },
@@ -29,6 +35,7 @@ const PARTNER_LOGOS = [
 	{ name: "MC Mässan 2027", src: "/images/clients/mcmassan-2027.webp", width: 472, height: 133 },
 	{ name: "Fysiolollo", src: "/images/clients/fysiolollo.webp", width: 166, height: 80 },
 	{ name: "Son of a Coder", src: "/images/clients/sonofacoder.webp", width: 226, height: 80 },
+	{ name: "PSB Pro Superbike", src: "/images/clients/psb-logo-color.png", width: 570, height: 251, color: true },
 ];
 
 export function Footer() {
@@ -119,7 +126,7 @@ export function Footer() {
 				alt={logo.name}
 				width={logo.width}
 				height={logo.height}
-				className="h-6 sm:h-8 w-auto [filter:url(#polar-lime-tint)] opacity-60"
+				className={logo.color ? "h-8 sm:h-10 w-auto opacity-90" : "h-6 sm:h-8 w-auto [filter:url(#polar-lime-tint)] opacity-60"}
 			/>
 		</div>
 	));
