@@ -35,7 +35,7 @@ const PARTNER_LOGOS: {
 	{ name: "MC Mässan 2027", src: "/images/clients/mcmassan-2027.webp", width: 472, height: 133 },
 	{ name: "Fysiolollo", src: "/images/clients/fysiolollo.webp", width: 166, height: 80 },
 	{ name: "Son of a Coder", src: "/images/clients/sonofacoder.webp", width: 226, height: 80 },
-	{ name: "PSB Pro Superbike", src: "/images/clients/psb-logo-color.png", width: 570, height: 251, color: true },
+	{ name: "PSB Pro Superbike", src: "/images/clients/psb-logo-clean.png", width: 570, height: 251 },
 ];
 
 export function Footer() {

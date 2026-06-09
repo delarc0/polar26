@@ -29,7 +29,7 @@ const CLIENTS: Client[] = [
 	{ type: "image", name: "MC Mässan 2027", src: "/images/clients/mcmassan-2027.webp", width: 472, height: 133, className: "h-8 sm:h-10" },
 	{ type: "image", name: "Fysiolollo", src: "/images/clients/fysiolollo.webp", width: 166, height: 80, className: "h-8 sm:h-10" },
 	{ type: "image", name: "Son of a Coder", src: "/images/clients/sonofacoder.webp", width: 226, height: 80, className: "h-8 sm:h-10" },
-	{ type: "image", name: "PSB Pro Superbike", src: "/images/clients/psb-logo-color.png", width: 570, height: 251, className: "h-10 sm:h-12", color: true },
+	{ type: "image", name: "PSB Pro Superbike", src: "/images/clients/psb-logo-clean.png", width: 570, height: 251, className: "h-8 sm:h-10" },
 ];
 
 const PRIORITY_CLIENTS = new Set(["Pirelli", "Nordea", "Yamaha", "Speedway GP", "MC Mässan 2027"]);
