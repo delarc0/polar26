@@ -21,6 +21,7 @@ type Client = ImageClient | TextClient;
 
 const CLIENTS: Client[] = [
 	{ type: "image", name: "Pirelli", src: "/images/clients/pirelli.webp", width: 377, height: 80, className: "h-8 sm:h-10" },
+	{ type: "image", name: "Nordea", src: "/images/clients/Nordea_logo16.png", width: 790, height: 180, className: "h-7 sm:h-9" },
 	{ type: "image", name: "Yamaha", src: "/images/clients/yamaha.webp", width: 500, height: 107, className: "h-8 sm:h-10" },
 	{ type: "image", name: "Speedway GP", src: "/images/clients/220301-SGP-Logo.webp", width: 600, height: 189, className: "h-8 sm:h-10" },
 	{ type: "image", name: "MC Mässan 2027", src: "/images/clients/mcmassan-2027.webp", width: 472, height: 133, className: "h-8 sm:h-10" },
@@ -28,7 +29,7 @@ const CLIENTS: Client[] = [
 	{ type: "image", name: "Son of a Coder", src: "/images/clients/sonofacoder.webp", width: 226, height: 80, className: "h-8 sm:h-10" },
 ];
 
-const PRIORITY_CLIENTS = new Set(["Pirelli", "Yamaha", "Speedway GP", "MC Mässan 2027"]);
+const PRIORITY_CLIENTS = new Set(["Pirelli", "Nordea", "Yamaha", "Speedway GP", "MC Mässan 2027"]);
 
 export function ClientLogoMarquee() {
 	const set = CLIENTS.map((client) => (
