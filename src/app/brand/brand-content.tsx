@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { Check, Copy, Download } from "lucide-react";
+import { EmailSignature } from "@/components/brand/EmailSignature";
 
 const COLORS = [
 	{ hex: "#BDFF00", name: "Polar Lime", role: "Signature accent" },
@@ -170,6 +171,64 @@ const PROCESS = [
 		phase: "Launch & Evolve",
 		name: "Impact",
 		body: "Go-live, measure, optimise. We do not disappear.",
+	},
+] as const;
+
+const BOILERPLATE = [
+	{
+		key: "oneliner",
+		label: "One-liner",
+		text: "Polar26 is a creative agency that grows businesses through sharp strategy and striking content.",
+	},
+	{
+		key: "tagline",
+		label: "Tagline",
+		text: "From brand to business.",
+	},
+	{
+		key: "short",
+		label: "Short bio",
+		text: "Polar26 is a Swedish creative agency specializing in brand activation, product strategy, athlete management, and content production. We help brands stand out and grow.",
+	},
+	{
+		key: "long",
+		label: "Long bio",
+		text: "Polar26 is a full-service creative agency built on the belief that great work comes from the intersection of strategy and raw creative energy. From brand activation and product strategy to athlete management and content production, we help brands stand out and grow. Founded by Patrik Nordstrom, we work with clients across motorsport, lifestyle, and consumer goods, bringing a perspective no boardroom can replicate.",
+	},
+] as const;
+
+const STICKERS = [
+	{ name: "Wordmark · Lime", file: "patrik-pov_sticker_contour_lime-pov" },
+	{ name: "Wordmark · Mono", file: "patrik-pov_sticker_contour_mono" },
+	{ name: "Follow · Lime", file: "patrik-pov_sticker_contour_lime-pov_follow" },
+	{ name: "Follow · Mono", file: "patrik-pov_sticker_contour_mono_follow" },
+	{ name: "Signature · Lime", file: "patrik-pov_sticker_contour_lime-pov_signature" },
+	{ name: "Signature · Mono", file: "patrik-pov_sticker_contour_mono_signature" },
+	{ name: "Plate · POV", file: "patrik-pov_sticker_regular_lime-pov" },
+	{ name: "Plate · At", file: "patrik-pov_sticker_regular_lime-at" },
+	{ name: "Viewfinder", file: "patrik-pov_sticker_regular_viewfinder" },
+	{ name: "Viewfinder · Follow", file: "patrik-pov_sticker_regular_viewfinder_follow" },
+	{ name: "Viewfinder · HUD", file: "patrik-pov_sticker_regular_viewfinder_hud" },
+] as const;
+
+const TEMPLATES = [
+	{
+		name: "Report",
+		note: "Branded report / proposal document",
+		format: "DOCX",
+		href: "",
+	},
+	{
+		name: "Pitch Deck",
+		note: "Presentation template, on-brand slides",
+		format: "PPTX",
+		href: "",
+	},
+	{
+		name: "Letterhead",
+		note: "Official letterhead for documents",
+		format: "DOCX",
+		href: "",
 	},
 ] as const;
 
@@ -436,6 +495,59 @@ export function BrandPageContent() {
 				</div>
 			</section>
 
+			{/* BOILERPLATE */}
+			<section className="py-16 sm:py-24 border-t border-white/[0.06]">
+				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+					<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
+						Messaging
+					</span>
+					<h2 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] font-display font-bold uppercase">
+						Boilerplate
+					</h2>
+					<p className="mt-3 max-w-xl text-sm text-muted-foreground leading-relaxed">
+						Approved copy for bios, intros, and press. Click any block to copy.
+					</p>
+					<div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+						{BOILERPLATE.map((b) => {
+							const key = `bp-${b.key}`;
+							const isCopied = copiedKey === key;
+							return (
+								<button
+									key={b.key}
+									type="button"
+									onClick={() => copy(b.text, key, `${b.label} copied`)}
+									aria-label={`Copy ${b.label}`}
+									className={`group text-left border bg-card p-5 transition-colors ${
+										isCopied ? "border-polar-lime" : "border-white/10 hover:border-polar-lime"
+									}`}
+								>
+									<div className="flex items-center justify-between mb-3">
+										<span className="text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+											{b.label}
+										</span>
+										<span
+											className={`inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-1 border ${
+												isCopied
+													? "bg-polar-lime text-background border-polar-lime"
+													: "border-white/10 text-muted-foreground"
+											}`}
+										>
+											{isCopied ? (
+												<Check className="h-3 w-3" strokeWidth={3} />
+											) : (
+												<Copy className="h-3 w-3" strokeWidth={2.5} />
+											)}
+											{isCopied ? "Copied" : "Copy"}
+										</span>
+									</div>
+									<p className="text-sm text-foreground/90 leading-relaxed">{b.text}</p>
+								</button>
+							);
+						})}
+					</div>
+				</div>
+			</section>
+
 			{/* LOGO & ELEMENTS */}
 			<section className="py-16 sm:py-24 border-t border-white/[0.06]">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
@@ -588,6 +700,130 @@ export function BrandPageContent() {
 					<p className="mt-8 text-[11px] text-white/30 leading-relaxed max-w-xl">
 						Vector files are auto-traced from the master PNG, fine for web &amp; screen use, pixel-perfect only at screen scale. For large-format print or merch, request the native vector from hello@polar26.com.
 					</p>
+				</div>
+			</section>
+
+			{/* STICKERS */}
+			<section className="py-16 sm:py-24 border-t border-white/[0.06]">
+				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+					<div className="flex items-end justify-between gap-4 flex-wrap">
+						<div>
+							<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
+								Merch &amp; Extras
+							</span>
+							<h2 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] font-display font-bold uppercase">
+								Stickers
+							</h2>
+						</div>
+						<a
+							href="/brand-assets/stickers/patrik-pov-stickers.zip"
+							download
+							className="inline-flex items-center gap-2 px-5 py-2.5 text-[11px] font-display font-bold tracking-[0.12em] uppercase bg-polar-lime/10 text-polar-lime border border-polar-lime/30 hover:bg-polar-lime hover:text-background transition-colors"
+						>
+							<Download size={13} aria-hidden="true" /> Download all (ZIP)
+						</a>
+					</div>
+					<div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+						{STICKERS.map((s) => (
+							<div key={s.file} className="group bg-card border border-white/10 flex flex-col">
+								<div className="relative aspect-[3/2] flex items-center justify-center p-6 overflow-hidden bg-[#0A0A0A]">
+									<Image
+										src={`/brand-assets/stickers/${s.file}.png`}
+										alt={s.name}
+										width={400}
+										height={267}
+										className="w-full h-auto max-h-full object-contain"
+										unoptimized
+									/>
+								</div>
+								<div className="p-4 border-t border-white/[0.06] flex flex-col gap-3">
+									<div className="font-display font-bold uppercase text-xs tracking-[0.06em]">
+										{s.name}
+									</div>
+									<div className="grid grid-cols-3 gap-2">
+										{(["svg", "png", "pdf"] as const).map((ext) => (
+											<a
+												key={ext}
+												href={`/brand-assets/stickers/${s.file}.${ext}`}
+												download
+												className="flex items-center justify-center gap-1 px-2 py-2 text-[10px] font-display font-bold tracking-[0.1em] uppercase border border-white/10 hover:border-polar-lime hover:text-polar-lime transition-colors"
+											>
+												<Download size={11} aria-hidden="true" /> {ext}
+											</a>
+										))}
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* EMAIL SIGNATURE */}
+			<section className="py-16 sm:py-24 border-t border-white/[0.06]">
+				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+					<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
+						Tools
+					</span>
+					<h2 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] font-display font-bold uppercase">
+						Email Signature
+					</h2>
+					<p className="mt-3 max-w-xl text-sm text-muted-foreground leading-relaxed">
+						Generate a consistent, on-brand signature for the whole team in
+						seconds.
+					</p>
+					<div className="mt-10">
+						<EmailSignature />
+					</div>
+				</div>
+			</section>
+
+			{/* TEMPLATES */}
+			<section className="py-16 sm:py-24 border-t border-white/[0.06]">
+				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+					<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
+						Documents
+					</span>
+					<h2 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] font-display font-bold uppercase">
+						Templates
+					</h2>
+					<p className="mt-3 max-w-xl text-sm text-muted-foreground leading-relaxed">
+						Ready-to-use document templates so everything your team sends stays
+						on-brand.
+					</p>
+					<div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+						{TEMPLATES.map((t) => (
+							<div key={t.name} className="bg-card border border-white/10 p-6 flex flex-col gap-4">
+								<div className="flex items-center justify-between">
+									<div className="font-display font-extrabold uppercase text-lg tracking-[0.04em]">
+										{t.name}
+									</div>
+									<span className="text-[10px] font-bold uppercase tracking-wider text-white/40 border border-white/10 px-2 py-1">
+										{t.format}
+									</span>
+								</div>
+								<p className="text-xs text-muted-foreground leading-snug flex-1">
+									{t.note}
+								</p>
+								{t.href ? (
+									<a
+										href={t.href}
+										download
+										className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-[11px] font-display font-bold tracking-[0.12em] uppercase bg-polar-lime/10 text-polar-lime border border-polar-lime/30 hover:bg-polar-lime hover:text-background transition-colors"
+									>
+										<Download size={13} aria-hidden="true" /> Download
+									</a>
+								) : (
+									<a
+										href="mailto:hello@polar26.com?subject=Template%20request"
+										className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-[11px] font-display font-bold tracking-[0.12em] uppercase border border-white/10 text-muted-foreground hover:border-polar-lime hover:text-polar-lime transition-colors"
+									>
+										Request
+									</a>
+								)}
+							</div>
+						))}
+					</div>
 				</div>
 			</section>
 
