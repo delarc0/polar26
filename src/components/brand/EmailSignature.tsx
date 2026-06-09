@@ -107,7 +107,7 @@ export function EmailSignature() {
 							className={FIELD}
 							value={title}
 							onChange={(e) => setTitle(e.target.value)}
-							placeholder="Founder & Creative Director"
+							placeholder="Founder & CEO"
 						/>
 					</div>
 					<div>

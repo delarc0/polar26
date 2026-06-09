@@ -326,7 +326,7 @@ export function AboutPageContent() {
 							<div className="mt-8 pt-6 border-t border-white/[0.06]">
 								<p className="text-xs text-muted-foreground">
 									<span className="text-foreground font-medium">Patrik Nordstrom</span>
-									{", "}Founder &amp; Creative Director, Polar26
+									{", "}Founder &amp; CEO, Polar26
 								</p>
 								<p className="mt-1 text-xs text-muted-foreground">
 									Published June 2026

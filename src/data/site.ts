@@ -11,6 +11,6 @@ export const SITE = {
   },
   founder: {
     name: "Patrik Nordstrom",
-    title: "Founder & Creative Director",
+    title: "Founder & CEO",
   },
 } as const;
