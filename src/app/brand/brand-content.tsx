@@ -197,20 +197,6 @@ const BOILERPLATE = [
 	},
 ] as const;
 
-const STICKERS = [
-	{ name: "Wordmark · Lime", file: "patrik-pov_sticker_contour_lime-pov" },
-	{ name: "Wordmark · Mono", file: "patrik-pov_sticker_contour_mono" },
-	{ name: "Follow · Lime", file: "patrik-pov_sticker_contour_lime-pov_follow" },
-	{ name: "Follow · Mono", file: "patrik-pov_sticker_contour_mono_follow" },
-	{ name: "Signature · Lime", file: "patrik-pov_sticker_contour_lime-pov_signature" },
-	{ name: "Signature · Mono", file: "patrik-pov_sticker_contour_mono_signature" },
-	{ name: "Plate · POV", file: "patrik-pov_sticker_regular_lime-pov" },
-	{ name: "Plate · At", file: "patrik-pov_sticker_regular_lime-at" },
-	{ name: "Viewfinder", file: "patrik-pov_sticker_regular_viewfinder" },
-	{ name: "Viewfinder · Follow", file: "patrik-pov_sticker_regular_viewfinder_follow" },
-	{ name: "Viewfinder · HUD", file: "patrik-pov_sticker_regular_viewfinder_hud" },
-] as const;
-
 const TEMPLATES = [
 	{
 		name: "Report",
@@ -706,55 +692,36 @@ export function BrandPageContent() {
 			{/* STICKERS */}
 			<section className="py-16 sm:py-24 border-t border-white/[0.06]">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-					<div className="flex items-end justify-between gap-4 flex-wrap">
-						<div>
-							<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
-								Merch &amp; Extras
-							</span>
-							<h2 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] font-display font-bold uppercase">
-								Stickers
-							</h2>
+					<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
+						Merch &amp; Extras
+					</span>
+					<h2 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] font-display font-bold uppercase">
+						Stickers
+					</h2>
+					<div className="mt-8 grid grid-cols-1 sm:grid-cols-[16rem_1fr] gap-6 items-center border border-white/10 bg-card p-6 max-w-3xl">
+						<div className="aspect-[3/2] bg-[#0A0A0A] flex items-center justify-center p-6 overflow-hidden">
+							<Image
+								src="/brand-assets/stickers/patrik-pov_sticker_regular_lime-pov.png"
+								alt="Polar26 sticker example"
+								width={400}
+								height={267}
+								className="w-full h-auto max-h-full object-contain"
+								unoptimized
+							/>
 						</div>
-						<a
-							href="/brand-assets/stickers/patrik-pov-stickers.zip"
-							download
-							className="inline-flex items-center gap-2 px-5 py-2.5 text-[11px] font-display font-bold tracking-[0.12em] uppercase bg-polar-lime/10 text-polar-lime border border-polar-lime/30 hover:bg-polar-lime hover:text-background transition-colors"
-						>
-							<Download size={13} aria-hidden="true" /> Download all (ZIP)
-						</a>
-					</div>
-					<div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-						{STICKERS.map((s) => (
-							<div key={s.file} className="group bg-card border border-white/10 flex flex-col">
-								<div className="relative aspect-[3/2] flex items-center justify-center p-6 overflow-hidden bg-[#0A0A0A]">
-									<Image
-										src={`/brand-assets/stickers/${s.file}.png`}
-										alt={s.name}
-										width={400}
-										height={267}
-										className="w-full h-auto max-h-full object-contain"
-										unoptimized
-									/>
-								</div>
-								<div className="p-4 border-t border-white/[0.06] flex flex-col gap-3">
-									<div className="font-display font-bold uppercase text-xs tracking-[0.06em]">
-										{s.name}
-									</div>
-									<div className="grid grid-cols-3 gap-2">
-										{(["svg", "png", "pdf"] as const).map((ext) => (
-											<a
-												key={ext}
-												href={`/brand-assets/stickers/${s.file}.${ext}`}
-												download
-												className="flex items-center justify-center gap-1 px-2 py-2 text-[10px] font-display font-bold tracking-[0.1em] uppercase border border-white/10 hover:border-polar-lime hover:text-polar-lime transition-colors"
-											>
-												<Download size={11} aria-hidden="true" /> {ext}
-											</a>
-										))}
-									</div>
-								</div>
-							</div>
-						))}
+						<div className="flex flex-col gap-4">
+							<p className="text-sm text-muted-foreground leading-relaxed">
+								A full sticker set in PNG, SVG and PDF. Eleven designs across
+								wordmark, signature, and viewfinder styles, in lime and mono.
+							</p>
+							<a
+								href="/brand-assets/stickers/patrik-pov-stickers.zip"
+								download
+								className="self-start inline-flex items-center gap-2 px-5 py-2.5 text-[11px] font-display font-bold tracking-[0.12em] uppercase bg-polar-lime/10 text-polar-lime border border-polar-lime/30 hover:bg-polar-lime hover:text-background transition-colors"
+							>
+								<Download size={13} aria-hidden="true" /> Download pack (ZIP)
+							</a>
+						</div>
 					</div>
 				</div>
 			</section>
