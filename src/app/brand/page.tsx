@@ -3,7 +3,7 @@ import { BrandPageContent } from "./brand-content";
 
 export const metadata: Metadata = {
   title: "Brand",
-  description: "Polar26 brand one-pager: colors, type, voice, and process.",
+  description: "The Polar26 brand kit: colors, typography, voice, logos, stickers, email signatures, and templates. Everything your team needs to stay on-brand.",
 };
 
 export default function BrandPage() {
