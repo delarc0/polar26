@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { IntroLoader } from "@/components/home/IntroLoader";
 import { HeroSection } from "@/components/home/HeroSection";
 import { ClientLogoMarquee } from "@/components/home/ClientLogoMarquee";
 
@@ -18,6 +19,7 @@ const AboutPreview = dynamic(() =>
 export function HomeContent() {
 	return (
 		<>
+			<IntroLoader />
 			<HeroSection />
 			<ClientLogoMarquee />
 			<ServicesSection />

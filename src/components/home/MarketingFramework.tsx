@@ -57,54 +57,65 @@ const FOUR_PS = [
 ];
 
 function ConnectionLine() {
-	const lineRef = useRef<SVGSVGElement>(null);
+	const ref = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const svg = lineRef.current;
-		if (!svg) return;
-		const path = svg.querySelector("path");
-		if (!path) return;
+		const el = ref.current;
+		if (!el) return;
 
-		const length = path.getTotalLength();
-		gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+		const line = el.querySelector<HTMLElement>(".fw-line");
+		const nodes = el.querySelectorAll<HTMLElement>(".fw-node");
+		const pulse = el.querySelector<HTMLElement>(".fw-pulse");
 
+		if (line) gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
+		gsap.set(nodes, { scale: 0, opacity: 0 });
+		if (pulse) gsap.set(pulse, { left: "0%", opacity: 0 });
+
+		const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		if (reduced) {
+			if (line) gsap.set(line, { scaleX: 1 });
+			gsap.set(nodes, { scale: 1, opacity: 1 });
+			return;
+		}
+
+		let pulseTween: gsap.core.Tween | null = null;
 		const trigger = ScrollTrigger.create({
-			trigger: svg,
+			trigger: el,
 			start: "top 75%",
 			once: true,
 			onEnter: () => {
-				gsap.to(path, {
-					strokeDashoffset: 0,
-					duration: 1.5,
-					ease: "power2.inOut",
-				});
+				const tl = gsap.timeline();
+				if (line) tl.to(line, { scaleX: 1, duration: 1.4, ease: "power2.inOut" });
+				tl.to(nodes, { scale: 1, opacity: 1, duration: 0.4, stagger: 0.18, ease: "back.out(2)" }, "-=0.8");
+				if (pulse) {
+					tl.set(pulse, { opacity: 1 });
+					pulseTween = gsap.to(pulse, { left: "100%", duration: 3.2, ease: "none", repeat: -1 });
+				}
 			},
 		});
 
-		return () => trigger.kill();
+		return () => {
+			trigger.kill();
+			pulseTween?.kill();
+		};
 	}, []);
 
 	return (
-		<svg
-			ref={lineRef}
-			className="hidden md:block absolute top-[3.5rem] left-[16.66%] right-[16.66%] h-[2px] z-0 overflow-visible"
-			preserveAspectRatio="none"
+		<div
+			ref={ref}
+			className="hidden md:block absolute top-[3.5rem] left-[16.66%] right-[16.66%] h-[2px] z-0"
 		>
-			<path
-				d="M0,1 L1000,1"
-				stroke="url(#line-gradient)"
-				strokeWidth="2"
-				fill="none"
-				vectorEffect="non-scaling-stroke"
-			/>
-			<defs>
-				<linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-					<stop offset="0%" stopColor="#BDFF00" stopOpacity="0.6" />
-					<stop offset="50%" stopColor="#BDFF00" stopOpacity="1" />
-					<stop offset="100%" stopColor="#BDFF00" stopOpacity="0.6" />
-				</linearGradient>
-			</defs>
-		</svg>
+			<div className="absolute inset-0 bg-white/10" />
+			<div className="fw-line absolute inset-0 bg-gradient-to-r from-polar-lime/60 via-polar-lime to-polar-lime/60" />
+			<span className="fw-pulse absolute top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-polar-lime shadow-[0_0_12px_4px_rgba(189,255,0,0.55)]" />
+			{[0, 50, 100].map((pct) => (
+				<span
+					key={pct}
+					className="fw-node absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-polar-lime bg-[#0A0A0A]"
+					style={{ left: `${pct}%` }}
+				/>
+			))}
+		</div>
 	);
 }
 
