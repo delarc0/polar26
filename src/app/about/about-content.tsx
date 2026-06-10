@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { gsap, ScrollTrigger } from "@/lib/gsap-config";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { RevealText } from "@/components/shared/RevealText";
+import { FounderReveal } from "@/components/about/FounderReveal";
 import { SITE } from "@/data/site";
 
 const VALUES = [
@@ -152,52 +152,7 @@ function CapabilityItem({ cap, index }: { cap: string; index: number }) {
 }
 
 export function AboutPageContent() {
-	const founderImageRef = useRef<HTMLDivElement>(null);
-	const imageInnerRef = useRef<HTMLDivElement>(null);
 	const bioRef = useScrollReveal<HTMLDivElement>({ delay: 0.1 });
-
-	useEffect(() => {
-		const container = founderImageRef.current;
-		const inner = imageInnerRef.current;
-		if (!container || !inner) return;
-
-		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-		if (prefersReducedMotion) return;
-
-		const scaleTween = gsap.fromTo(
-			inner,
-			{ scale: 1.15 },
-			{
-				scale: 1,
-				ease: "none",
-				scrollTrigger: {
-					trigger: container,
-					start: "top bottom",
-					end: "bottom top",
-					scrub: true,
-				},
-			}
-		);
-
-		const revealTrigger = ScrollTrigger.create({
-			trigger: container,
-			start: "top 80%",
-			once: true,
-			onEnter: () => {
-				gsap.fromTo(
-					container,
-					{ clipPath: "inset(100% 0 0 0)" },
-					{ clipPath: "inset(0% 0 0 0)", duration: 1.2, ease: "power4.inOut" }
-				);
-			},
-		});
-
-		return () => {
-			scaleTween.scrollTrigger?.kill();
-			scaleTween.kill();
-			revealTrigger.kill();
-		};
-	}, []);
 
 	useEffect(() => {
 		const paragraphs = document.querySelectorAll(".bio-paragraph");
@@ -334,24 +289,7 @@ export function AboutPageContent() {
 							</div>
 						</div>
 
-						<div
-							ref={founderImageRef}
-							className="relative aspect-[4/5] lg:aspect-auto lg:h-full lg:min-h-[460px] overflow-hidden w-full max-w-sm mx-auto lg:max-w-none lg:mx-0"
-							style={{ clipPath: "inset(100% 0 0 0)" }}
-						>
-							<div ref={imageInnerRef} className="absolute inset-0 will-change-transform">
-								<Image
-									src="/images/patrik-portrait-bw.webp"
-									alt="Patrik Nordstrom"
-									width={1024}
-									height={2048}
-									priority
-									sizes="(max-width: 1024px) 100vw, 384px"
-									className="object-cover object-[center_32%] absolute inset-0 w-full h-full"
-								/>
-							</div>
-							<div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/30 to-transparent" />
-						</div>
+						<FounderReveal />
 					</div>
 				</div>
 			</section>
