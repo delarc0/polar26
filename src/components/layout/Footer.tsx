@@ -1,13 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { NAV_LINKS } from "@/data/navigation";
 import { SITE } from "@/data/site";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useMagnetic } from "@/hooks/useMagnetic";
 import { gsap, ScrollTrigger } from "@/lib/gsap-config";
 
 const FOOTER_NAV = [
@@ -43,9 +41,6 @@ export function Footer() {
 	const riderRef = useRef<HTMLDivElement>(null);
 	const videoRef = useRef<HTMLVideoElement>(null);
 	const marqueeRef = useRef<HTMLDivElement>(null);
-	const pathname = usePathname();
-	const buttonRef = useMagnetic<HTMLAnchorElement>(0.25);
-	const isContactPage = pathname === "/contact";
 
 	const leftNavRef = useScrollReveal<HTMLDivElement>({
 		children: true,
@@ -222,19 +217,6 @@ export function Footer() {
 					</div>
 				</div>
 			</div>
-
-			{!isContactPage && (
-				<div className="relative z-10 flex justify-center -mt-6 pt-2 pb-4">
-					<a
-						ref={buttonRef}
-						href={`mailto:${SITE.email}`}
-						className="inline-flex items-center gap-3 px-6 py-3 text-xs sm:text-sm font-display font-bold tracking-[0.15em] uppercase bg-polar-lime text-[#111] hover:bg-white transition-colors rounded-full cursor-pointer group"
-					>
-						Business Enquiries
-						<span className="block w-4 h-px bg-current transition-all duration-300 group-hover:w-8" />
-					</a>
-				</div>
-			)}
 
 			<div className="bg-[#0A0A0A]">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
