@@ -254,7 +254,7 @@ export function AboutPageContent() {
 
 			<section className="pt-6 sm:pt-10 pb-16 sm:pb-24">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 						<div ref={bioRef}>
 							<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
 								The Founder
@@ -336,7 +336,7 @@ export function AboutPageContent() {
 
 						<div
 							ref={founderImageRef}
-							className="relative aspect-[3/4] overflow-hidden w-full max-w-sm mx-auto lg:mx-0 lg:ml-auto"
+							className="relative aspect-square overflow-hidden w-full max-w-sm mx-auto lg:mx-0 lg:ml-auto"
 							style={{ clipPath: "inset(100% 0 0 0)" }}
 						>
 							<div ref={imageInnerRef} className="absolute inset-0 will-change-transform">
@@ -347,7 +347,7 @@ export function AboutPageContent() {
 									height={2048}
 									priority
 									sizes="(max-width: 1024px) 100vw, 384px"
-									className="object-cover absolute inset-0 w-full h-full"
+									className="object-cover object-[center_32%] absolute inset-0 w-full h-full"
 								/>
 							</div>
 							<div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/30 to-transparent" />
