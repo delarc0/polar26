@@ -254,7 +254,7 @@ export function AboutPageContent() {
 
 			<section className="pt-6 sm:pt-10 pb-16 sm:pb-24">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
 						<div ref={bioRef}>
 							<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
 								The Founder
@@ -336,7 +336,7 @@ export function AboutPageContent() {
 
 						<div
 							ref={founderImageRef}
-							className="relative aspect-square overflow-hidden w-full max-w-sm mx-auto lg:mx-0 lg:ml-auto"
+							className="relative aspect-[4/5] lg:aspect-auto lg:h-full lg:min-h-[460px] overflow-hidden w-full max-w-sm mx-auto lg:max-w-none lg:mx-0"
 							style={{ clipPath: "inset(100% 0 0 0)" }}
 						>
 							<div ref={imageInnerRef} className="absolute inset-0 will-change-transform">
