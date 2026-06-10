@@ -135,10 +135,6 @@ export function FounderReveal() {
 						<span className="absolute bottom-0 right-0 h-7 w-7 border-b-2 border-r-2 border-polar-lime" />
 						<span className="absolute left-1/2 top-1/2 h-6 w-px -translate-x-1/2 -translate-y-1/2 bg-polar-lime/70" />
 						<span className="absolute left-1/2 top-1/2 h-px w-6 -translate-x-1/2 -translate-y-1/2 bg-polar-lime/70" />
-						<span className="absolute -top-6 left-0 flex items-center gap-1.5 text-[9px] font-display font-bold tracking-[0.25em] text-polar-lime">
-							<span className="inline-block h-1.5 w-1.5 rounded-full bg-[#FF5A5A] animate-pulse" />
-							REC
-						</span>
 					</div>
 
 					{/* Hint */}
