@@ -54,7 +54,7 @@ export function GolfGallery() {
         {/* Header */}
         <header className="max-w-3xl">
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
-            Polar26 &middot; Event Photography
+            Polar26 &middot; Creative Agency
           </span>
           <h1 className="mt-4 text-[clamp(2.25rem,6vw,4.5rem)] font-display font-bold uppercase">
             {EVENT_TITLE}
