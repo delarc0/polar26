@@ -7,7 +7,7 @@ import { GOLF_PHOTOS } from "@/data/golfPhotos";
 
 /* -------------------------------------------------------------------------- */
 /*  Edit these two lines to change the event name / intro shown on the page.   */
-const EVENT_TITLE = "Golf Day";
+const EVENT_TITLE = "Kungsbacka Open";
 const EVENT_INTRO =
   "Photos from the day. Browse below, download the ones you like, or grab the full set in one click.";
 /* -------------------------------------------------------------------------- */
