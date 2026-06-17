@@ -8,12 +8,11 @@ import { GOLF_PHOTOS } from "@/data/golfPhotos";
 /*  Edit these two lines to change the event name / intro shown on the page.   */
 const EVENT_TITLE = "Kungsbacka Open";
 const EVENT_INTRO =
-  "Photos from the day. Browse below, download the ones you like, or grab the full set in one click.";
+  "Photos from the day. Browse below and save the ones you like.";
 /* -------------------------------------------------------------------------- */
 
 const THUMB = (name: string) => `/images/golf/thumbs/${name}.webp`;
 const FULL = (name: string) => `/images/golf/photos/${name}.jpg`;
-const ZIP = "/images/golf/polar26-golf-photos.zip";
 
 export function GolfGallery() {
   const [active, setActive] = useState<number | null>(null);
@@ -105,19 +104,9 @@ export function GolfGallery() {
             {EVENT_INTRO}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href={ZIP}
-              download="Polar26-Golf-Photos.zip"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 text-sm font-medium uppercase tracking-[0.1em] transition-opacity hover:opacity-90"
-            >
-              <Download className="h-4 w-4" strokeWidth={2} />
-              Download all
-            </a>
-            <span className="text-sm text-muted-foreground">
-              {GOLF_PHOTOS.length} photos
-            </span>
-          </div>
+          <p className="mt-8 text-sm font-medium tracking-[0.1em] uppercase text-muted-foreground">
+            {GOLF_PHOTOS.length} photos
+          </p>
 
           <p className="mt-6 text-sm text-muted-foreground leading-relaxed">
             On iPhone: tap a photo, press Save photo, then choose &ldquo;Save
