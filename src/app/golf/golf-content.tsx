@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
 import { Download, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { GOLF_PHOTOS } from "@/data/golfPhotos";
 
@@ -16,7 +15,7 @@ const THUMB = (name: string) => `/images/golf/thumbs/${name}.webp`;
 const FULL = (name: string) => `/images/golf/photos/${name}.jpg`;
 const ZIP = "/images/golf/polar26-golf-photos.zip";
 
-export function GolfGallery({ siteEmail }: { siteEmail: string }) {
+export function GolfGallery() {
   const [active, setActive] = useState<number | null>(null);
 
   const close = useCallback(() => setActive(null), []);
@@ -109,28 +108,10 @@ export function GolfGallery({ siteEmail }: { siteEmail: string }) {
           ))}
         </div>
 
-        {/* Credit / soft CTA */}
+        {/* Credit */}
         <div className="mt-20 border-t border-border pt-10">
           <p className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
             Shot by Polar26
-          </p>
-          <p className="mt-3 max-w-2xl text-sm text-muted-foreground leading-relaxed">
-            We make brand films, campaigns and event coverage that move people.
-            Want photo or video for your next event?{" "}
-            <Link
-              href="/contact"
-              className="text-foreground underline underline-offset-4 hover:text-polar-lime transition-colors"
-            >
-              Get in touch
-            </Link>{" "}
-            or email{" "}
-            <a
-              href={`mailto:${siteEmail}`}
-              className="text-foreground underline underline-offset-4 hover:text-polar-lime transition-colors"
-            >
-              {siteEmail}
-            </a>
-            .
           </p>
         </div>
       </div>

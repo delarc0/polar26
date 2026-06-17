@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { GolfGallery } from "./golf-content";
-import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Kungsbacka Open",
@@ -24,5 +23,5 @@ export const metadata: Metadata = {
 };
 
 export default function GolfPage() {
-  return <GolfGallery siteEmail={SITE.email} />;
+  return <GolfGallery />;
 }
