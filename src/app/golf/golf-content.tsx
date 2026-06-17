@@ -31,6 +31,48 @@ export function GolfGallery() {
     [],
   );
 
+  // Save a single photo. On iPhone/iPad this opens the native share sheet
+  // (with a one-tap "Save Image" to Photos). On desktop it downloads the file.
+  const savePhoto = useCallback(async (name: string) => {
+    const url = FULL(name);
+    const filename = `${name}.jpg`;
+    let blob: Blob;
+    try {
+      const res = await fetch(url);
+      blob = await res.blob();
+    } catch {
+      window.location.href = url; // last resort
+      return;
+    }
+    const file = new File([blob], filename, {
+      type: blob.type || "image/jpeg",
+    });
+
+    // Mobile (iOS/Android): native share sheet -> "Save Image" / "Save to Photos".
+    const nav = navigator as Navigator & {
+      canShare?: (data?: unknown) => boolean;
+    };
+    if (nav.canShare && nav.canShare({ files: [file] })) {
+      try {
+        await nav.share({ files: [file] });
+        return;
+      } catch (err) {
+        if (err instanceof Error && err.name === "AbortError") return;
+        // otherwise fall through to a normal download
+      }
+    }
+
+    // Desktop / unsupported: trigger a standard download.
+    const objUrl = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = objUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(objUrl), 1000);
+  }, []);
+
   // Keyboard navigation + lock body scroll while the lightbox is open.
   useEffect(() => {
     if (active === null) return;
@@ -78,8 +120,8 @@ export function GolfGallery() {
           </div>
 
           <p className="mt-6 text-sm text-muted-foreground leading-relaxed">
-            On iPhone: tap the photo you want, press Download, then press and
-            hold the image to get the &ldquo;Save to Photos&rdquo; option.
+            On iPhone: tap a photo, press Save photo, then choose &ldquo;Save
+            Image&rdquo; to send it straight to your Photos.
           </p>
         </header>
 
@@ -99,16 +141,18 @@ export function GolfGallery() {
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
               />
               <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
-              {/* Quick per-photo download */}
-              <a
-                href={FULL(name)}
-                download={`${name}.jpg`}
-                onClick={(e) => e.stopPropagation()}
-                aria-label="Download this photo"
-                className="absolute bottom-2 right-2 inline-flex h-9 w-9 items-center justify-center bg-background/80 text-foreground opacity-0 backdrop-blur-sm transition-opacity duration-200 hover:bg-primary hover:text-primary-foreground group-hover:opacity-100 focus-visible:opacity-100"
+              {/* Quick per-photo download / save */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  savePhoto(name);
+                }}
+                aria-label="Save this photo"
+                className="absolute bottom-2 right-2 inline-flex h-9 w-9 items-center justify-center bg-background/80 text-foreground opacity-100 backdrop-blur-sm transition-opacity duration-200 hover:bg-primary hover:text-primary-foreground sm:opacity-0 sm:group-hover:opacity-100 sm:focus-visible:opacity-100"
               >
                 <Download className="h-4 w-4" strokeWidth={2} />
-              </a>
+              </button>
             </div>
           ))}
         </div>
@@ -177,14 +221,14 @@ export function GolfGallery() {
               <span className="text-xs text-muted-foreground tracking-[0.1em]">
                 {active + 1} / {GOLF_PHOTOS.length}
               </span>
-              <a
-                href={FULL(GOLF_PHOTOS[active])}
-                download={`${GOLF_PHOTOS[active]}.jpg`}
+              <button
+                type="button"
+                onClick={() => savePhoto(GOLF_PHOTOS[active])}
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium uppercase tracking-[0.1em] transition-opacity hover:opacity-90"
               >
                 <Download className="h-4 w-4" strokeWidth={2} />
-                Download
-              </a>
+                Save photo
+              </button>
             </div>
           </div>
         </div>
