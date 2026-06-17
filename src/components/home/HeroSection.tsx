@@ -114,10 +114,10 @@ export function HeroSection() {
 				muted
 				loop
 				playsInline
-				poster="/videos/hero-banner-v2-poster.webp"
+				poster="/videos/hero-banner-v3-poster.webp"
 				className="absolute inset-0 w-full h-[130%] -top-[15%] object-cover will-change-transform"
 			>
-				<source src="/videos/hero-banner-v2.mp4" type="video/mp4" />
+				<source src="/videos/hero-banner-v3.mp4" type="video/mp4" />
 			</video>
 
 			<div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#0A0A0A]/90 via-[#0A0A0A]/60 to-transparent" />

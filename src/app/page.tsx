@@ -40,8 +40,8 @@ export default function HomePage() {
             name: "Polar26 Showreel",
             description:
               "Creative showreel by Polar26, a Swedish agency specializing in brand activation, athlete management, and content production.",
-            thumbnailUrl: `${SITE.url}/videos/hero-banner-v2-poster.webp`,
-            contentUrl: `${SITE.url}/videos/hero-banner-v2.mp4`,
+            thumbnailUrl: `${SITE.url}/videos/hero-banner-v3-poster.webp`,
+            contentUrl: `${SITE.url}/videos/hero-banner-v3.mp4`,
             uploadDate: "2026-01-01T00:00:00+01:00",
           }),
         }}
