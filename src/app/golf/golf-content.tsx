@@ -76,6 +76,11 @@ export function GolfGallery() {
               {GOLF_PHOTOS.length} photos
             </span>
           </div>
+
+          <p className="mt-6 text-sm text-muted-foreground leading-relaxed">
+            On iPhone: tap the photo you want, press Download, then press and
+            hold the image to get the &ldquo;Save Photo&rdquo; option.
+          </p>
         </header>
 
         {/* Grid */}
