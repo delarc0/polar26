@@ -147,7 +147,7 @@ export function HeroSection() {
 
 				<div className="hero-title overflow-hidden">
 					<div className="overflow-hidden">
-						<h1 className="line text-[clamp(2.75rem,10vw,10rem)] font-display font-extrabold uppercase tracking-[-0.03em] leading-[0.85]">
+						<h1 className="line text-[clamp(2.75rem,8vw,7.5rem)] font-display font-extrabold uppercase tracking-[-0.03em] leading-[0.85]">
 							Polar26
 						</h1>
 					</div>
