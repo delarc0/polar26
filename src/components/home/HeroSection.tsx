@@ -118,7 +118,7 @@ export function HeroSection() {
 				loop
 				playsInline
 				poster="/videos/hero-banner-v3-poster.webp"
-				className="relative z-[1] w-[calc(100%_+_3rem)] -mx-6 aspect-video object-cover mb-8 will-change-transform sm:absolute sm:inset-0 sm:z-0 sm:mx-0 sm:mb-0 sm:w-full sm:h-[130%] sm:-top-[15%] sm:aspect-auto"
+				className="relative z-[1] left-1/2 -translate-x-1/2 w-screen aspect-video object-cover mb-8 will-change-transform sm:absolute sm:inset-0 sm:left-0 sm:translate-x-0 sm:z-0 sm:mb-0 sm:w-full sm:h-[130%] sm:-top-[15%] sm:aspect-auto"
 			>
 				<source src="/videos/hero-banner-v3.mp4" type="video/mp4" />
 			</video>
@@ -145,7 +145,7 @@ export function HeroSection() {
 				</p>
 			</div>
 
-			<div className="hero-scroll absolute bottom-8 left-1/2 -translate-x-1/2 z-[3] hidden sm:flex flex-col items-center gap-2">
+			<div className="hero-scroll relative mt-14 self-center z-[3] flex flex-col items-center gap-2 sm:absolute sm:bottom-8 sm:left-1/2 sm:mt-0 sm:self-auto sm:-translate-x-1/2">
 				<span className="text-xs tracking-[0.2em] uppercase text-muted-foreground">
 					Scroll
 				</span>
