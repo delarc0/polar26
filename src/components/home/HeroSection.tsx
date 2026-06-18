@@ -107,7 +107,7 @@ export function HeroSection() {
 	return (
 		<section
 			ref={heroRef}
-			className="relative sm:min-h-screen flex flex-col justify-start sm:justify-center px-6 sm:px-8 lg:px-12 pt-16 sm:pt-20 pb-14 sm:pb-0 overflow-hidden"
+			className="relative sm:min-h-screen flex flex-col justify-start sm:justify-center pt-16 sm:pt-20 pb-14 sm:pb-0 overflow-hidden"
 		>
 			{/* Mobile: video shown full-width in its native landscape ratio (no crop,
 			    stays sharp). Desktop (sm+): full-bleed cover background. */}
@@ -118,7 +118,7 @@ export function HeroSection() {
 				loop
 				playsInline
 				poster="/videos/hero-banner-v3-poster.webp"
-				className="relative z-[1] left-1/2 -translate-x-1/2 w-screen aspect-video object-cover mb-8 will-change-transform sm:absolute sm:inset-0 sm:left-0 sm:translate-x-0 sm:z-0 sm:mb-0 sm:w-full sm:h-[130%] sm:-top-[15%] sm:aspect-auto"
+				className="relative z-[1] w-full aspect-video object-cover mb-8 will-change-transform sm:absolute sm:inset-0 sm:z-0 sm:mb-0 sm:h-[130%] sm:-top-[15%] sm:aspect-auto"
 			>
 				<source src="/videos/hero-banner-v3.mp4" type="video/mp4" />
 			</video>
@@ -127,7 +127,7 @@ export function HeroSection() {
 			<div className="hidden sm:block absolute inset-0 z-[2] bg-gradient-to-r from-[#0A0A0A]/90 via-[#0A0A0A]/60 to-transparent" />
 			<div className="hidden sm:block absolute inset-0 z-[2] bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/40" />
 
-			<div className="hero-content relative z-[3] mx-auto max-w-7xl w-full will-change-transform">
+			<div className="hero-content relative z-[3] mx-auto max-w-7xl w-full px-6 sm:px-8 lg:px-12 will-change-transform">
 				<p className="hero-overline text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-polar-lime mb-6 sm:mb-8">
 					Creative Agency
 				</p>
