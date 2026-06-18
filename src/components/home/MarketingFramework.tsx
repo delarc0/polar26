@@ -103,7 +103,7 @@ function ConnectionLine() {
 	return (
 		<div
 			ref={ref}
-			className="hidden md:block absolute top-[3.5rem] left-[16.66%] right-[16.66%] h-[2px] z-0"
+			className="hidden md:block absolute top-2 left-[16.66%] right-[16.66%] h-[2px] z-0"
 		>
 			<div className="absolute inset-0 bg-white/10" />
 			<div className="fw-line absolute inset-0 bg-gradient-to-r from-polar-lime/60 via-polar-lime to-polar-lime/60" />
@@ -272,7 +272,7 @@ export function MarketingFramework() {
 
 				<div className="relative mt-20 sm:mt-24">
 					<ConnectionLine />
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 md:pt-16">
 						{PILLARS.map((pillar, i) => (
 							<PillarCard key={pillar.title} pillar={pillar} index={i} />
 						))}
