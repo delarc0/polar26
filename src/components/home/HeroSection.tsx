@@ -21,7 +21,8 @@ export function HeroSection() {
 		}
 
 		let videoTween: gsap.core.Tween | undefined;
-		if (video) {
+		// Parallax only on desktop, where the video is a full-bleed background.
+		if (video && window.innerWidth >= 640) {
 			videoTween = gsap.to(video, {
 				yPercent: 30,
 				ease: "none",
@@ -108,6 +109,8 @@ export function HeroSection() {
 			ref={heroRef}
 			className="relative min-h-screen flex flex-col justify-center px-6 sm:px-8 lg:px-12 pt-20 overflow-hidden"
 		>
+			{/* Mobile: video shown full-width in its native landscape ratio (no crop,
+			    stays sharp). Desktop (sm+): full-bleed cover background. */}
 			<video
 				ref={videoRef}
 				autoPlay
@@ -115,13 +118,14 @@ export function HeroSection() {
 				loop
 				playsInline
 				poster="/videos/hero-banner-v3-poster.webp"
-				className="absolute inset-0 w-full h-[130%] -top-[15%] object-cover will-change-transform"
+				className="relative z-[1] w-full aspect-video object-cover mb-10 will-change-transform sm:absolute sm:inset-0 sm:z-0 sm:mb-0 sm:h-[130%] sm:-top-[15%] sm:aspect-auto"
 			>
 				<source src="/videos/hero-banner-v3.mp4" type="video/mp4" />
 			</video>
 
-			<div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#0A0A0A]/90 via-[#0A0A0A]/60 to-transparent" />
-			<div className="absolute inset-0 z-[2] bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/40" />
+			{/* Legibility gradients only needed for the full-bleed desktop layout */}
+			<div className="hidden sm:block absolute inset-0 z-[2] bg-gradient-to-r from-[#0A0A0A]/90 via-[#0A0A0A]/60 to-transparent" />
+			<div className="hidden sm:block absolute inset-0 z-[2] bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/40" />
 
 			<div className="hero-content relative z-[3] mx-auto max-w-7xl w-full will-change-transform">
 				<p className="hero-overline text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-polar-lime mb-6 sm:mb-8">
