@@ -107,28 +107,41 @@ export function HeroSection() {
 	return (
 		<section
 			ref={heroRef}
-			className="relative sm:min-h-screen flex flex-col justify-start sm:justify-center pt-16 sm:pt-20 pb-14 sm:pb-0 overflow-hidden"
+			className="relative sm:min-h-screen flex flex-col justify-start sm:justify-center sm:pt-20 pb-14 sm:pb-0 overflow-hidden"
 		>
-			{/* Mobile: video shown full-width in its native landscape ratio (no crop,
-			    stays sharp). Desktop (sm+): full-bleed cover background. */}
-			<video
-				ref={videoRef}
-				autoPlay
-				muted
-				loop
-				playsInline
-				poster="/videos/hero-banner-v3-poster.webp"
-				className="relative z-[1] w-full aspect-video object-cover mb-8 will-change-transform sm:absolute sm:inset-0 sm:z-0 sm:mb-0 sm:h-[130%] sm:-top-[15%] sm:aspect-auto"
-			>
-				<source src="/videos/hero-banner-v3.mp4" type="video/mp4" />
-			</video>
+			{/* Media: mobile = full-bleed landscape band with gradient + overlaid
+			    label; desktop = full-bleed cover background. */}
+			<div className="relative z-[1] w-full mb-8 sm:mb-0 sm:absolute sm:inset-0 sm:z-0">
+				<video
+					ref={videoRef}
+					autoPlay
+					muted
+					loop
+					playsInline
+					poster="/videos/hero-banner-v3-poster.webp"
+					className="w-full aspect-video object-cover will-change-transform sm:absolute sm:inset-x-0 sm:-top-[15%] sm:h-[130%] sm:w-full sm:aspect-auto"
+				>
+					<source src="/videos/hero-banner-v3.mp4" type="video/mp4" />
+				</video>
 
-			{/* Legibility gradients only needed for the full-bleed desktop layout */}
+				{/* Gradient under the header for legibility (mobile only) */}
+				<div className="sm:hidden absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-[#0A0A0A]/85 to-transparent" />
+
+				{/* Gradient over the bottom of the video band (mobile only) */}
+				<div className="sm:hidden absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/15 to-transparent" />
+
+				{/* Overline laid over the video (mobile only) */}
+				<p className="hero-overline sm:hidden absolute bottom-4 left-6 z-[2] text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
+					Creative Agency
+				</p>
+			</div>
+
+			{/* Legibility gradients for the full-bleed desktop layout */}
 			<div className="hidden sm:block absolute inset-0 z-[2] bg-gradient-to-r from-[#0A0A0A]/90 via-[#0A0A0A]/60 to-transparent" />
 			<div className="hidden sm:block absolute inset-0 z-[2] bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/40" />
 
 			<div className="hero-content relative z-[3] mx-auto max-w-7xl w-full px-6 sm:px-8 lg:px-12 will-change-transform">
-				<p className="hero-overline text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-polar-lime mb-6 sm:mb-8">
+				<p className="hero-overline hidden sm:block text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-polar-lime mb-6 sm:mb-8">
 					Creative Agency
 				</p>
 
