@@ -226,7 +226,7 @@ const BOILERPLATE = [
 	{
 		key: "long",
 		label: "Long bio",
-		text: "Polar26 is a full-service creative agency built on the belief that great work comes from the intersection of strategy and raw creative energy. From brand activation and product strategy to athlete management and content production, we help brands stand out and grow. Founded by Patrik Nordstrom, we work with clients across motorsport, lifestyle, and consumer goods, bringing a perspective no boardroom can replicate.",
+		text: "Polar26 is a full-service creative agency built on the belief that great work comes from the intersection of strategy and raw creative energy. From brand activation and product strategy to athlete management and content production, we help brands stand out and grow. Founded by Patrik Nordström, we work with clients across motorsport, lifestyle, and consumer goods, bringing a perspective no boardroom can replicate.",
 	},
 ] as const;
 

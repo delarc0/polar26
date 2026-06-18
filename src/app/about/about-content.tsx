@@ -218,7 +218,7 @@ export function AboutPageContent() {
 								as="h2"
 								className="mt-4 text-[clamp(1.75rem,3vw,2.75rem)] font-display font-bold uppercase"
 							>
-								Patrik Nordstrom
+								Patrik Nordström
 							</RevealText>
 							<div className="mt-6 space-y-4 text-muted-foreground leading-relaxed">
 								<p className="bio-paragraph">
@@ -280,7 +280,7 @@ export function AboutPageContent() {
 								</div>
 							<div className="mt-8 pt-6 border-t border-white/[0.06]">
 								<p className="text-xs text-muted-foreground">
-									<span className="text-foreground font-medium">Patrik Nordstrom</span>
+									<span className="text-foreground font-medium">Patrik Nordström</span>
 									{", "}Founder &amp; CEO, Polar26
 								</p>
 								<p className="mt-1 text-xs text-muted-foreground">

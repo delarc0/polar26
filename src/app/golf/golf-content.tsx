@@ -112,6 +112,18 @@ export function GolfGallery() {
             On iPhone: tap a photo, press Save photo, then choose &ldquo;Save
             Image&rdquo; to send it straight to your Photos.
           </p>
+
+          <p className="mt-6 text-sm text-muted-foreground">
+            Photographer: Patrik Nordström &middot;{" "}
+            <a
+              href="https://www.instagram.com/patrik.pov"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground underline underline-offset-4 hover:text-polar-lime transition-colors"
+            >
+              @patrik.pov
+            </a>
+          </p>
         </header>
 
         {/* Grid */}
@@ -150,17 +162,6 @@ export function GolfGallery() {
         <div className="mt-20 border-t border-border pt-10">
           <p className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
             Shot by Polar26
-          </p>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Photographer: Patrik Nordström &middot;{" "}
-            <a
-              href="https://www.instagram.com/patrik.pov"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground underline underline-offset-4 hover:text-polar-lime transition-colors"
-            >
-              @patrik.pov
-            </a>
           </p>
         </div>
       </div>

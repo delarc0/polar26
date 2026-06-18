@@ -10,7 +10,7 @@ export const SITE = {
     linkedin: "https://www.linkedin.com/in/patriknordstrm/",
   },
   founder: {
-    name: "Patrik Nordstrom",
+    name: "Patrik Nordström",
     title: "Founder & CEO",
   },
 } as const;

@@ -80,7 +80,7 @@ export function FounderReveal() {
 			{/* Base sharp photo */}
 			<Image
 				src={IMG}
-				alt="Patrik Nordstrom"
+				alt="Patrik Nordström"
 				fill
 				priority
 				sizes="(max-width: 1024px) 100vw, 50vw"

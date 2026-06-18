@@ -24,7 +24,7 @@ export function AboutPreview() {
               Bold ideas deserve bold execution
             </RevealText>
             <p className="mt-6 text-muted-foreground leading-relaxed">
-              Founded by Patrik Nordstrom, Polar26 is a creative agency built on
+              Founded by Patrik Nordström, Polar26 is a creative agency built on
               the belief that great work comes from the intersection of strategy
               and raw creative energy. From first strategy to lasting growth,
               we make work people actually remember. A perspective no boardroom

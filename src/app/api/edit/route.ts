@@ -55,7 +55,7 @@ async function createNotionPage(data: z.infer<typeof editSchema>) {
           rich_text: [
             {
               text: {
-                content: "Patrik Nordstrom",
+                content: "Patrik Nordström",
               },
             },
           ],
@@ -108,7 +108,7 @@ function buildEmail(data: z.infer<typeof editSchema>, hasFiles: boolean) {
           </table>
         </td></tr>
         <tr><td style="padding-top:24px;">
-          <p style="margin:0;font-size:13px;color:#666;">From: Patrik Nordstrom</p>
+          <p style="margin:0;font-size:13px;color:#666;">From: Patrik Nordström</p>
         </td></tr>
       </table>
     </td></tr>

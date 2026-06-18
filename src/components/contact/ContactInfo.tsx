@@ -55,12 +55,6 @@ export function ContactInfo() {
           </a>
         </div>
       </div>
-
-      <div className="pt-4 border-t border-white/[0.06]">
-        <p className="text-xs text-muted-foreground">
-          Currently accepting projects for Q2 2026.
-        </p>
-      </div>
     </div>
   );
 }
