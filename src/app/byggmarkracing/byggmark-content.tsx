@@ -114,7 +114,7 @@ export function ByggmarkGallery() {
           </p>
 
           <p className="mt-6 text-sm text-muted-foreground">
-            Photographer: Patrik Nordström &middot;{" "}
+            Photographers: Patrik Nordström &middot;{" "}
             <a
               href="https://www.instagram.com/patrik.pov"
               target="_blank"
@@ -122,6 +122,15 @@ export function ByggmarkGallery() {
               className="text-foreground underline underline-offset-4 hover:text-polar-lime transition-colors"
             >
               @patrik.pov
+            </a>
+            {" "}&nbsp;&middot;&nbsp; Andree Högberg &middot;{" "}
+            <a
+              href="https://www.instagram.com/andreehogbeerg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground underline underline-offset-4 hover:text-polar-lime transition-colors"
+            >
+              @andreehogbeerg
             </a>
           </p>
         </header>
