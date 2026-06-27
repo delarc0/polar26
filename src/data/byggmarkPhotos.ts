@@ -4,7 +4,7 @@ export const BYGGMARK_PHOTOS: string[] = [
   "DSC00917",
   "DSC00925",
   "DSC00929",
-  "DSC00934",
+  "DSC00934-2",
   "DSC00951",
   "DSC00953",
   "DSC00958",
