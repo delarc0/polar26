@@ -135,6 +135,31 @@ export function ByggmarkGallery() {
           </p>
         </header>
 
+        {/* Video */}
+        <div className="mt-14 max-w-sm">
+          <p className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
+            Video
+          </p>
+          <div className="mt-4 overflow-hidden bg-secondary aspect-[9/16]">
+            <video
+              src="/videos/byggmarkracing/story1-evolve.mp4"
+              poster="/videos/byggmarkracing/story1-evolve-poster.webp"
+              controls
+              playsInline
+              preload="metadata"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <a
+            href="/videos/byggmarkracing/story1-evolve-full.mp4"
+            download="Byggmark-Racing-Polar26.mp4"
+            className="mt-4 inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium uppercase tracking-[0.1em] transition-opacity hover:opacity-90"
+          >
+            <Download className="h-4 w-4" strokeWidth={2} />
+            Download video
+          </a>
+        </div>
+
         {/* Grid */}
         <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
           {BYGGMARK_PHOTOS.map((name, i) => (
