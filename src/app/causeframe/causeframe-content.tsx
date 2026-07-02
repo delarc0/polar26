@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { RevealText } from "@/components/shared/RevealText";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { CAUSEFRAME, GEORGIA_PHOTOS, GEORGIA_VIDEO_ID } from "@/data/causeframe";
+import { GhanaImpactSteps } from "./ghana-impact-steps";
 
 function LinkedInIcon() {
 	return (
@@ -168,6 +169,8 @@ export function CauseFrameContent() {
 					</div>
 				</div>
 			</section>
+
+			<GhanaImpactSteps />
 
 			{/* Journey so far / Georgia */}
 			<section className="py-20 sm:py-28 border-t border-white/[0.06]">
