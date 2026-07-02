@@ -158,7 +158,7 @@ export function CauseFrameContent() {
 								href="mailto:hello@polar26.com?subject=CauseFrame%20-%20Ghana%20Bikes"
 								className="inline-flex items-center gap-2.5 px-6 py-3 bg-primary text-primary-foreground text-xs font-display font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
 							>
-								Support This Trip &middot; hello@polar26.com
+								Get Involved &middot; hello@polar26.com
 							</a>
 							<span className="text-xs uppercase tracking-[0.15em] text-muted-foreground">
 								Swish donations: to come
