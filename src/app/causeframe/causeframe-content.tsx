@@ -101,7 +101,7 @@ export function CauseFrameContent() {
 							as="h2"
 							className="mt-4 text-[clamp(2rem,5.5vw,4rem)] font-display font-bold uppercase"
 						>
-							CauseFrame Bikes
+							The Ghana Pedaling Initiative
 						</RevealText>
 						<div className="mt-8 grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-16 items-start">
 							<div className="space-y-5 text-base sm:text-lg text-muted-foreground leading-relaxed">
@@ -235,7 +235,7 @@ export function CauseFrameContent() {
 			{/* Get involved */}
 			<section className="py-20 sm:py-28 border-t border-white/[0.06]">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-					<SectionHeading eyebrow="Get Involved" title="Help this trip happen" />
+					<SectionHeading eyebrow="Get Involved" title="Get Involved" />
 					<div ref={involvedRef} className="mt-12 grid sm:grid-cols-3 gap-8 sm:gap-10">
 						{[
 							{
