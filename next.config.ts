@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
               "img-src 'self' data: https:",
               "font-src 'self' https://fonts.gstatic.com",
               "connect-src 'self' https://*.vercel-insights.com https://*.vercel-analytics.com https://plausible.io https://challenges.cloudflare.com",
-              "frame-src https://challenges.cloudflare.com",
+              "frame-src https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",
