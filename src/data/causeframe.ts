@@ -9,7 +9,7 @@ export const CAUSEFRAME = {
       linkedin: "https://www.linkedin.com/in/patriknordstrm/",
     },
     {
-      name: "Nate Fleischmann",
+      name: "Nathaniel Fleischmann",
       role: "Co-Founder",
       image: "/images/causeframe/team/nate-fleischmann.jpg",
       focus: "80% 25%",

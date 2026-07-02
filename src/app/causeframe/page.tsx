@@ -32,7 +32,7 @@ export default function CauseFramePage() {
             url: "https://polar26.com/causeframe",
             founder: [
               { "@type": "Person", name: "Patrik Nordström" },
-              { "@type": "Person", name: "Nate Fleischmann" },
+              { "@type": "Person", name: "Nathaniel Fleischmann" },
             ],
           }),
         }}

@@ -74,7 +74,7 @@ export function CauseFrameContent() {
 						<SectionHeading eyebrow="Who We Are" title="From storytelling to showing up" />
 						<div className="space-y-5 text-base sm:text-lg text-muted-foreground leading-relaxed">
 							<p>
-								CauseFrame was founded by Patrik Nordström and Nate Fleischmann. It started
+								CauseFrame was founded by Patrik Nordström and Nathaniel Fleischmann. It started
 								as a mobile storytelling project, driving over 10,000 km from Sweden through
 								the Balkans and into the Caucasus to produce video and photography for local
 								nonprofits, free of charge.
@@ -107,7 +107,7 @@ export function CauseFrameContent() {
 							<div className="space-y-5 text-base sm:text-lg text-muted-foreground leading-relaxed">
 								<p>
 									This October, CauseFrame is donating bicycles to a local after-school
-									program in Ghana. Patrik and Nate are traveling there to hand over the
+									program in Ghana. Patrik and Nathaniel are traveling there to hand over the
 									bikes in person and spend a day with the kids, teaching them to ride.
 								</p>
 								<p>
