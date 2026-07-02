@@ -164,32 +164,30 @@ function StepCard({ step, index }: { step: (typeof STEPS)[number]; index: number
 
 export function GhanaImpactSteps() {
 	return (
-		<section className="py-20 sm:py-28 border-t border-white/[0.06] overflow-hidden">
-			<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-				<div className="text-center max-w-3xl mx-auto">
-					<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
-						From Distance To Opportunity
-					</span>
-					<RevealText
-						as="h2"
-						className="mt-4 text-[clamp(2rem,5vw,4rem)] font-display font-extrabold uppercase"
-					>
-						How A Bike Changes The Equation
-					</RevealText>
-					<p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-						One bike. Three steps. A real shot at staying in school.
-					</p>
-				</div>
+		<div className="mt-20 sm:mt-24">
+			<div className="text-center max-w-3xl mx-auto">
+				<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
+					From Distance To Opportunity
+				</span>
+				<RevealText
+					as="h2"
+					className="mt-4 text-[clamp(2rem,5vw,4rem)] font-display font-extrabold uppercase"
+				>
+					How A Bike Changes The Equation
+				</RevealText>
+				<p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+					One bike. Three steps. A real shot at staying in school.
+				</p>
+			</div>
 
-				<div className="relative mt-20 sm:mt-24">
-					<ConnectionLine />
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 md:pt-16">
-						{STEPS.map((step, i) => (
-							<StepCard key={step.title} step={step} index={i} />
-						))}
-					</div>
+			<div className="relative mt-20 sm:mt-24">
+				<ConnectionLine />
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 md:pt-16">
+					{STEPS.map((step, i) => (
+						<StepCard key={step.title} step={step} index={i} />
+					))}
 				</div>
 			</div>
-		</section>
+		</div>
 	);
 }

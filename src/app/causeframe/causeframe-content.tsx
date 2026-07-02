@@ -92,7 +92,7 @@ export function CauseFrameContent() {
 			</section>
 
 			{/* Flagship: Ghana */}
-			<section className="py-20 sm:py-28 border-t border-white/[0.06] bg-card">
+			<section className="py-20 sm:py-28 border-t border-white/[0.06] bg-card overflow-hidden">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
 					<div ref={ghanaRef}>
 						<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
@@ -134,6 +134,8 @@ export function CauseFrameContent() {
 								))}
 							</div>
 						</div>
+						<GhanaImpactSteps />
+
 						<div className="mt-14 grid sm:grid-cols-2 gap-8 sm:gap-10 border-t border-white/[0.06] pt-10">
 							<div>
 								<p className="text-sm font-display font-bold uppercase tracking-[0.1em] text-foreground">
@@ -169,8 +171,6 @@ export function CauseFrameContent() {
 					</div>
 				</div>
 			</section>
-
-			<GhanaImpactSteps />
 
 			{/* Journey so far / Georgia */}
 			<section className="py-20 sm:py-28 border-t border-white/[0.06]">
