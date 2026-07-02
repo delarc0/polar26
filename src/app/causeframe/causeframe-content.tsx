@@ -227,7 +227,7 @@ export function CauseFrameContent() {
 			{/* Founders */}
 			<section className="py-20 sm:py-28 border-t border-white/[0.06] bg-card">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-					<SectionHeading eyebrow="Founders" title="Two people, one project" />
+					<SectionHeading eyebrow="Founders" title="Two people, global impact" />
 					<div ref={foundersRef} className="mt-12 grid sm:grid-cols-2 gap-8 sm:gap-10">
 						{CAUSEFRAME.founders.map((founder) => (
 							<div key={founder.name} className="group">
