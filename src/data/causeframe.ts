@@ -4,7 +4,7 @@ export const CAUSEFRAME = {
     {
       name: "Patrik Nordström",
       role: "Co-Founder",
-      image: "/images/patrik-portrait.webp",
+      image: "/images/causeframe/team/patrik-nordstrom.png",
       linkedin: "https://www.linkedin.com/in/patriknordstrm/",
     },
     {
