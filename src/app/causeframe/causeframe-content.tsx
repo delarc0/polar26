@@ -148,8 +148,9 @@ export function CauseFrameContent() {
 									For Companies
 								</p>
 								<p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-									Sponsor this trip, or the next one. A more direct, hands-on way to back a
-									cause than a logo on a wall.
+									Sponsor this trip, or the next one. Not just a logo on a project page,
+									but a genuine investment in real change and lasting brand impact for
+									your company.
 								</p>
 							</div>
 						</div>
