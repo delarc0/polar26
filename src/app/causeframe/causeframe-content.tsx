@@ -133,6 +133,37 @@ export function CauseFrameContent() {
 								))}
 							</div>
 						</div>
+						<div className="mt-14 grid sm:grid-cols-2 gap-8 sm:gap-10 border-t border-white/[0.06] pt-10">
+							<div>
+								<p className="text-sm font-display font-bold uppercase tracking-[0.1em] text-foreground">
+									For Individuals
+								</p>
+								<p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+									Chip in toward the bikes and the cost of getting to Ghana, or just follow
+									along and help spread the word before, during, and after the trip.
+								</p>
+							</div>
+							<div>
+								<p className="text-sm font-display font-bold uppercase tracking-[0.1em] text-foreground">
+									For Companies
+								</p>
+								<p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+									Sponsor this trip, or the next one. A more direct, hands-on way to back a
+									cause than a logo on a wall.
+								</p>
+							</div>
+						</div>
+						<div className="mt-8 flex flex-wrap items-center gap-4">
+							<a
+								href="mailto:hello@polar26.com?subject=CauseFrame%20-%20Ghana%20Bikes"
+								className="inline-flex items-center gap-2.5 px-6 py-3 bg-primary text-primary-foreground text-xs font-display font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+							>
+								Support This Trip &middot; hello@polar26.com
+							</a>
+							<span className="text-xs uppercase tracking-[0.15em] text-muted-foreground">
+								Swish donations: to come
+							</span>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -206,6 +237,7 @@ export function CauseFrameContent() {
 										fill
 										sizes="(max-width: 640px) 100vw, 50vw"
 										className="object-cover"
+										style={{ objectPosition: founder.focus }}
 									/>
 								</div>
 								<div className="mt-5 flex items-start justify-between gap-4">
