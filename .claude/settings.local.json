@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh repo:*)",
+      "Bash(GIT_TERMINAL_PROMPT=0 git clone https://github.com/delarc0/polar26.git \"/Users/patriknordstrom/Documents/Root_AI/Projects/Polar26 - Website\")",
+      "Bash(GIT_TERMINAL_PROMPT=0 git clone https://github.com/delarc0/polar26.git /tmp/polar26_clone)",
+      "Bash(GIT_SSH_COMMAND=\"ssh -o StrictHostKeyChecking=accept-new\" git clone git@github.com:delarc0/polar26.git /tmp/polar26_clone)",
+      "Read(//Users/patriknordstrom/.ssh/**)",
+      "Bash(ssh-add -l)",
+      "Bash(git clone:*)",
+      "Bash(rsync -a /tmp/polar26_clone/ \"/Users/patriknordstrom/Documents/Root_AI/Projects/Polar26 - Website/\")",
+      "Bash(rm -rf /tmp/polar26_clone)",
+      "Bash(curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh)",
+      "Bash(bash)"
+    ]
+  }
+}

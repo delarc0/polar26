@@ -1,0 +1,21 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- CauseFrame icon mark, reversed for dark backgrounds -->
+  <g fill="none" stroke="#BDFF00" stroke-width="6" stroke-linecap="square">
+    <path d="M6,24 V6 H24" />
+    <path d="M76,6 H94 V24" />
+    <path d="M94,76 V94 H76" />
+    <path d="M24,94 H6 V76" />
+  </g>
+  <g stroke="#FAFAFA" fill="none">
+    <circle cx="50" cy="50" r="27" stroke-width="5" />
+    <g stroke-width="3">
+      <line x1="50" y1="50" x2="50" y2="23" />
+      <line x1="50" y1="50" x2="50" y2="77" />
+      <line x1="50" y1="50" x2="26.6" y2="36.5" />
+      <line x1="50" y1="50" x2="73.4" y2="63.5" />
+      <line x1="50" y1="50" x2="26.6" y2="63.5" />
+      <line x1="50" y1="50" x2="73.4" y2="36.5" />
+    </g>
+  </g>
+  <circle cx="50" cy="50" r="4.5" fill="#BDFF00" />
+</svg>
