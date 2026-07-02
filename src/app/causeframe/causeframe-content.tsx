@@ -153,16 +153,16 @@ export function CauseFrameContent() {
 								</p>
 							</div>
 						</div>
-						<div className="mt-8 flex flex-wrap items-center gap-4">
+						<div className="mt-8">
 							<a
 								href="mailto:hello@polar26.com?subject=CauseFrame%20-%20Ghana%20Bikes"
 								className="inline-flex items-center gap-2.5 px-6 py-3 bg-primary text-primary-foreground text-xs font-display font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
 							>
 								Get Involved &middot; hello@polar26.com
 							</a>
-							<span className="text-xs uppercase tracking-[0.15em] text-muted-foreground">
+							<p className="mt-3 text-xs uppercase tracking-[0.15em] text-muted-foreground">
 								Swish donations: to come
-							</span>
+							</p>
 						</div>
 					</div>
 				</div>
