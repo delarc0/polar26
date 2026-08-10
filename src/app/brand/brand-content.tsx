@@ -110,7 +110,11 @@ const LOGO_VARIANTS = [
 		label: "Primary",
 		note: "Default on dark backgrounds",
 		swatchClass: "bg-[#0A0A0A]",
-		previewSrc: "/brand-assets/polar26-logo-lime.png",
+		boxClass: "aspect-[320/140]",
+		imgClass: "w-full max-w-[220px] h-auto object-contain",
+		w: 1280,
+		h: 344,
+		previewSrc: "/brand-assets/polar26-logo-lime@2x.png",
 		png: "/brand-assets/polar26-logo-lime.png",
 		svg: "/brand-assets/polar26-logo-lime.svg",
 		zip: "/brand-assets/polar26-logo-lime.zip",
@@ -120,7 +124,11 @@ const LOGO_VARIANTS = [
 		label: "Mono \u00B7 Light",
 		note: "For dark photography & video",
 		swatchClass: "bg-[#262626]",
-		previewSrc: "/brand-assets/polar26-logo-white.png",
+		boxClass: "aspect-[320/140]",
+		imgClass: "w-full max-w-[220px] h-auto object-contain",
+		w: 1280,
+		h: 344,
+		previewSrc: "/brand-assets/polar26-logo-white@2x.png",
 		png: "/brand-assets/polar26-logo-white.png",
 		svg: "/brand-assets/polar26-logo-white.svg",
 		zip: "/brand-assets/polar26-logo-white.zip",
@@ -130,10 +138,56 @@ const LOGO_VARIANTS = [
 		label: "Mono \u00B7 Dark",
 		note: "For light backgrounds & print",
 		swatchClass: "bg-[#FAFAFA]",
-		previewSrc: "/brand-assets/polar26-logo-black.png",
+		boxClass: "aspect-[320/140]",
+		imgClass: "w-full max-w-[220px] h-auto object-contain",
+		w: 1280,
+		h: 344,
+		previewSrc: "/brand-assets/polar26-logo-black@2x.png",
 		png: "/brand-assets/polar26-logo-black.png",
 		svg: "/brand-assets/polar26-logo-black.svg",
 		zip: "/brand-assets/polar26-logo-black.zip",
+	},
+	{
+		key: "stacked-lime",
+		label: "Stacked \u00B7 Lime",
+		note: "Square and vertical spaces",
+		swatchClass: "bg-[#0A0A0A]",
+		boxClass: "aspect-[320/220]",
+		imgClass: "w-full max-w-[130px] h-auto object-contain",
+		w: 575,
+		h: 462,
+		previewSrc: "/brand-assets/polar26-logo-stacked-lime@2x.png",
+		png: "/brand-assets/polar26-logo-stacked-lime.png",
+		svg: "/brand-assets/polar26-logo-stacked-lime.svg",
+		zip: "/brand-assets/polar26-logo-stacked-lime.zip",
+	},
+	{
+		key: "stacked-white",
+		label: "Stacked \u00B7 Light",
+		note: "Dark backgrounds, vertical",
+		swatchClass: "bg-[#262626]",
+		boxClass: "aspect-[320/220]",
+		imgClass: "w-full max-w-[130px] h-auto object-contain",
+		w: 575,
+		h: 462,
+		previewSrc: "/brand-assets/polar26-logo-stacked-white@2x.png",
+		png: "/brand-assets/polar26-logo-stacked-white.png",
+		svg: "/brand-assets/polar26-logo-stacked-white.svg",
+		zip: "/brand-assets/polar26-logo-stacked-white.zip",
+	},
+	{
+		key: "stacked-black",
+		label: "Stacked \u00B7 Dark",
+		note: "Light backgrounds, vertical",
+		swatchClass: "bg-[#FAFAFA]",
+		boxClass: "aspect-[320/220]",
+		imgClass: "w-full max-w-[130px] h-auto object-contain",
+		w: 575,
+		h: 462,
+		previewSrc: "/brand-assets/polar26-logo-stacked-black@2x.png",
+		png: "/brand-assets/polar26-logo-stacked-black.png",
+		svg: "/brand-assets/polar26-logo-stacked-black.svg",
+		zip: "/brand-assets/polar26-logo-stacked-black.zip",
 	},
 ] as const;
 
@@ -143,7 +197,7 @@ const MARK_VARIANTS = [
 		label: "Natural",
 		note: "Full-tone illustration",
 		swatchClass: "bg-[#0A0A0A]",
-		previewSrc: "/brand-assets/polar26-mark-natural.png",
+		previewSrc: "/brand-assets/polar26-mark-natural@4x.png",
 		png: "/brand-assets/polar26-mark-natural.png",
 		svg: null,
 		zip: "/brand-assets/polar26-mark-natural.zip",
@@ -153,7 +207,7 @@ const MARK_VARIANTS = [
 		label: "Lime",
 		note: "Silhouette on dark",
 		swatchClass: "bg-[#0A0A0A]",
-		previewSrc: "/brand-assets/polar26-mark-lime.png",
+		previewSrc: "/brand-assets/polar26-mark-lime@2x.png",
 		png: "/brand-assets/polar26-mark-lime.png",
 		svg: "/brand-assets/polar26-mark-lime.svg",
 		zip: "/brand-assets/polar26-mark-lime.zip",
@@ -163,7 +217,7 @@ const MARK_VARIANTS = [
 		label: "Mono \u00B7 Light",
 		note: "For dark photography & video",
 		swatchClass: "bg-[#262626]",
-		previewSrc: "/brand-assets/polar26-mark-white.png",
+		previewSrc: "/brand-assets/polar26-mark-white@2x.png",
 		png: "/brand-assets/polar26-mark-white.png",
 		svg: "/brand-assets/polar26-mark-white.svg",
 		zip: "/brand-assets/polar26-mark-white.zip",
@@ -173,7 +227,7 @@ const MARK_VARIANTS = [
 		label: "Mono \u00B7 Dark",
 		note: "For light backgrounds & print",
 		swatchClass: "bg-[#FAFAFA]",
-		previewSrc: "/brand-assets/polar26-mark-black.png",
+		previewSrc: "/brand-assets/polar26-mark-black@2x.png",
 		png: "/brand-assets/polar26-mark-black.png",
 		svg: "/brand-assets/polar26-mark-black.svg",
 		zip: "/brand-assets/polar26-mark-black.zip",
@@ -635,7 +689,7 @@ export function BrandPageContent() {
 								Wordmark
 							</h3>
 							<span className="text-[10px] tracking-[0.2em] uppercase text-white/40">
-								Primary lockup
+								Three lockups
 							</span>
 						</div>
 						<div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -645,14 +699,14 @@ export function BrandPageContent() {
 									className="group bg-card border border-white/10 flex flex-col"
 								>
 									<div
-										className={`${v.swatchClass} relative aspect-[320/140] flex items-center justify-center p-10 overflow-hidden`}
+										className={`${v.swatchClass} relative ${v.boxClass} flex items-center justify-center p-10 overflow-hidden`}
 									>
 										<Image
 											src={v.previewSrc}
 											alt={`Polar26 wordmark, ${v.label}`}
-											width={640}
-											height={172}
-											className="w-full max-w-[220px] h-auto object-contain"
+											width={v.w}
+											height={v.h}
+											className={v.imgClass}
 											unoptimized
 										/>
 									</div>
@@ -701,7 +755,7 @@ export function BrandPageContent() {
 								Symbol
 							</h3>
 							<span className="text-[10px] tracking-[0.2em] uppercase text-white/40">
-								Standalone mark
+								Standalone mark · full & small
 							</span>
 						</div>
 						<div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -809,7 +863,23 @@ export function BrandPageContent() {
         </div>
 
 					<p className="mt-8 text-[11px] text-white/30 leading-relaxed max-w-xl">
-						Vector files are auto-traced from the master PNG, fine for web &amp; screen use, pixel-perfect only at screen scale. For large-format print or merch, request the native vector from hello@polar26.com.
+						All vector files are rebuilt from geometry, not auto-traced: true circles, outlined
+						Barlow Condensed type, clean paths. Safe at any size, screen or large-format. Sending
+						artwork to a printer? The pack below carries one-colour separations that work for black or
+						white ink, EPS, white-ink references, and a full specification sheet.
+					</p>
+					<a
+						href="/brand-assets/polar26-print-package.zip"
+						download
+						className="mt-5 self-start inline-flex items-center gap-2 px-5 py-2.5 text-[11px] font-display font-bold tracking-[0.12em] uppercase bg-polar-lime/10 text-polar-lime border border-polar-lime/30 hover:bg-polar-lime hover:text-background transition-colors"
+					>
+						<Download size={13} aria-hidden="true" /> Print &amp; merch pack (ZIP)
+					</a>
+					<p className="mt-4 text-[11px] text-white/30 leading-relaxed max-w-xl">
+						Merch is specified black and white only. Polar Lime sits outside the process CMYK
+						gamut, so it cannot be hit reliably with process inks and needs a spot or fluorescent
+						match. The specification sheet carries the CIELAB target if you ever need it, plus
+						minimum sizes and clear space per lockup.
 					</p>
 				</div>
 			</section>
