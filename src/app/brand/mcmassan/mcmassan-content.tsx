@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { mcDisplay, mcMono, mcSans } from "./fonts";
 import {
 	BOILERPLATE,
@@ -35,10 +36,6 @@ const BUTTON =
 	"rounded-[3px] border border-[var(--mc-line)] transition-colors hover:border-[var(--mc-red)] hover:text-[var(--mc-red)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mc-red)]";
 const DOWNLOAD = `${MONO} ${BUTTON} inline-block px-4 py-[10px] text-xs uppercase tracking-[0.06em] text-[var(--mc-paper)]`;
 
-// Arms the reveal before the browser paints, without tripping React's
-// "useLayoutEffect does nothing on the server" warning during SSR.
-const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
-
 const MC_TOKENS = {
 	"--mc-ink": "#221F20",
 	"--mc-ink-deep": "#171516",
@@ -49,57 +46,6 @@ const MC_TOKENS = {
 	"--mc-fog": "#8C8184",
 	"--mc-line": "rgba(231, 226, 223, 0.14)",
 } as React.CSSProperties;
-
-/**
- * Reveal-on-scroll, deliberately not the shared `useScrollReveal`.
- *
- * That hook hides its target with `gsap.set({opacity: 0})` and un-hides it with
- * a tween, while `lib/gsap-config.ts` calls `gsap.globalTimeline.pause()` under
- * `prefers-reduced-motion` — which would leave these chapters stuck at zero
- * opacity for exactly the viewers who can least afford it. The source spec
- * guaranteed the opposite (visible by default, motion only as an enhancement),
- * so this keeps that guarantee locally: the hidden state is only ever applied
- * after the observer is confirmed, and never when reduced motion is requested.
- */
-function useReveal<T extends HTMLElement>() {
-	const ref = useRef<T>(null);
-	// `armed` is the spec's `js-anim` switch: nothing is ever hidden until the
-	// client has confirmed it can animate, so server HTML, a failed hydration
-	// and a reduced-motion viewer all render fully visible. The observer is then
-	// the only thing that decides what is revealed — deliberately no measuring
-	// of our own, which would race the images still loading above.
-	const [armed, setArmed] = useState(false);
-	const [revealed, setRevealed] = useState(false);
-
-	useIsomorphicLayoutEffect(() => {
-		const el = ref.current;
-		if (!el) return;
-		if (
-			typeof IntersectionObserver === "undefined" ||
-			window.matchMedia("(prefers-reduced-motion: reduce)").matches
-		) {
-			return;
-		}
-
-		setArmed(true);
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						setRevealed(true);
-						observer.disconnect();
-					}
-				}
-			},
-			{ threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
-		);
-		observer.observe(el);
-		return () => observer.disconnect();
-	}, []);
-
-	return { ref, hidden: armed && !revealed };
-}
 
 function Chapter({
 	num,
@@ -112,17 +58,15 @@ function Chapter({
 	title: string;
 	children: React.ReactNode;
 }) {
-	const { ref, hidden } = useReveal<HTMLElement>();
+	// The site's shared reveal. It leaves content visible under
+	// prefers-reduced-motion, which is the guarantee the source spec made.
+	const ref = useScrollReveal<HTMLElement>({ y: 18, duration: 0.6 });
 
 	return (
 		<section
 			ref={ref}
 			id={id}
-			// Tailwind v4 drives translate-* through the standalone `translate`
-			// property, so that is what transitions here, not `transform`.
-			className={`border-b border-[var(--mc-line)] py-[76px] transition-[opacity,translate] duration-[600ms] ease-out last:border-b-0 motion-reduce:transition-none ${
-				hidden ? "translate-y-[18px] opacity-0" : "translate-y-0 opacity-100"
-			}`}
+			className="border-b border-[var(--mc-line)] py-[76px] last:border-b-0"
 		>
 			<div className="mb-[34px] flex items-baseline gap-[14px]">
 				<span className={`${MONO} text-[13px] tracking-[0.08em] text-[var(--mc-red)]`}>
@@ -301,8 +245,15 @@ export function McMassanContent() {
 					<div className="mb-10 grid gap-4 md:grid-cols-3">
 						{LOGOS.map((logo) => (
 							<div key={logo.src} className="flex flex-col">
+								{/*
+								  Fixed height rather than a minimum, so all three boxes match
+								  and the captions below them share a baseline. The mark then
+								  caps at max-h-full, which is 100% of whatever the content box
+								  works out to under border-box, so the height and padding above
+								  stay the only numbers anyone has to touch.
+								*/}
 								<div
-									className={`${PANEL} flex min-h-[150px] items-center justify-center px-5 py-7`}
+									className={`${PANEL} flex h-[150px] items-center justify-center px-5 py-7`}
 								>
 									<Image
 										src={logo.src}
@@ -310,14 +261,7 @@ export function McMassanContent() {
 										width={logo.width}
 										height={logo.height}
 										sizes="(max-width: 768px) 90vw, 360px"
-										// The liggande marks are limited by column width and land
-										// around 92px tall, leaving their box at the 150px minimum.
-										// The square one is limited by height instead, so it gets a
-										// tighter cap to keep all three boxes the same height and
-										// the captions on one line.
-										className={`h-auto w-auto max-w-full object-contain ${
-											logo.width === logo.height ? "max-h-[90px]" : "max-h-[110px]"
-										}`}
+										className="h-auto max-h-full w-auto max-w-full object-contain"
 									/>
 								</div>
 								<span
