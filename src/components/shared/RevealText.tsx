@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap-config";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap-config";
 import { cn } from "@/lib/utils";
 
 interface RevealTextProps {
@@ -30,6 +30,9 @@ export function RevealText({
 	useEffect(() => {
 		const el = containerRef.current;
 		if (!el) return;
+
+		// The words render visible; skipping the reveal leaves them readable.
+		if (prefersReducedMotion()) return;
 
 		const words = el.querySelectorAll(".reveal-word");
 		gsap.set(words, { y: "110%", opacity: 0 });

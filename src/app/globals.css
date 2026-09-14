@@ -165,6 +165,13 @@
   to { height: 0; }
 }
 
+/* Start state for a JS-driven scroll reveal. Pair it with a tween that brings
+   opacity back to 1. Never a bare `opacity-0`, which stays hidden whenever
+   the tween is skipped. */
+.reveal-init {
+  opacity: 0;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -177,6 +184,10 @@
   }
   .clip-reveal {
     clip-path: ellipse(100% 100% at 50% 50%) !important;
+  }
+  /* The reveal tween is skipped here, so the start state must not hide. */
+  .reveal-init {
+    opacity: 1;
   }
 }
 

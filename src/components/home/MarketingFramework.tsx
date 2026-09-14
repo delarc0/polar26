@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap-config";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap-config";
 import { RevealText } from "@/components/shared/RevealText";
 import { Search, Compass, Megaphone, ArrowRight } from "lucide-react";
 
@@ -132,6 +132,14 @@ function PillarCard({ pillar, index }: { pillar: typeof PILLARS[number]; index: 
 		const targetNum = parseInt(pillar.number, 10);
 		const obj = { val: 0 };
 
+		// No count-up: drop the counter straight onto its final value and the
+		// faint opacity the tween would have left it at.
+		if (prefersReducedMotion()) {
+			counter.textContent = pillar.number;
+			gsap.set(counter, { opacity: 0.04, scale: 1, y: 0 });
+			return;
+		}
+
 		gsap.set(counter, { opacity: 0, scale: 0.5, y: 30 });
 
 		const trigger = ScrollTrigger.create({
@@ -206,6 +214,9 @@ function FourPCard({ p, index }: { p: typeof FOUR_PS[number]; index: number }) {
 		const el = cardRef.current;
 		if (!el) return;
 
+		// `reveal-init` already resolves to opacity 1 under reduced motion.
+		if (prefersReducedMotion()) return;
+
 		const trigger = ScrollTrigger.create({
 			trigger: el,
 			start: "top 85%",
@@ -225,7 +236,7 @@ function FourPCard({ p, index }: { p: typeof FOUR_PS[number]; index: number }) {
 	return (
 		<div
 			ref={cardRef}
-			className="relative overflow-hidden bg-background p-8 sm:p-10 group cursor-pointer opacity-0"
+			className="relative overflow-hidden bg-background p-8 sm:p-10 group cursor-pointer reveal-init"
 		>
 			<div className={`absolute inset-0 bg-gradient-to-br ${p.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 

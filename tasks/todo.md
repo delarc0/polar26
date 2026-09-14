@@ -120,5 +120,78 @@ wants its own visual pass. This page uses a local IntersectionObserver reveal
 that keeps the spec's guarantee (visible unless JS has confirmed it can
 animate). Worth a separate task.
 
+> Resolved. See "Reduced-motion reveals" below. The hook itself turned out to
+> be accidentally safe; the same root cause was breaking four other components.
+
 **Not committed**: `.claude/launch.json` (dev-server convenience for Claude
 Code sessions), plus the pre-existing dirty files, which were left alone.
+
+
+# Reduced-motion reveals (shared GSAP config)
+
+Follow-up to the item flagged during the `/brand/mcmassan` build.
+
+## What was actually wrong
+
+`lib/gsap-config.ts` called `gsap.globalTimeline.pause()` under
+`prefers-reduced-motion`. A paused global timeline never renders its children,
+so no tween runs, but the DOM those tweens were meant to change is left exactly
+as it was. Anything already sitting at `opacity: 0` stays there forever.
+
+Verified with Puppeteer against `next dev`, using
+`page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }])`,
+scrolling each page top to bottom and then listing every element with a
+non-trivial box, real text and computed opacity 0. Baseline run, before any
+change:
+
+- `/`: the four "4 P's" cards, permanently blank.
+- `/about`: the three value cards and all five capability rows, blank.
+- `/causeframe`: the three Ghana impact steps, blank.
+- `/`: the pillar counters showed a full-opacity white `00` instead of their
+  faint final number, found while fixing the above.
+
+The suspect hook, `useScrollReveal`, was **not** broken: the pause also
+swallows its `gsap.set()`, so its targets simply never got hidden. Correct by
+accident, and it would have broken the moment the pause went away. Everything
+that did break hides itself with a bare `opacity-0` class in the markup, which
+the pause cannot swallow.
+
+## Fix
+
+- [x] `lib/gsap-config.ts`: dropped the global pause and the
+      `ScrollTrigger.defaults({ animation: undefined })` that went with it.
+      Exports `prefersReducedMotion()` as the one canonical check. A global
+      kill switch that silences tweens without touching their DOM will keep
+      breaking every reveal-shaped animation anyone adds later.
+- [x] `globals.css`: added `.reveal-init`, a reveal start state that resolves
+      to `opacity: 1` under reduced motion. Replaces bare `opacity-0` in the
+      markup, so the content is safe from CSS alone, with no flash of visible
+      content for everyone else.
+- [x] Opted the previously unguarded call sites out explicitly, each leaving
+      its element in the final visible state: `useScrollReveal`, `RevealText`,
+      `Lightbox` (guard wraps only the tweens, the close-button focus still
+      runs), `about-content` (ValueCard, CapabilityItem, bio paragraphs),
+      `MarketingFramework` (PillarCard, FourPCard), `ghana-impact-steps`
+      (StepCard). PillarCard also writes its final number, since the count-up
+      tween is what used to set the text.
+- [x] Left the eight components that already had their own `matchMedia` check
+      alone. They were correct and stay correct without the pause.
+
+## Review
+
+- Re-ran the probe over all 12 routes in both modes. Reduced motion and normal
+  motion now report an identical set of zero-opacity elements, and every one of
+  them is a hover-revealed label that is meant to be hidden at rest.
+- Frame-by-frame trace of a reveal on `/causeframe`: normal motion still starts
+  at `opacity 0` with a 40px offset and eases in over ~700ms; reduced motion
+  sits at `opacity 1`, `transform: none`, unchanged across 14 samples.
+- Idle check on `/`, `/about`, `/causeframe`, `/contact` under reduced motion:
+  no computed transform or opacity anywhere on the page changes, at rest or
+  after scrolling. The decorative pulse dot on the connection lines is now
+  correctly hidden rather than parked mid-track.
+- Pillar counters under reduced motion now read `01`/`02`/`03` at 0.04 opacity.
+- Screenshots of all three previously blank sections, reduced motion on: fully
+  rendered.
+- `npm run build` clean, 21 routes. `npx eslint` clean on all touched files.
+  Console output identical in both modes (only the pre-existing dev-mode CSP
+  `eval()` notice from Turbopack).

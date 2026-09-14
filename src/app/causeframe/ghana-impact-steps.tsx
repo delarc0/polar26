@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap-config";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap-config";
 import { RevealText } from "@/components/shared/RevealText";
 import { Footprints, Bike, GraduationCap, ArrowRight } from "lucide-react";
 
@@ -106,6 +106,9 @@ function StepCard({ step, index }: { step: (typeof STEPS)[number]; index: number
 		const el = cardRef.current;
 		if (!el) return;
 
+		// `reveal-init` already resolves to opacity 1 under reduced motion.
+		if (prefersReducedMotion()) return;
+
 		const trigger = ScrollTrigger.create({
 			trigger: el,
 			start: "top 85%",
@@ -123,7 +126,7 @@ function StepCard({ step, index }: { step: (typeof STEPS)[number]; index: number
 	}, [index]);
 
 	return (
-		<div ref={cardRef} className="relative group z-[1] opacity-0">
+		<div ref={cardRef} className="relative group z-[1] reveal-init">
 			<span className="absolute -top-8 -left-2 text-[8rem] sm:text-[10rem] font-display font-extrabold uppercase text-white/[0.04] select-none pointer-events-none leading-none">
 				{step.number}
 			</span>

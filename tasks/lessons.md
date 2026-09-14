@@ -30,3 +30,35 @@ Any component using `ScrollTrigger` with `pin: true` MUST use `useLayoutEffect` 
 ### Logo transparency fix (same session)
 - ffmpeg `colorkey` filter is unreliable for removing white backgrounds from logos with complex colors/gradients
 - Pillow luminance-to-alpha conversion (grayscale -> invert -> alpha channel) works much better for converting any-color logos to white-on-transparent
+
+## 2026-09-14: Reduced-motion reveal audit
+
+### The lesson: reproduce before believing a plausible mechanism
+The bug report was mechanically sound and pointed at `hooks/useScrollReveal.ts`:
+it hides with `gsap.set({opacity: 0})` and un-hides with a tween, and
+`gsap.globalTimeline.pause()` under `prefers-reduced-motion` stops the tween.
+The reasoning was right about the cause and wrong about the victim. A paused
+global timeline swallows `gsap.set()` too, so the hook's targets never got
+hidden in the first place. The hook was fine, accidentally.
+
+What was actually broken: four components that hide with a bare `opacity-0`
+Tailwind class in the markup, which no paused timeline can swallow. Plus a
+pillar counter left showing a full-opacity white `00`, invisible to an
+"is anything at opacity 0" search and only found by reading the code around it.
+
+Puppeteer with `emulateMediaFeatures` found all of this in one pass, and a
+normal-motion run of the same probe separated the real regressions from the
+hover-revealed labels that are supposed to be hidden at rest.
+
+### Rules
+- **Run the probe in both states.** Hidden-under-reduced-motion means nothing
+  on its own. Diff it against normal motion or you will chase hover states.
+- **A global animation kill switch is a trap.** Silencing tweens does not undo
+  the DOM they were going to change. Reduced motion belongs at each call site,
+  which is responsible for leaving its element in the final, visible state.
+- **Never hide content with a bare `opacity-0` and un-hide it in JS.** Use a
+  start-state class that resolves to visible under reduced motion
+  (`.reveal-init` in `globals.css`), so CSS alone keeps the content readable.
+- **Check the end state, not just visibility.** An element the reveal was
+  supposed to dim, resize or fill with text also needs its final value when the
+  animation is skipped.

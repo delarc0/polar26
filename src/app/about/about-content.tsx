@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap-config";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap-config";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { RevealText } from "@/components/shared/RevealText";
 import { FounderReveal } from "@/components/about/FounderReveal";
@@ -43,6 +43,9 @@ function ValueCard({ value, index }: { value: typeof VALUES[number]; index: numb
 		const el = cardRef.current;
 		if (!el) return;
 
+		// `reveal-init` already resolves to opacity 1 under reduced motion.
+		if (prefersReducedMotion()) return;
+
 		const trigger = ScrollTrigger.create({
 			trigger: el,
 			start: "top 85%",
@@ -75,7 +78,7 @@ function ValueCard({ value, index }: { value: typeof VALUES[number]; index: numb
 	}, [index]);
 
 	return (
-		<div ref={cardRef} className="relative group opacity-0 cursor-pointer" style={{ perspective: "1000px" }}>
+		<div ref={cardRef} className="relative group reveal-init cursor-pointer" style={{ perspective: "1000px" }}>
 			<div className="absolute -top-4 -left-2 text-[5rem] sm:text-[6rem] font-display font-extrabold text-white/[0.03] leading-none select-none pointer-events-none group-hover:text-white/[0.06] transition-colors duration-500">
 				{value.number}
 			</div>
@@ -98,6 +101,9 @@ function CapabilityItem({ cap, index }: { cap: string; index: number }) {
 	useEffect(() => {
 		const el = itemRef.current;
 		if (!el) return;
+
+		// `reveal-init` already resolves to opacity 1 under reduced motion.
+		if (prefersReducedMotion()) return;
 
 		const trigger = ScrollTrigger.create({
 			trigger: el,
@@ -140,7 +146,7 @@ function CapabilityItem({ cap, index }: { cap: string; index: number }) {
 	return (
 		<div
 			ref={itemRef}
-			className="flex items-center gap-3 py-4 border-b border-white/[0.06] group cursor-pointer opacity-0"
+			className="flex items-center gap-3 py-4 border-b border-white/[0.06] group cursor-pointer reveal-init"
 		>
 			<div className="cap-dot h-2 w-2 bg-polar-lime flex-shrink-0 group-hover:scale-150 transition-transform duration-300" />
 			<span className="text-sm sm:text-base text-foreground group-hover:text-polar-lime transition-colors duration-300 uppercase tracking-wide">
@@ -155,6 +161,9 @@ export function AboutPageContent() {
 	const bioRef = useScrollReveal<HTMLDivElement>({ delay: 0.1 });
 
 	useEffect(() => {
+		// The paragraphs render visible; skipping the reveal leaves them readable.
+		if (prefersReducedMotion()) return;
+
 		const paragraphs = document.querySelectorAll(".bio-paragraph");
 		const triggers: ScrollTrigger[] = [];
 

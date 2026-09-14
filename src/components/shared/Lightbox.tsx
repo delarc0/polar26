@@ -3,7 +3,7 @@
 import { useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { gsap } from "@/lib/gsap-config";
+import { gsap, prefersReducedMotion } from "@/lib/gsap-config";
 import type { GalleryItem } from "@/data/gallery";
 import { useScrollLock } from "@/components/providers/SmoothScrollProvider";
 
@@ -31,12 +31,15 @@ export function Lightbox({ items, activeIndex, onClose, onNavigate }: LightboxPr
 	}, [activeIndex, items.length, onNavigate]);
 
 	useEffect(() => {
-		gsap.fromTo(backdropRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3 });
-		gsap.fromTo(contentRef.current, { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" });
+		if (!prefersReducedMotion()) {
+			gsap.fromTo(backdropRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+			gsap.fromTo(contentRef.current, { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" });
+		}
 		closeButtonRef.current?.focus();
 	}, []);
 
 	useEffect(() => {
+		if (prefersReducedMotion()) return;
 		gsap.fromTo(contentRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" });
 	}, [activeIndex]);
 

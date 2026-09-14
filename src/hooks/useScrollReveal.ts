@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap-config";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap-config";
 
 interface UseScrollRevealOptions {
   y?: number;
@@ -30,6 +30,10 @@ export function useScrollReveal<T extends HTMLElement>(
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // Leave the content in its natural, visible state. Hiding it here would
+    // depend on a reveal tween that we are about to skip.
+    if (prefersReducedMotion()) return;
 
     const targets = children ? el.children : el;
 
