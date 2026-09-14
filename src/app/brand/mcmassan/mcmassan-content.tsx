@@ -250,7 +250,7 @@ export function McMassanContent() {
 
 			<main className={WRAP}>
 				{/* ---------- 01 boilerplate ---------- */}
-				<Chapter num="01" id="mc-massan" title="MC-Mässan">
+				<Chapter num="01" id="mc-massan" title="Boilerplates">
 					<p className={`${LEDE} mb-7`}>{BOILERPLATE.pendingApproval}</p>
 					<div className="grid gap-4">
 						<div className={`${PANEL} flex flex-col gap-[14px] p-6`}>
