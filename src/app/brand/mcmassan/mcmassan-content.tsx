@@ -310,7 +310,14 @@ export function McMassanContent() {
 										width={logo.width}
 										height={logo.height}
 										sizes="(max-width: 768px) 90vw, 360px"
-										className="h-auto max-h-[110px] w-auto max-w-full object-contain"
+										// The liggande marks are limited by column width and land
+										// around 92px tall, leaving their box at the 150px minimum.
+										// The square one is limited by height instead, so it gets a
+										// tighter cap to keep all three boxes the same height and
+										// the captions on one line.
+										className={`h-auto w-auto max-w-full object-contain ${
+											logo.width === logo.height ? "max-h-[90px]" : "max-h-[110px]"
+										}`}
 									/>
 								</div>
 								<span
@@ -321,7 +328,7 @@ export function McMassanContent() {
 								<a
 									href={logo.src}
 									download={logo.filename}
-									className={`${DOWNLOAD} mt-auto self-start pt-[10px]`}
+									className={`${DOWNLOAD} mt-auto self-start`}
 								>
 									Ladda ner (PNG)
 								</a>
