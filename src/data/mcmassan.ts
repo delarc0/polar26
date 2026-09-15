@@ -37,7 +37,7 @@ export const BOILERPLATE = {
 		{
 			id: "oneliner-b",
 			label: "Alternativ B",
-			text: "600 motorcyklar, 140 utställare; MC-mässan.",
+			text: "600 motorcyklar, 140 utställare: MC-mässan.",
 		},
 	],
 	kort: {
