@@ -5,6 +5,7 @@
 /* -------------------------------------------------------------------------- */
 
 import type { ReactNode } from "react";
+import { PartnerOption } from "./partner-option";
 
 type Project = {
   id: string;
@@ -220,11 +221,8 @@ export function UpcomingProjects() {
 
         {/* Partner options */}
         <div className="mt-14 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {PARTNER_OPTIONS.map((o) => (
-            <div key={o.title} className="bg-background p-6">
-              <p className="font-display text-base font-bold uppercase">{o.title}</p>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{o.text}</p>
-            </div>
+          {PARTNER_OPTIONS.map((o, i) => (
+            <PartnerOption key={o.title} title={o.title} text={o.text} index={i} />
           ))}
         </div>
 
