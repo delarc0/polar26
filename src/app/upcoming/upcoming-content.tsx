@@ -17,6 +17,7 @@ type Project = {
   story: string;
   produce: string[];
   reach: string[];
+  audience: { value: string; label: string }[];
   price: string;
   image?: { src: string; alt: string; shape?: "landscape" | "square" | "portrait" };
   link?: { href: string; caption: string; label: string };
@@ -44,6 +45,11 @@ const PROJECTS: Project[] = [
       "Skoovby: 675k followers on Instagram",
       "Part of the MC Mässan 2027 campaign (January 2027, Elmia, Jönköping)",
     ],
+    audience: [
+      { value: "30M+", label: "Monthly views worldwide" },
+      { value: "5 markets", label: "US, Germany, France, Spain and Sweden" },
+      { value: "18 to 35", label: "Core audience, men" },
+    ],
     price: "From €2,000",
     image: {
       src: "/images/upcoming/skoovby-rider.webp",
@@ -64,15 +70,20 @@ const PROJECTS: Project[] = [
     when: "21 to 24 October 2026",
     where: "Gotland, Sweden",
     story:
-      "Jens Byggmark races Gotland Grand National again, and we go with him. The trip over, the crew, the pits and race day. The whole experience around the race, not just the results.",
+      "Jens Byggmark races Gotland Grand National again, and we go with him as ambassadors for Yamaha Motor Europe. The trip over, the crew, the pits and race day. The whole experience around the race, not just the results.",
     produce: [
       "1 YouTube episode, “The Gotland Experience”",
       "Reels and short clips",
       "Photos",
     ],
     reach: [
-      "Our YouTube channel: 5k to 60k views per episode",
-      "Riders' Instagram accounts: about 40k views per post on average",
+      "Our YouTube channel",
+      "Riders' Instagram accounts",
+    ],
+    audience: [
+      { value: "8k to 60k", label: "Views per YouTube episode" },
+      { value: "70k", label: "Average views per organic post" },
+      { value: "Household name", label: "In Sweden, from TV, sport and entertainment" },
     ],
     price: "From €1,000",
     image: { src: "/images/upcoming/gotland-jens.webp", alt: "Jens Byggmark in his garage" },
@@ -88,9 +99,14 @@ const PROJECTS: Project[] = [
       "Patrik tries speedway as an amateur, coached by Kim Nilsson, the only Swede to qualify for the 2027 Speedway GP. No brakes, no gears, one very fast teacher.",
     produce: ["YouTube episode on our channel", "Short-format assets for partners", "Photos"],
     reach: [
-      "Our YouTube channel: 5k to 60k views per episode",
+      "Our YouTube channel",
       "Kim Nilsson and Patrik's Instagram",
       "Partner channels",
+    ],
+    audience: [
+      { value: "8k to 60k", label: "Views per YouTube episode" },
+      { value: "Global stage", label: "Kim races the 2027 world championship" },
+      { value: "Booming niche", label: "A rare chance for brand activation in a fast-growing sport" },
     ],
     price: "From €2,000",
     image: { src: "/images/upcoming/speedway-kim-wheelie.webp", alt: "Kim Nilsson wheelie on a speedway track" },
@@ -174,6 +190,22 @@ function ProjectBlock({ p }: { p: Project }) {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        <div className="mt-8">
+          <p className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground">
+            Who&apos;s watching
+          </p>
+          <div className="mt-3 grid gap-px bg-border sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+            {p.audience.map((a) => (
+              <div key={a.label} className="bg-background py-4 sm:px-4 sm:first:pl-0 lg:px-0 xl:px-4 xl:first:pl-0">
+                <p className="font-display text-base sm:text-lg font-bold uppercase leading-tight text-polar-lime">
+                  {a.value}
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{a.label}</p>
+              </div>
+            ))}
           </div>
         </div>
 
