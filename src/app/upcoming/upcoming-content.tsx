@@ -87,8 +87,9 @@ const PROJECTS: Project[] = [
       "Patrik tries speedway as an amateur, coached by Kim Nilsson, the only Swede to qualify for the 2027 Speedway GP. No brakes, no gears, one very fast teacher.",
     produce: ["YouTube episode on our channel", "Short-format assets for partners", "Photos"],
     reach: [
-      "Our YouTube channel",
+      "Our YouTube channel: 5k to 60k views per episode",
       "Kim Nilsson and Patrik's Instagram",
+      "Partner channels",
     ],
     price: "From €2,000",
     image: { src: "/images/upcoming/speedway-kim-wheelie.webp", alt: "Kim Nilsson wheelie on a speedway track" },
