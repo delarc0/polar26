@@ -16,7 +16,7 @@ type Project = {
   story: string;
   produce: string[];
   reach: string[];
-  prices: { label: string; value: string }[];
+  price: string;
   image?: { src: string; alt: string; shape?: "landscape" | "square" | "portrait" };
   link?: { href: string; caption: string; label: string };
 };
@@ -43,12 +43,7 @@ const PROJECTS: Project[] = [
       "Skoovby: 675k followers on Instagram",
       "Part of the MC Mässan 2027 campaign (January 2027, Elmia, Jönköping)",
     ],
-    prices: [
-      { label: "Appearance in the reel", value: "From €1,500" },
-      { label: "Photo and clip pack (organic and internal use only)", value: "From €1,500" },
-      { label: "Standalone collab post", value: "From €3,000" },
-      { label: "Skoovby YouTube episode", value: "TBD" },
-    ],
+    price: "From €1,500",
     image: {
       src: "/images/upcoming/skoovby-rider.webp",
       alt: "Skoovby with his supermoto",
@@ -78,7 +73,7 @@ const PROJECTS: Project[] = [
       "Our YouTube channel: 5k to 60k views per episode",
       "Riders' Instagram accounts: about 40k views per post on average",
     ],
-    prices: [{ label: "Silent exposure or content for your own channels", value: "From €1,000" }],
+    price: "From €1,000",
     image: { src: "/images/upcoming/gotland-jens.webp", alt: "Jens Byggmark in his garage" },
   },
   {
@@ -96,7 +91,7 @@ const PROJECTS: Project[] = [
       "Kim Nilsson and Speedway GP on Instagram",
       "Possible release on the Speedway GP YouTube channel (pending)",
     ],
-    prices: [{ label: "Basic exposure", value: "From €2,000 + products" }],
+    price: "From €2,000 + products",
     image: { src: "/images/upcoming/speedway-kim-wheelie.webp", alt: "Kim Nilsson wheelie on a speedway track" },
   },
 ];
@@ -181,15 +176,9 @@ function ProjectBlock({ p }: { p: Project }) {
           </div>
         </div>
 
-        <dl className="mt-8 divide-y divide-border border-y border-border">
-          {p.prices.map((price) => (
-            <div key={price.label} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4">
-              <dt className="text-sm text-muted-foreground">{price.label}</dt>
-              <dd className="font-display text-lg sm:text-xl font-bold uppercase text-polar-lime">
-                {price.value}
-              </dd>
-            </div>
-          ))}
+        <dl className="mt-8 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-y border-border py-4">
+          <dt className="text-sm text-muted-foreground">Get involved</dt>
+          <dd className="font-display text-lg sm:text-xl font-bold uppercase text-polar-lime">{p.price}</dd>
         </dl>
 
         {p.link && (
