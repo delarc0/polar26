@@ -66,7 +66,7 @@ const PROJECTS: Project[] = [
     ],
     prices: [
       { label: "Appearance in the reel", value: "From €1,500" },
-      { label: "Photo and clip pack", value: "From €1,000" },
+      { label: "Photo and clip pack (organic and internal use only)", value: "From €1,500" },
       { label: "Collab posts", value: "On request" },
     ],
     image: {
