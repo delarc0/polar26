@@ -203,7 +203,7 @@ function ProjectBlock({ p }: { p: Project }) {
               rel="noopener noreferrer"
               className="mt-3 inline-block text-base sm:text-lg text-foreground underline underline-offset-4 hover:text-polar-lime transition-colors"
             >
-              {p.link.label} &rarr;
+              {p.link.label}&nbsp;&rarr;
             </a>
           </div>
         )}
