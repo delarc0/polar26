@@ -89,7 +89,6 @@ const PROJECTS: Project[] = [
     reach: [
       "Our YouTube channel",
       "Kim Nilsson and Patrik's Instagram",
-      "Possible release on the Speedway GP YouTube channel and Instagram (pending)",
     ],
     price: "From €2,000",
     image: { src: "/images/upcoming/speedway-kim-wheelie.webp", alt: "Kim Nilsson wheelie on a speedway track" },
