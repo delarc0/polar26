@@ -18,7 +18,7 @@ type Project = {
   reach: string[];
   prices: { label: string; value: string }[];
   image?: { src: string; alt: string; shape?: "landscape" | "square" | "portrait" };
-  embed?: { src: string; caption: string };
+  link?: { href: string; caption: string; label: string };
 };
 
 const PARTNER_OPTIONS = [
@@ -30,29 +30,8 @@ const PARTNER_OPTIONS = [
 
 const PROJECTS: Project[] = [
   {
-    id: "gotland",
-    number: "01",
-    title: "Gotland Grand National",
-    withWho: "with Jens Byggmark",
-    when: "21 to 24 October 2026",
-    where: "Gotland, Sweden",
-    story:
-      "Jens Byggmark races Gotland Grand National again, and we go with him. The trip over, the crew, the pits and race day. The whole experience around the race, not just the results.",
-    produce: [
-      "1 YouTube episode, “The Gotland Experience” (about 20 min)",
-      "Reels and short clips",
-      "Photos",
-    ],
-    reach: [
-      "Our YouTube channel: 5k to 60k views per episode",
-      "Riders' Instagram accounts: about 40k views per post on average",
-    ],
-    prices: [{ label: "Silent exposure or content for your own channels", value: "From €1,000" }],
-    image: { src: "/images/upcoming/gotland-jens.webp", alt: "Jens Byggmark in his garage" },
-  },
-  {
     id: "skoovby",
-    number: "02",
+    number: "01",
     title: "Skoovby does the Toprak Challenge",
     withWho: "with Skoovby",
     when: "Around 19 October 2026",
@@ -75,10 +54,32 @@ const PROJECTS: Project[] = [
       alt: "Skoovby with his supermoto",
       shape: "square",
     },
-    embed: {
-      src: "https://www.instagram.com/reel/CrBdQ6SIDnO/embed",
+    link: {
+      href: "https://www.instagram.com/reel/CrBdQ6SIDnO/",
       caption: "The original",
+      label: "Watch Toprak's original reel on Instagram",
     },
+  },
+  {
+    id: "gotland",
+    number: "02",
+    title: "Gotland Grand National",
+    withWho: "with Jens Byggmark",
+    when: "21 to 24 October 2026",
+    where: "Gotland, Sweden",
+    story:
+      "Jens Byggmark races Gotland Grand National again, and we go with him. The trip over, the crew, the pits and race day. The whole experience around the race, not just the results.",
+    produce: [
+      "1 YouTube episode, “The Gotland Experience” (about 20 min)",
+      "Reels and short clips",
+      "Photos",
+    ],
+    reach: [
+      "Our YouTube channel: 5k to 60k views per episode",
+      "Riders' Instagram accounts: about 40k views per post on average",
+    ],
+    prices: [{ label: "Silent exposure or content for your own channels", value: "From €1,000" }],
+    image: { src: "/images/upcoming/gotland-jens.webp", alt: "Jens Byggmark in his garage" },
   },
   {
     id: "speedway",
@@ -191,18 +192,19 @@ function ProjectBlock({ p }: { p: Project }) {
           ))}
         </dl>
 
-        {p.embed && (
-          <div className="mt-10 max-w-[360px]">
+        {p.link && (
+          <div className="mt-10">
             <p className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground">
-              {p.embed.caption}
+              {p.link.caption}
             </p>
-            <iframe
-              src={p.embed.src}
-              title={`${p.title}: ${p.embed.caption}`}
-              loading="lazy"
-              allowFullScreen
-              className="mt-3 h-[640px] w-full border-0 bg-white"
-            />
+            <a
+              href={p.link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-block text-base sm:text-lg text-foreground underline underline-offset-4 hover:text-polar-lime transition-colors"
+            >
+              {p.link.label} &rarr;
+            </a>
           </div>
         )}
       </div>
