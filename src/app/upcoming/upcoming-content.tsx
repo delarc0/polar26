@@ -35,7 +35,7 @@ const PROJECTS: Project[] = [
     number: "01",
     title: "Skoovby does the Toprak Challenge",
     withWho: "with Skoovby",
-    when: "Around 19 October 2026",
+    when: "19 October 2026",
     where: "Uppsala / Stockholm",
     story:
       "Toprak Razgatlıoğlu posted a trick. Skoovby recreates it and challenges him back, and the community tags Toprak. The caption reveals Skoovby as headliner of the MC Mässan 2027 stunt show.",
