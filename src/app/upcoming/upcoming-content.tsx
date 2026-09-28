@@ -88,6 +88,7 @@ const PROJECTS: Project[] = [
     audience: [
       { value: "8k to 60k", label: "Views per YouTube episode" },
       { value: "70k", label: "Average views per organic post" },
+      { value: "35 to 54", label: "Core audience, men and women" },
       { value: "Household name", label: "In Sweden, from TV, sport and entertainment" },
     ],
     price: "From €1,500",
@@ -129,7 +130,21 @@ function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
+// Audience cards sit three across, or 2x2 when there are four. They stack in the
+// lg range, where the copy column is too narrow for side-by-side cards.
+const AUDIENCE_GRID = {
+  3: {
+    grid: "sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3",
+    cell: "sm:px-4 sm:first:pl-0 lg:px-0 xl:px-4 xl:first:pl-0",
+  },
+  4: {
+    grid: "sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2",
+    cell: "sm:px-4 sm:odd:pl-0 lg:px-0 xl:px-4 xl:odd:pl-0",
+  },
+};
+
 function ProjectBlock({ p }: { p: Project }) {
+  const audienceGrid = p.audience.length === 4 ? AUDIENCE_GRID[4] : AUDIENCE_GRID[3];
   const shape = (p.video ?? p.image)?.shape;
   const portrait = shape === "portrait";
   const aspectClass =
@@ -215,9 +230,9 @@ function ProjectBlock({ p }: { p: Project }) {
           <p className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground">
             Who&apos;s watching
           </p>
-          <div className="mt-3 grid gap-px bg-border sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+          <div className={`mt-3 grid gap-px bg-border ${audienceGrid.grid}`}>
             {p.audience.map((a) => (
-              <div key={a.label} className="bg-background py-4 sm:px-4 sm:first:pl-0 lg:px-0 xl:px-4 xl:first:pl-0">
+              <div key={a.label} className={`bg-background py-4 ${audienceGrid.cell}`}>
                 <p className="font-display text-base sm:text-lg font-bold uppercase leading-tight text-polar-lime">
                   {a.value}
                 </p>
