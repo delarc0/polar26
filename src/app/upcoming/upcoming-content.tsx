@@ -65,7 +65,7 @@ const PROJECTS: Project[] = [
     story:
       "Jens Byggmark races Gotland Grand National again, and we go with him. The trip over, the crew, the pits and race day. The whole experience around the race, not just the results.",
     produce: [
-      "1 YouTube episode, “The Gotland Experience” (about 20 min)",
+      "1 YouTube episode, “The Gotland Experience”",
       "Reels and short clips",
       "Photos",
     ],
