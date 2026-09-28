@@ -90,7 +90,7 @@ const PROJECTS: Project[] = [
       { value: "70k", label: "Average views per organic post" },
       { value: "Household name", label: "In Sweden, from TV, sport and entertainment" },
     ],
-    price: "From €1,000",
+    price: "From €1,500",
     image: { src: "/images/upcoming/gotland-jens.webp", alt: "Jens Byggmark in his garage" },
   },
   {
