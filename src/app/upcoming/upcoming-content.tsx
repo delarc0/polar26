@@ -23,6 +23,8 @@ type Project = {
   audience: { value: string; label: string }[];
   price: string;
   image?: { src: string; alt: string; shape?: MediaShape };
+  // Desktop only: fills the media column beside the longer copy.
+  secondImage?: { src: string; alt: string };
   // Silent loop shown in place of `image`.
   video?: { src: string; poster: string; label: string; shape?: MediaShape };
   link?: { href: string; caption: string; label: string };
@@ -93,6 +95,7 @@ const PROJECTS: Project[] = [
     ],
     price: "From €1,500",
     image: { src: "/images/upcoming/gotland-jens.webp", alt: "Jens Byggmark in his garage" },
+    secondImage: { src: "/images/upcoming/gotland-patrik-jens.webp", alt: "Patrik Nordström and Jens Byggmark laughing outside Jens's house" },
   },
   {
     id: "speedway",
@@ -181,6 +184,15 @@ function ProjectBlock({ p }: { p: Project }) {
               {p.number}
             </span>
           </div>
+        )}
+        {p.secondImage && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={p.secondImage.src}
+            alt={p.secondImage.alt}
+            loading="lazy"
+            className="mt-4 hidden w-full object-cover bg-secondary aspect-[3/2] lg:block"
+          />
         )}
       </div>
 
