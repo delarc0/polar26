@@ -5,6 +5,7 @@
 /* -------------------------------------------------------------------------- */
 
 import type { ReactNode } from "react";
+import { LoopVideo } from "./loop-video";
 import { PartnerOption } from "./partner-option";
 
 type Project = {
@@ -20,6 +21,8 @@ type Project = {
   audience: { value: string; label: string }[];
   price: string;
   image?: { src: string; alt: string; shape?: "landscape" | "square" | "portrait" };
+  // Silent 5:4 loop shown in place of `image`.
+  video?: { src: string; poster: string; label: string };
   link?: { href: string; caption: string; label: string };
 };
 
@@ -109,7 +112,11 @@ const PROJECTS: Project[] = [
       { value: "Booming niche", label: "A rare chance for brand activation in a fast-growing sport" },
     ],
     price: "From €2,000",
-    image: { src: "/images/upcoming/speedway-kim-wheelie.webp", alt: "Kim Nilsson wheelie on a speedway track" },
+    video: {
+      src: "/images/upcoming/speedway-loop.mp4",
+      poster: "/images/upcoming/speedway-loop-poster.webp",
+      label: "Speedway riders leaving the start gate in front of a packed stand",
+    },
   },
 ];
 
@@ -134,7 +141,14 @@ function ProjectBlock({ p }: { p: Project }) {
     >
       {/* Media */}
       <div className={portrait ? "lg:col-span-4" : "lg:col-span-6"}>
-        {p.image ? (
+        {p.video ? (
+          <LoopVideo
+            src={p.video.src}
+            poster={p.video.poster}
+            label={p.video.label}
+            className="aspect-[5/4] w-full object-cover bg-secondary"
+          />
+        ) : p.image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={p.image.src}
