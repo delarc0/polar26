@@ -43,7 +43,7 @@ const PROJECTS: Project[] = [
       "Skoovby: 675k followers on Instagram",
       "Part of the MC Mässan 2027 campaign (January 2027, Elmia, Jönköping)",
     ],
-    price: "From €1,500",
+    price: "From €2,000",
     image: {
       src: "/images/upcoming/skoovby-rider.webp",
       alt: "Skoovby with his supermoto",
@@ -91,7 +91,7 @@ const PROJECTS: Project[] = [
       "Kim Nilsson and Speedway GP on Instagram",
       "Possible release on the Speedway GP YouTube channel (pending)",
     ],
-    price: "From €2,000 + products",
+    price: "From €2,000",
     image: { src: "/images/upcoming/speedway-kim-wheelie.webp", alt: "Kim Nilsson wheelie on a speedway track" },
   },
 ];
