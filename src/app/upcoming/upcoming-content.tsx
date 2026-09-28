@@ -52,7 +52,7 @@ const PROJECTS: Project[] = [
     ],
     audience: [
       { value: "30M+", label: "Monthly views worldwide" },
-      { value: "5 markets", label: "US, Germany, France, Spain and Sweden" },
+      { value: "Core markets", label: "US, Germany, France, Spain and Sweden" },
       { value: "18 to 35", label: "Core audience, men" },
     ],
     price: "From €2,000",
