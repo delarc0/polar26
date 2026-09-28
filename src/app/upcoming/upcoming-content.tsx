@@ -8,6 +8,8 @@ import type { ReactNode } from "react";
 import { LoopVideo } from "./loop-video";
 import { PartnerOption } from "./partner-option";
 
+type MediaShape = "landscape" | "square" | "portrait";
+
 type Project = {
   id: string;
   number: string;
@@ -20,9 +22,9 @@ type Project = {
   reach: string[];
   audience: { value: string; label: string }[];
   price: string;
-  image?: { src: string; alt: string; shape?: "landscape" | "square" | "portrait" };
-  // Silent 5:4 loop shown in place of `image`.
-  video?: { src: string; poster: string; label: string };
+  image?: { src: string; alt: string; shape?: MediaShape };
+  // Silent loop shown in place of `image`.
+  video?: { src: string; poster: string; label: string; shape?: MediaShape };
   link?: { href: string; caption: string; label: string };
 };
 
@@ -115,7 +117,8 @@ const PROJECTS: Project[] = [
     video: {
       src: "/images/upcoming/speedway-loop.mp4",
       poster: "/images/upcoming/speedway-loop-poster.webp",
-      label: "Speedway riders leaving the start gate in front of a packed stand",
+      label: "Kim Nilsson at the start gate, then racing into the first corner",
+      shape: "portrait",
     },
   },
 ];
@@ -127,11 +130,12 @@ function Eyebrow({ children }: { children: ReactNode }) {
 }
 
 function ProjectBlock({ p }: { p: Project }) {
-  const portrait = p.image?.shape === "portrait";
+  const shape = (p.video ?? p.image)?.shape;
+  const portrait = shape === "portrait";
   const aspectClass =
-    p.image?.shape === "portrait"
+    shape === "portrait"
       ? "aspect-[4/5]"
-      : p.image?.shape === "square"
+      : shape === "square"
         ? "aspect-square"
         : "aspect-[3/2]";
   return (
@@ -146,7 +150,7 @@ function ProjectBlock({ p }: { p: Project }) {
             src={p.video.src}
             poster={p.video.poster}
             label={p.video.label}
-            className="aspect-[5/4] w-full object-cover bg-secondary"
+            className={`w-full object-cover bg-secondary ${aspectClass}`}
           />
         ) : p.image ? (
           // eslint-disable-next-line @next/next/no-img-element
