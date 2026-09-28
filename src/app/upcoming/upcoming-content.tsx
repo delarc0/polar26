@@ -68,6 +68,7 @@ const PROJECTS: Project[] = [
       { label: "Appearance in the reel", value: "From €1,500" },
       { label: "Photo and clip pack (organic and internal use only)", value: "From €1,500" },
       { label: "Standalone collab post", value: "From €3,000" },
+      { label: "Skoovby YouTube episode", value: "TBD" },
     ],
     image: {
       src: "/images/upcoming/skoovby-rider.webp",
