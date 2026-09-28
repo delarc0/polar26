@@ -18,7 +18,6 @@ type Project = {
   reach: string[];
   prices: { label: string; value: string }[];
   image?: { src: string; alt: string; shape?: "landscape" | "square" | "portrait" };
-  extraImage?: { src: string; alt: string; caption: string };
   embed?: { src: string; caption: string };
 };
 
@@ -50,11 +49,6 @@ const PROJECTS: Project[] = [
     ],
     prices: [{ label: "Silent exposure or content for your own channels", value: "From €1,000" }],
     image: { src: "/images/upcoming/gotland-jens.webp", alt: "Jens Byggmark in his garage" },
-    extraImage: {
-      src: "/images/upcoming/gotland-patrik-jens.webp",
-      alt: "Patrik Nordström and Jens Byggmark",
-      caption: "Patrik and Jens",
-    },
   },
   {
     id: "skoovby",
@@ -80,11 +74,6 @@ const PROJECTS: Project[] = [
       alt: "Skoovby with his supermoto",
       shape: "square",
     },
-    extraImage: {
-      src: "/images/upcoming/skoovby-bike.webp",
-      alt: "Skoovby's Yamaha supermoto, number 429",
-      caption: "Skoovby's bike",
-    },
     embed: {
       src: "https://www.instagram.com/reel/CrBdQ6SIDnO/embed",
       caption: "The original",
@@ -107,11 +96,6 @@ const PROJECTS: Project[] = [
     ],
     prices: [{ label: "Basic exposure", value: "From €2,000 + products" }],
     image: { src: "/images/upcoming/speedway-kim-wheelie.webp", alt: "Kim Nilsson wheelie on a speedway track" },
-    extraImage: {
-      src: "/images/upcoming/speedway-kim-trophy.webp",
-      alt: "Kim Nilsson with trophy and medal",
-      caption: "Kim Nilsson",
-    },
   },
 ];
 
@@ -150,18 +134,6 @@ function ProjectBlock({ p }: { p: Project }) {
               {p.number}
             </span>
           </div>
-        )}
-        {p.extraImage && (
-          <figure className="mt-3 w-1/2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={p.extraImage.src}
-              alt={p.extraImage.alt}
-              loading="lazy"
-              className="aspect-[4/5] w-full object-cover bg-secondary"
-            />
-            <figcaption className="mt-2 text-xs text-muted-foreground">{p.extraImage.caption}</figcaption>
-          </figure>
         )}
       </div>
 
