@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -8,14 +8,21 @@ import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useMagnetic } from "@/hooks/useMagnetic";
 import { cn } from "@/lib/utils";
 
-const schema = z.object({
-	name: z.string().min(1, "Name is required"),
-	email: z.string().email("Invalid email address"),
-	company: z.string().optional(),
-	projectType: z.string().optional(),
-	message: z.string().min(1, "Message is required"),
-	turnstileToken: z.string().min(1, "Please complete the security check"),
-});
+const schema = z
+	.object({
+		name: z.string().min(1, "Name is required"),
+		email: z.string().email("Invalid email address"),
+		company: z.string().optional(),
+		projectType: z.string().optional(),
+		subject: z.string().max(150).optional(),
+		message: z.string().min(1, "Message is required"),
+		turnstileToken: z.string().min(1, "Please complete the security check"),
+	})
+	// Partnership enquiries (a subject set from /upcoming) must say who they represent.
+	.refine((d) => !d.subject || !!d.company?.trim(), {
+		path: ["company"],
+		message: "Tell us which company or brand you represent",
+	});
 
 type FormData = z.infer<typeof schema>;
 
@@ -45,6 +52,8 @@ function FloatingField({
 
 export function ContactForm() {
 	const [submitted, setSubmitted] = useState(false);
+	// Set when arriving from a "Get involved" link on /upcoming (?project=...).
+	const [project, setProject] = useState<string | null>(null);
 	const buttonRef = useMagnetic<HTMLButtonElement>(0.2);
 	const turnstileRef = useRef<TurnstileInstance>(null);
 	const {
@@ -58,6 +67,13 @@ export function ContactForm() {
 	});
 
 	const [error, setError] = useState("");
+
+	useEffect(() => {
+		const name = new URLSearchParams(window.location.search).get("project")?.trim().slice(0, 120);
+		if (!name) return;
+		setProject(name);
+		setValue("subject", `Partnership: ${name}`);
+	}, [setValue]);
 
 	const onSubmit = async (data: FormData) => {
 		setError("");
@@ -122,7 +138,22 @@ export function ContactForm() {
 				/>
 			</FloatingField>
 
-			<FloatingField id="company" label="Company">
+			{project && (
+				<FloatingField id="subject" label="Subject" error={errors.subject?.message}>
+					<input
+						id="subject"
+						{...register("subject")}
+						placeholder="Subject"
+						className={inputClasses}
+					/>
+				</FloatingField>
+			)}
+
+			<FloatingField
+				id="company"
+				label={project ? "Company or brand you represent *" : "Company"}
+				error={errors.company?.message}
+			>
 				<input
 					id="company"
 					{...register("company")}

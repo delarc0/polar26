@@ -327,7 +327,14 @@ function ProjectBlock({ p }: { p: Project }) {
         </div>
 
         <dl className="mt-8 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-y border-border py-4">
-          <dt className="text-sm text-muted-foreground">Get involved</dt>
+          <dt>
+            <a
+              href={`/contact?project=${encodeURIComponent(p.title)}`}
+              className="text-sm text-foreground underline underline-offset-4 hover:text-polar-lime transition-colors"
+            >
+              Get involved&nbsp;&rarr;
+            </a>
+          </dt>
           <dd className="font-display text-lg sm:text-xl font-bold uppercase text-polar-lime">{p.price}</dd>
         </dl>
 

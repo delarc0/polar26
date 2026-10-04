@@ -9,6 +9,7 @@ const contactSchema = z.object({
   email: z.string().email("Invalid email address").max(254),
   company: z.string().max(100).optional(),
   projectType: z.string().max(100).optional(),
+  subject: z.string().max(150).optional(),
   message: z.string().min(1, "Message is required").max(5000),
   turnstileToken: z.string().min(1, "Security check required"),
 });
@@ -24,12 +25,14 @@ function buildEmail({
   email,
   company,
   projectType,
+  subject,
   message,
 }: {
   name: string;
   email: string;
   company?: string;
   projectType?: string;
+  subject?: string;
   message: string;
 }) {
   const html = `<!DOCTYPE html>
@@ -55,6 +58,10 @@ function buildEmail({
               <td style="padding:12px 16px;color:#999;font-size:13px;">Email</td>
               <td style="padding:12px 16px;color:#FAFAFA;font-size:14px;">${escapeHtml(email)}</td>
             </tr>
+            ${subject ? `<tr>
+              <td style="padding:12px 16px;color:#999;font-size:13px;">Subject</td>
+              <td style="padding:12px 16px;color:#FAFAFA;font-size:14px;">${escapeHtml(subject)}</td>
+            </tr>` : ""}
             ${company ? `<tr>
               <td style="padding:12px 16px;color:#999;font-size:13px;">Company</td>
               <td style="padding:12px 16px;color:#FAFAFA;font-size:14px;">${escapeHtml(company)}</td>
@@ -107,6 +114,15 @@ export async function POST(req: NextRequest) {
     }
 
     const { name, email, company, projectType, message, turnstileToken } = parsed.data;
+    const subjectLine = parsed.data.subject?.trim();
+
+    // Partnership enquiries from /upcoming must name the company they represent.
+    if (subjectLine && !company?.trim()) {
+      return NextResponse.json(
+        { error: "Tell us which company or brand you represent" },
+        { status: 400 }
+      );
+    }
 
     const ip = req.headers.get("cf-connecting-ip") ?? req.headers.get("x-forwarded-for") ?? "unknown";
     const turnstileOk = await verifyTurnstile(turnstileToken, ip);
@@ -114,8 +130,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Security check failed. Please try again." }, { status: 400 });
     }
 
-    const subject = `Contact form: ${name}`;
-    const html = buildEmail({ name, email, company, projectType, message });
+    const subject = subjectLine ? `${subjectLine} (${name})` : `Contact form: ${name}`;
+    const html = buildEmail({ name, email, company, projectType, subject: subjectLine, message });
 
     after(async () => {
       if (!resend) {
