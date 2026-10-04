@@ -4,7 +4,7 @@ import { UpcomingProjects } from "./upcoming-content";
 export const metadata: Metadata = {
   title: "Upcoming projects",
   description:
-    "Three moto productions Polar26 is shooting this fall, with room for partners.",
+    "Moto productions Polar26 is shooting this fall and developing next, with room for partners.",
   alternates: {
     canonical: "https://polar26.com/upcoming",
   },
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     url: "https://polar26.com/upcoming",
     title: "Upcoming projects | Polar26",
     description:
-      "Three moto productions Polar26 is shooting this fall, with room for partners.",
+      "Moto productions Polar26 is shooting this fall and developing next, with room for partners.",
     images: [{ url: "https://polar26.com/opengraph-image", width: 1200, height: 630, alt: "Polar26 - Creative Agency" }],
   },
   robots: {

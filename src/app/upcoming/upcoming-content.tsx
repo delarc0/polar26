@@ -4,7 +4,7 @@
 /*  Images: drop files in /public/images/upcoming/ and set `image` per project.*/
 /* -------------------------------------------------------------------------- */
 
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { LoopVideo } from "./loop-video";
 import { PartnerOption } from "./partner-option";
 
@@ -127,27 +127,76 @@ const PROJECTS: Project[] = [
   },
 ];
 
+// Not date-confirmed yet: shown under "In development", with a season instead of a date.
+const IN_DEVELOPMENT: Project[] = [
+  {
+    id: "kb-bomberleague",
+    number: "04",
+    title: "KB_bomberleague Photoshoot",
+    withWho: "with Karl Bryngelsson and Sporthoj of Sweden",
+    when: "Late Q4 2026 · date TBD",
+    where: "Gothenburg, Sweden",
+    story:
+      "A photoshoot with Karl Bryngelsson (KB_bomberleague), the most respected and engaging name in the community, activated on the Sporthoj forum. A way to reach a new audience that puts a high demand on authenticity.",
+    produce: [
+      "Photoshoot with Karl Bryngelsson",
+      "Behind-the-scenes reels for social media",
+      "Forum activation on Sporthoj",
+    ],
+    reach: [
+      "Sporthoj of Sweden, on Facebook and the web",
+      "Karl Bryngelsson on Facebook",
+      "KB_bomberleague on Instagram",
+    ],
+    audience: [
+      { value: "Most respected", label: "Name in the community" },
+      { value: "Authenticity first", label: "An audience that ignores classic ads" },
+    ],
+    price: "From €1,500",
+    image: {
+      src: "/images/upcoming/kb-bomberleague.webp",
+      alt: "Karl Bryngelsson leaning over his Honda CBR on an autumn park path",
+      shape: "portrait",
+    },
+  },
+];
+
+// Handles like "KB_bomberleague" are one long word; let narrow phones wrap them
+// after the underscore instead of pushing the page wider than the screen.
+function withUnderscoreBreaks(text: string) {
+  return text.split("_").map((part, i) => (
+    <Fragment key={i}>
+      {i > 0 && (
+        <>
+          _<wbr />
+        </>
+      )}
+      {part}
+    </Fragment>
+  ));
+}
+
 function Eyebrow({ children }: { children: ReactNode }) {
   return (
     <p className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">{children}</p>
   );
 }
 
-// Audience cards sit three across, or 2x2 when there are four. They stack in the
-// lg range, where the copy column is too narrow for side-by-side cards.
+// Audience cards sit three across, or two across for an even count (2 or 4).
+// They stack in the lg range, where the copy column is too narrow for side-by-side cards.
 const AUDIENCE_GRID = {
-  3: {
+  three: {
     grid: "sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3",
     cell: "sm:px-4 sm:first:pl-0 lg:px-0 xl:px-4 xl:first:pl-0",
   },
-  4: {
+  two: {
     grid: "sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2",
     cell: "sm:px-4 sm:odd:pl-0 lg:px-0 xl:px-4 xl:odd:pl-0",
   },
 };
 
 function ProjectBlock({ p }: { p: Project }) {
-  const audienceGrid = p.audience.length === 4 ? AUDIENCE_GRID[4] : AUDIENCE_GRID[3];
+  const audienceGrid = p.audience.length % 2 === 0 ? AUDIENCE_GRID.two : AUDIENCE_GRID.three;
   const shape = (p.video ?? p.image)?.shape;
   const portrait = shape === "portrait";
   const aspectClass =
@@ -202,7 +251,7 @@ function ProjectBlock({ p }: { p: Project }) {
           {p.number} &middot; {p.when}
         </Eyebrow>
         <h2 className="mt-4 text-[clamp(1.75rem,4vw,2.75rem)] font-display font-bold uppercase leading-[1.05]">
-          {p.title}
+          {withUnderscoreBreaks(p.title)}
         </h2>
         <p className="mt-2 text-base sm:text-lg text-muted-foreground">
           {p.withWho} &middot; {p.where}
@@ -290,7 +339,8 @@ export function UpcomingProjects() {
             Upcoming projects
           </h1>
           <p className="mt-6 text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Three moto productions we&apos;re shooting this fall. The riders, crew and channels are
+            Moto productions we&apos;re shooting this fall, and a few we&apos;re developing next. The
+            riders, crew and channels are
             already booked, so partners can come in for extra exposure without paying for a full
             production.
           </p>
@@ -309,6 +359,23 @@ export function UpcomingProjects() {
             <ProjectBlock key={p.id} p={p} />
           ))}
         </div>
+
+        {/* In development */}
+        <section className="mt-24 sm:mt-32">
+          <header className="max-w-3xl">
+            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold uppercase leading-[1.02]">
+              In development
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
+              Projects we&apos;re still shaping. Come in early and have a say in how they turn out.
+            </p>
+          </header>
+          <div className="mt-12 sm:mt-16 space-y-20 sm:space-y-28">
+            {IN_DEVELOPMENT.map((p) => (
+              <ProjectBlock key={p.id} p={p} />
+            ))}
+          </div>
+        </section>
 
         {/* Footer */}
         <div className="mt-24 border-t border-border pt-10 flex flex-wrap items-end justify-between gap-6">
