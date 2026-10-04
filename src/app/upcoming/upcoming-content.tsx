@@ -22,7 +22,8 @@ type Project = {
   reach: string[];
   audience: { value: string; label: string }[];
   price: string;
-  image?: { src: string; alt: string; shape?: MediaShape };
+  // `caption` labels photos that aren't ours, e.g. "Reference".
+  image?: { src: string; alt: string; shape?: MediaShape; caption?: string };
   // Desktop only: fills the media column beside the longer copy.
   secondImage?: { src: string; alt: string };
   // Silent loop shown in place of `image`.
@@ -172,6 +173,11 @@ const IN_DEVELOPMENT: Project[] = [
     reach: ["Our YouTube channel", "Patrik's Instagram", "Partner channels"],
     audience: [{ value: "8k to 60k", label: "Views per YouTube episode" }],
     price: "From €1,000",
+    image: {
+      src: "/images/upcoming/sprinter-reference.webp",
+      alt: "Converted Mercedes Sprinter with the rear doors open, showing a bike bay under a raised bed",
+      caption: "Reference",
+    },
   },
 ];
 
@@ -228,13 +234,18 @@ function ProjectBlock({ p }: { p: Project }) {
             className={`w-full object-cover bg-secondary ${aspectClass}`}
           />
         ) : p.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={p.image.src}
-            alt={p.image.alt}
-            loading="lazy"
-            className={`w-full object-cover bg-secondary ${aspectClass}`}
-          />
+          <figure>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={p.image.src}
+              alt={p.image.alt}
+              loading="lazy"
+              className={`w-full object-cover bg-secondary ${aspectClass}`}
+            />
+            {p.image.caption && (
+              <figcaption className="mt-2 text-xs text-muted-foreground">{p.image.caption}</figcaption>
+            )}
+          </figure>
         ) : (
           <div className="flex aspect-[3/2] w-full items-end bg-secondary p-6">
             <span className="font-display text-[clamp(3rem,10vw,7rem)] font-bold leading-none text-foreground/10">
