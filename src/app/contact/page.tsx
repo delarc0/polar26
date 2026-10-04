@@ -14,6 +14,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
-  return <ContactPageContent />;
+// `?project=` comes from the "Get involved" links on /upcoming and switches the
+// page into a partnership enquiry. Read on the server so the regular intro
+// never flashes before the partnership one.
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ project?: string | string[] }>;
+}) {
+  const { project } = await searchParams;
+  const name = typeof project === "string" ? project.trim().slice(0, 120) : "";
+  return <ContactPageContent project={name || undefined} />;
 }

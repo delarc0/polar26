@@ -1,17 +1,20 @@
 import { SITE } from "@/data/site";
 import { Mail, MapPin } from "lucide-react";
 
-export function ContactInfo() {
+// `partnership` drops the general pitch for enquiries coming from /upcoming.
+export function ContactInfo({ partnership = false }: { partnership?: boolean }) {
   return (
     <div className="space-y-8">
       <div>
         <h2 className="text-lg font-display font-bold uppercase">
           Get In Touch
         </h2>
-        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-          Have a project in mind? We would love to hear about it. Drop us a
-          message and we will get back to you within 24 hours.
-        </p>
+        {!partnership && (
+          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+            Have a project in mind? We would love to hear about it. Drop us a
+            message and we will get back to you within 24 hours.
+          </p>
+        )}
       </div>
 
       <div className="space-y-4">
