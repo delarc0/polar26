@@ -4,7 +4,7 @@
 /*  Images: drop files in /public/images/upcoming/ and set `image` per project.*/
 /* -------------------------------------------------------------------------- */
 
-import { Fragment, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { LoopVideo } from "./loop-video";
 import { PartnerOption } from "./partner-option";
 
@@ -132,7 +132,7 @@ const IN_DEVELOPMENT: Project[] = [
   {
     id: "kb-bomberleague",
     number: "04",
-    title: "KB_bomberleague Photoshoot",
+    title: "Sportbike community activation",
     withWho: "with Karl Bryngelsson and Sporthoj of Sweden",
     when: "Late Q4 2026 · date TBD",
     where: "Gothenburg, Sweden",
@@ -161,19 +161,13 @@ const IN_DEVELOPMENT: Project[] = [
   },
 ];
 
-// Handles like "KB_bomberleague" are one long word; let narrow phones wrap them
-// after the underscore instead of pushing the page wider than the screen.
-function withUnderscoreBreaks(text: string) {
-  return text.split("_").map((part, i) => (
-    <Fragment key={i}>
-      {i > 0 && (
-        <>
-          _<wbr />
-        </>
-      )}
-      {part}
-    </Fragment>
-  ));
+// Caps the title size so its longest word (e.g. the handle "KB_bomberleague",
+// which must never break) fits the phone's width. The uppercase display face
+// runs about 0.81em per character; 0.82 leaves a little room. Below sm the
+// column is the viewport minus 3rem of padding; wider screens never hit the cap.
+function titleFontSize(title: string) {
+  const longest = Math.max(...title.split(/\s+/).map((w) => w.length));
+  return `min(clamp(1.75rem, 4vw, 2.75rem), calc((100vw - 3rem) / ${(longest * 0.82).toFixed(2)}))`;
 }
 
 function Eyebrow({ children }: { children: ReactNode }) {
@@ -250,8 +244,11 @@ function ProjectBlock({ p }: { p: Project }) {
         <Eyebrow>
           {p.number} &middot; {p.when}
         </Eyebrow>
-        <h2 className="mt-4 text-[clamp(1.75rem,4vw,2.75rem)] font-display font-bold uppercase leading-[1.05]">
-          {withUnderscoreBreaks(p.title)}
+        <h2
+          className="mt-4 font-display font-bold uppercase leading-[1.05]"
+          style={{ fontSize: titleFontSize(p.title) }}
+        >
+          {p.title}
         </h2>
         <p className="mt-2 text-base sm:text-lg text-muted-foreground">
           {p.withWho} &middot; {p.where}
