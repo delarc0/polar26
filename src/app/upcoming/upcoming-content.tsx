@@ -163,14 +163,15 @@ const IN_DEVELOPMENT: Project[] = [
     id: "sprinter",
     number: "05",
     title: "Sprinter race van build",
-    withWho: "with North of Normal TV and build partners",
+    withWho: "with Tom Söderström, Jens Byggmark and North of Normal TV",
     when: "Q4 2026 · date TBD",
+    where: "Stockholm, Sweden",
     story:
       "We turn a Mercedes Sprinter into a race and production van, with room for two motorcycles, a bed and a workstation. The build becomes a YouTube episode, and the van becomes our base for shoots and race weekends after it.",
     produce: ["YouTube episode on the build", "Build content for social media"],
     reach: ["Our YouTube channel", "Patrik's Instagram", "Partner channels"],
     audience: [{ value: "8k to 60k", label: "Views per YouTube episode" }],
-    price: "On request",
+    price: "From €1,000",
   },
 ];
 
