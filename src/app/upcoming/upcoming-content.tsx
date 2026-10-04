@@ -150,6 +150,7 @@ const IN_DEVELOPMENT: Project[] = [
       "KB_bomberleague on Instagram",
     ],
     audience: [
+      { value: "18k", label: "Sporthoj forum members" },
       { value: "Most respected", label: "Name in the community" },
       { value: "Authenticity first", label: "An audience that ignores classic ads" },
     ],
@@ -196,9 +197,11 @@ function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-// Audience cards sit three across, or two across for an even count (2 or 4).
+// Audience cards sit three across, two across for an even count (2 or 4), or
+// full width when there is only one (an empty grid cell would show as a grey block).
 // They stack in the lg range, where the copy column is too narrow for side-by-side cards.
 const AUDIENCE_GRID = {
+  one: { grid: "", cell: "" },
   three: {
     grid: "sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3",
     cell: "sm:px-4 sm:first:pl-0 lg:px-0 xl:px-4 xl:first:pl-0",
@@ -210,9 +213,13 @@ const AUDIENCE_GRID = {
 };
 
 function ProjectBlock({ p }: { p: Project }) {
-  const audienceGrid = p.audience.length % 2 === 0 ? AUDIENCE_GRID.two : AUDIENCE_GRID.three;
+  const audienceGrid =
+    p.audience.length === 1
+      ? AUDIENCE_GRID.one
+      : p.audience.length % 2 === 0
+        ? AUDIENCE_GRID.two
+        : AUDIENCE_GRID.three;
   const shape = (p.video ?? p.image)?.shape;
-  const portrait = shape === "portrait";
   const aspectClass =
     shape === "portrait"
       ? "aspect-[4/5]"
@@ -225,7 +232,9 @@ function ProjectBlock({ p }: { p: Project }) {
       className="grid gap-8 lg:gap-14 border-t border-border pt-12 sm:pt-16 lg:grid-cols-12"
     >
       {/* Media */}
-      <div className={portrait ? "lg:col-span-4" : "lg:col-span-6"}>
+      {/* Same split for every project so the copy column lines up down the page.
+          Tall media is capped on tablets, where full width would fill the screen. */}
+      <div className={`lg:col-span-5 ${shape === "portrait" || shape === "square" ? "sm:max-w-md lg:max-w-none" : ""}`}>
         {p.video ? (
           <LoopVideo
             src={p.video.src}
@@ -265,7 +274,7 @@ function ProjectBlock({ p }: { p: Project }) {
       </div>
 
       {/* Copy */}
-      <div className={portrait ? "lg:col-span-8" : "lg:col-span-6"}>
+      <div className="lg:col-span-7">
         <Eyebrow>
           {p.number} &middot; {p.when}
         </Eyebrow>
