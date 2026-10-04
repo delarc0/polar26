@@ -7,6 +7,7 @@ import { z } from "zod";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useMagnetic } from "@/hooks/useMagnetic";
 import { cn } from "@/lib/utils";
+import { InvestmentSlider } from "./InvestmentSlider";
 
 const schema = z
 	.object({
@@ -35,9 +36,6 @@ const PROJECT_TYPES = [
 	"Product Strategy",
 	"Other",
 ];
-
-// Partnership enquiries only. Starts at the lowest "From" price on /upcoming.
-const BUDGETS = ["€1,000 to €2,500", "€2,500 to €5,000", "€5,000 to €10,000", "€10,000+", "Not sure yet"];
 
 const inputClasses = "w-full h-12 bg-secondary border border-white/[0.06] px-3 text-sm text-foreground placeholder-transparent focus:outline-none focus:ring-1 focus:ring-polar-lime transition-all";
 const textareaClasses = "w-full bg-secondary border border-white/[0.06] px-3 pt-6 pb-3 text-sm text-foreground placeholder-transparent focus:outline-none focus:ring-1 focus:ring-polar-lime transition-all resize-none";
@@ -205,12 +203,10 @@ export function ContactForm({ project }: { project?: string }) {
 			</FloatingField>
 
 			{project ? (
-				<SelectField
-					id="budget"
-					label="Investment size (optional)"
-					options={BUDGETS}
-					registration={register("budget")}
-				/>
+				<>
+					<InvestmentSlider onChange={(value) => setValue("budget", value)} />
+					<input type="hidden" {...register("budget")} />
+				</>
 			) : (
 				<SelectField
 					id="projectType"
