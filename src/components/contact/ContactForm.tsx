@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
@@ -14,6 +14,7 @@ const schema = z
 		email: z.string().email("Invalid email address"),
 		company: z.string().optional(),
 		projectType: z.string().optional(),
+		budget: z.string().optional(),
 		subject: z.string().max(150).optional(),
 		message: z.string().min(1, "Message is required"),
 		turnstileToken: z.string().min(1, "Please complete the security check"),
@@ -26,7 +27,20 @@ const schema = z
 
 type FormData = z.infer<typeof schema>;
 
-const PROJECT_TYPES = ["Film", "Brand", "Digital", "Events", "Other"];
+const PROJECT_TYPES = [
+	"Brand Activation",
+	"Content Production",
+	"Strategic Partnerships",
+	"Athlete Management",
+	"Product Strategy",
+	"Other",
+];
+
+// Partnership enquiries only. Starts at the lowest "From" price on /upcoming.
+const BUDGETS = ["€1,000 to €2,500", "€2,500 to €5,000", "€5,000 to €10,000", "€10,000+", "Not sure yet"];
+
+const inputClasses = "w-full h-12 bg-secondary border border-white/[0.06] px-3 text-sm text-foreground placeholder-transparent focus:outline-none focus:ring-1 focus:ring-polar-lime transition-all";
+const textareaClasses = "w-full bg-secondary border border-white/[0.06] px-3 pt-6 pb-3 text-sm text-foreground placeholder-transparent focus:outline-none focus:ring-1 focus:ring-polar-lime transition-all resize-none";
 
 function FloatingField({
 	id,
@@ -51,6 +65,43 @@ function FloatingField({
 }
 
 // `project` is set when arriving from a "Get involved" link on /upcoming.
+function SelectField({
+	id,
+	label,
+	options,
+	registration,
+}: {
+	id: string;
+	label: string;
+	options: string[];
+	registration: UseFormRegisterReturn;
+}) {
+	return (
+		<FloatingField id={id} label={label}>
+			<div className="relative">
+				<select
+					id={id}
+					{...registration}
+					className={cn(inputClasses, "appearance-none cursor-pointer pr-10")}
+					defaultValue=""
+				>
+					<option value="" disabled hidden></option>
+					{options.map((option) => (
+						<option key={option} value={option}>
+							{option}
+						</option>
+					))}
+				</select>
+				<div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+					<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+						<path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground" />
+					</svg>
+				</div>
+			</div>
+		</FloatingField>
+	);
+}
+
 export function ContactForm({ project }: { project?: string }) {
 	const [submitted, setSubmitted] = useState(false);
 	const buttonRef = useMagnetic<HTMLButtonElement>(0.2);
@@ -107,8 +158,6 @@ export function ContactForm({ project }: { project?: string }) {
 		);
 	}
 
-	const inputClasses = "w-full h-12 bg-secondary border border-white/[0.06] px-3 text-sm text-foreground placeholder-transparent focus:outline-none focus:ring-1 focus:ring-polar-lime transition-all";
-	const textareaClasses = "w-full bg-secondary border border-white/[0.06] px-3 pt-6 pb-3 text-sm text-foreground placeholder-transparent focus:outline-none focus:ring-1 focus:ring-polar-lime transition-all resize-none";
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="space-y-5 sm:space-y-6">
@@ -155,29 +204,20 @@ export function ContactForm({ project }: { project?: string }) {
 				/>
 			</FloatingField>
 
-			{!project && (
-				<FloatingField id="projectType" label="Project Type">
-					<div className="relative">
-						<select
-							id="projectType"
-							{...register("projectType")}
-							className={cn(inputClasses, "appearance-none cursor-pointer pr-10")}
-							defaultValue=""
-						>
-							<option value="" disabled hidden></option>
-							{PROJECT_TYPES.map((type) => (
-								<option key={type} value={type}>
-									{type}
-								</option>
-							))}
-						</select>
-						<div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
-							<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-								<path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground" />
-							</svg>
-						</div>
-					</div>
-				</FloatingField>
+			{project ? (
+				<SelectField
+					id="budget"
+					label="Investment size (optional)"
+					options={BUDGETS}
+					registration={register("budget")}
+				/>
+			) : (
+				<SelectField
+					id="projectType"
+					label="Project Type"
+					options={PROJECT_TYPES}
+					registration={register("projectType")}
+				/>
 			)}
 
 			<FloatingField id="message" label="Message *" error={errors.message?.message}>

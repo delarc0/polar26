@@ -10,6 +10,7 @@ const contactSchema = z.object({
   company: z.string().max(100).optional(),
   projectType: z.string().max(100).optional(),
   subject: z.string().max(150).optional(),
+  budget: z.string().max(50).optional(),
   message: z.string().min(1, "Message is required").max(5000),
   turnstileToken: z.string().min(1, "Security check required"),
 });
@@ -26,6 +27,7 @@ function buildEmail({
   company,
   projectType,
   subject,
+  budget,
   message,
 }: {
   name: string;
@@ -33,6 +35,7 @@ function buildEmail({
   company?: string;
   projectType?: string;
   subject?: string;
+  budget?: string;
   message: string;
 }) {
   const html = `<!DOCTYPE html>
@@ -65,6 +68,10 @@ function buildEmail({
             ${company ? `<tr>
               <td style="padding:12px 16px;color:#999;font-size:13px;">Company</td>
               <td style="padding:12px 16px;color:#FAFAFA;font-size:14px;">${escapeHtml(company)}</td>
+            </tr>` : ""}
+            ${budget ? `<tr>
+              <td style="padding:12px 16px;color:#999;font-size:13px;">Investment size</td>
+              <td style="padding:12px 16px;color:#FAFAFA;font-size:14px;">${escapeHtml(budget)}</td>
             </tr>` : ""}
             ${projectType ? `<tr>
               <td style="padding:12px 16px;color:#999;font-size:13px;">Project Type</td>
@@ -113,7 +120,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { name, email, company, projectType, message, turnstileToken } = parsed.data;
+    const { name, email, company, projectType, budget, message, turnstileToken } = parsed.data;
     const subjectLine = parsed.data.subject?.trim();
 
     // Partnership enquiries from /upcoming must name the company they represent.
@@ -131,7 +138,7 @@ export async function POST(req: NextRequest) {
     }
 
     const subject = subjectLine ? `${subjectLine} (${name})` : `Contact form: ${name}`;
-    const html = buildEmail({ name, email, company, projectType, subject: subjectLine, message });
+    const html = buildEmail({ name, email, company, projectType, subject: subjectLine, budget, message });
 
     after(async () => {
       if (!resend) {
