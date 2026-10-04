@@ -16,7 +16,7 @@ type Project = {
   title: string;
   withWho: string;
   when: string;
-  where: string;
+  where?: string;
   story: string;
   produce: string[];
   reach: string[];
@@ -159,6 +159,19 @@ const IN_DEVELOPMENT: Project[] = [
       shape: "portrait",
     },
   },
+  {
+    id: "sprinter",
+    number: "05",
+    title: "Sprinter race van build",
+    withWho: "with North of Normal TV and build partners",
+    when: "Q4 2026 · date TBD",
+    story:
+      "We turn a Mercedes Sprinter into a race and production van, with room for two motorcycles, a bed and a workstation. The build becomes a YouTube episode, and the van becomes our base for shoots and race weekends after it.",
+    produce: ["YouTube episode on the build", "Build content for social media"],
+    reach: ["Our YouTube channel", "Patrik's Instagram", "Partner channels"],
+    audience: [{ value: "8k to 60k", label: "Views per YouTube episode" }],
+    price: "On request",
+  },
 ];
 
 // Caps the title size so its longest word (e.g. the handle "KB_bomberleague",
@@ -251,7 +264,8 @@ function ProjectBlock({ p }: { p: Project }) {
           {p.title}
         </h2>
         <p className="mt-2 text-base sm:text-lg text-muted-foreground">
-          {p.withWho} &middot; {p.where}
+          {p.withWho}
+          {p.where && <> &middot; {p.where}</>}
         </p>
         <p className="mt-6 text-base sm:text-lg leading-relaxed">{p.story}</p>
 
