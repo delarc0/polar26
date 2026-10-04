@@ -176,6 +176,7 @@ const IN_DEVELOPMENT: Project[] = [
       { value: "8k to 60k", label: "Views per YouTube episode" },
       { value: "70k", label: "Average views per organic post" },
       { value: "18 to 35", label: "Core audience, men and women" },
+      { value: "Crossover", label: "Campervan and motorsport audiences" },
     ],
     price: "From €1,000",
     image: {
