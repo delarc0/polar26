@@ -172,7 +172,11 @@ const IN_DEVELOPMENT: Project[] = [
       "We turn a Mercedes Sprinter into a race and production van, with room for two motorcycles, a bed and a workstation. The build becomes a YouTube episode, and the van becomes our base for shoots and race weekends after it.",
     produce: ["YouTube episode on the build", "Build content for social media"],
     reach: ["Our YouTube channel", "Patrik's Instagram", "Partner channels"],
-    audience: [{ value: "8k to 60k", label: "Views per YouTube episode" }],
+    audience: [
+      { value: "8k to 60k", label: "Views per YouTube episode" },
+      { value: "70k", label: "Average views per organic post" },
+      { value: "18 to 35", label: "Core audience, men and women" },
+    ],
     price: "From €1,000",
     image: {
       src: "/images/upcoming/sprinter-reference.webp",
