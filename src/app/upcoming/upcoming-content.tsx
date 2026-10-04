@@ -145,7 +145,7 @@ const IN_DEVELOPMENT: Project[] = [
       "Forum activation on Sporthoj",
     ],
     reach: [
-      "Sporthoj of Sweden, on Facebook and the web",
+      "Sporthoj of Sweden, on Facebook and website",
       "Karl Bryngelsson on Facebook",
       "KB_bomberleague on Instagram",
     ],
