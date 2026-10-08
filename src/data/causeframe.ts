@@ -21,6 +21,7 @@ export const CAUSEFRAME = {
     { name: "Bear Sanctuary Pristina", location: "Kosovo" },
     { name: "Kids Academy", location: "Kosovo" },
     { name: "Society Biliki", location: "Gori, Georgia" },
+    { name: "Boys & Girls Club of Ghana", location: "Ekumfi, Ghana" },
   ],
 } as const;
 
@@ -36,3 +37,69 @@ export const GEORGIA_PHOTOS = [
 ] as const;
 
 export const GEORGIA_VIDEO_ID = "eXlI276GCjc";
+
+export const GHANA_STATS = [
+  { value: "30", label: "Bikes delivered" },
+  { value: "3", label: "Communities" },
+  { value: "10", label: "Soccer balls" },
+] as const;
+
+export const GHANA_PARTNERS = [
+  {
+    name: "Boys & Girls Club of Ghana",
+    role: "Our partner on the ground, bringing together the kids and communities.",
+  },
+  {
+    name: "Village Bicycle Project",
+    role: "Sourced the bikes we bought, then serviced and delivered them.",
+  },
+] as const;
+
+export const GHANA_HERO = {
+  file: "founders-with-crowd.webp",
+  alt: "Patrik and Nathaniel with the kids and bikes on handover day in Ghana",
+} as const;
+
+export const GHANA_PHOTOS = [
+  { file: "bikes-lined-up.webp", alt: "Rows of bicycles lined up under a pavilion, ready for handover" },
+  { file: "bike-handover.webp", alt: "Kids gathering around the bikes as they are handed out" },
+  { file: "girl-speech.webp", alt: "A girl giving a speech in front of the bikes" },
+  { file: "handshake.webp", alt: "Two women shaking hands during the handover ceremony" },
+  { file: "speech-laughing.webp", alt: "A young woman laughing as she speaks into a microphone" },
+  { file: "kids-gathering.webp", alt: "Kids and adults gathered outside for the handover" },
+] as const;
+
+export const GHANA_PORTRAITS = [
+  { file: "friends-hugging.webp", alt: "Two smiling girls hugging" },
+  { file: "soccer-kick.webp", alt: "A boy kicking a soccer ball on a dirt pitch" },
+  { file: "kids-with-camera.webp", alt: "Two young kids holding an action camera" },
+  { file: "boy-at-window.webp", alt: "A boy leaning out of a green window frame" },
+] as const;
+
+export const COMMUNITY_NEEDS = [
+  {
+    title: "Toilet facilities",
+    cost: "€2,000",
+    body: "Proper, clean toilets for the kids and families who gather there every day.",
+  },
+  {
+    title: "Drinking water pump",
+    cost: "€1,500",
+    body: "A new pump for safe, reliable drinking water.",
+  },
+] as const;
+
+export const CORPORATE_PILLARS = [
+  {
+    title: "Real, traceable impact",
+    body: "Every project is concrete, costed and delivered in person. You know exactly what your money did, down to the last bike.",
+  },
+  {
+    title: "Documented, not staged",
+    body: "Polar26 photographs and films every delivery, so you get content worth publishing, not stock photos.",
+  },
+  {
+    title: "PR and CSR, handled",
+    body: "Press, social and CSR reporting built around the project, so your stakeholders see the work, not just a logo.",
+  },
+] as const;

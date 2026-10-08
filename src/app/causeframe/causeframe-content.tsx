@@ -4,7 +4,18 @@ import Image from "next/image";
 import { useRef } from "react";
 import { RevealText } from "@/components/shared/RevealText";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { CAUSEFRAME, GEORGIA_PHOTOS, GEORGIA_VIDEO_ID } from "@/data/causeframe";
+import {
+	CAUSEFRAME,
+	COMMUNITY_NEEDS,
+	CORPORATE_PILLARS,
+	GEORGIA_PHOTOS,
+	GEORGIA_VIDEO_ID,
+	GHANA_HERO,
+	GHANA_PARTNERS,
+	GHANA_PHOTOS,
+	GHANA_PORTRAITS,
+	GHANA_STATS,
+} from "@/data/causeframe";
 import { GhanaImpactSteps } from "./ghana-impact-steps";
 
 function LinkedInIcon() {
@@ -34,6 +45,8 @@ function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) 
 export function CauseFrameContent() {
 	const whoRef = useScrollReveal<HTMLDivElement>({ y: 30 });
 	const ghanaRef = useScrollReveal<HTMLDivElement>({ y: 30 });
+	const needsRef = useScrollReveal<HTMLDivElement>({ y: 24, stagger: 0.1, children: true });
+	const companiesRef = useScrollReveal<HTMLDivElement>({ y: 24, stagger: 0.08, children: true });
 	const journeyRef = useScrollReveal<HTMLDivElement>({ y: 24, stagger: 0.08, children: true });
 	const foundersRef = useScrollReveal<HTMLDivElement>({ y: 24, stagger: 0.1, children: true });
 	const involvedRef = useScrollReveal<HTMLDivElement>({ y: 24, stagger: 0.08, children: true });
@@ -52,7 +65,7 @@ export function CauseFrameContent() {
 						alt="CauseFrame"
 						width={420}
 						height={98}
-						priority
+						preload
 						className="mt-4 h-auto w-[220px] sm:w-[300px]"
 					/>
 					<RevealText
@@ -65,6 +78,16 @@ export function CauseFrameContent() {
 						CauseFrame is a nonprofit initiative that turns support into real, hands-on
 						projects, delivered in person to the people who need them.
 					</p>
+					<div className="mt-12 sm:mt-16 relative aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9] overflow-hidden bg-secondary">
+						<Image
+							src={`/images/causeframe/ghana/${GHANA_HERO.file}`}
+							alt={GHANA_HERO.alt}
+							fill
+							preload
+							sizes="(max-width: 1280px) 100vw, 1216px"
+							className="object-cover object-[50%_40%]"
+						/>
+					</div>
 				</div>
 			</section>
 
@@ -96,7 +119,7 @@ export function CauseFrameContent() {
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
 					<div ref={ghanaRef}>
 						<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
-							Current Project &middot; Ghana &middot; October 2026
+							Delivered &middot; Ekumfi, Ghana &middot; October 2026
 						</span>
 						<RevealText
 							as="h2"
@@ -107,24 +130,21 @@ export function CauseFrameContent() {
 						<div className="mt-8 grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-16 items-start">
 							<div className="space-y-5 text-base sm:text-lg text-muted-foreground leading-relaxed">
 								<p>
-									This October, CauseFrame is donating bicycles to a local after-school
-									program in Ghana. Patrik and Nathaniel are traveling there to hand over the
-									bikes in person and spend a day with the kids, teaching them to ride.
+									In October, Patrik and Nathaniel traveled to the Ekumfi region of Ghana and
+									handed over 30 bicycles to kids from three different communities, together
+									with our partner Boys &amp; Girls Club of Ghana. Along with the bikes came 10 soccer
+									balls and other sports equipment.
 								</p>
 								<p>
 									For many kids, distance is the biggest barrier between them and school.
-									A bicycle can turn a long walk into a short ride, and free up time and
+									A bicycle turns a long walk into a short ride, and frees up time and
 									energy for everything that comes after.
 								</p>
 							</div>
 							<div className="grid grid-cols-3 gap-4 sm:gap-6">
-								{[
-									{ label: "Location", value: "Ghana" },
-									{ label: "Timing", value: "Oct 2026" },
-									{ label: "Delivered", value: "In Person" },
-								].map((stat) => (
+								{GHANA_STATS.map((stat) => (
 									<div key={stat.label} className="border-t border-polar-lime/40 pt-4">
-										<p className="text-lg sm:text-xl font-display font-bold uppercase text-foreground">
+										<p className="text-3xl sm:text-4xl font-display font-bold uppercase text-foreground">
 											{stat.value}
 										</p>
 										<p className="mt-1 text-xs uppercase tracking-[0.15em] text-muted-foreground">
@@ -134,40 +154,127 @@ export function CauseFrameContent() {
 								))}
 							</div>
 						</div>
-						<GhanaImpactSteps />
 
-						<div className="mt-14 grid sm:grid-cols-2 gap-8 sm:gap-10 border-t border-white/[0.06] pt-10">
-							<div>
-								<p className="text-sm font-display font-bold uppercase tracking-[0.1em] text-foreground">
-									For Individuals
-								</p>
-								<p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-									Chip in toward the bikes and the cost of getting to Ghana, or just follow
-									along and help spread the word before, during, and after the trip.
-								</p>
-							</div>
-							<div>
-								<p className="text-sm font-display font-bold uppercase tracking-[0.1em] text-foreground">
-									For Companies
-								</p>
-								<p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-									Sponsor this trip, or the next one. Not just a logo on a project page,
-									but a genuine investment in real change and lasting brand impact for
-									your company.
-								</p>
-							</div>
-						</div>
-						<div className="mt-8">
-							<a
-								href="mailto:hello@polar26.com?subject=CauseFrame%20-%20Ghana%20Bikes"
-								className="inline-flex items-center gap-2.5 px-6 py-3 bg-primary text-primary-foreground text-xs font-display font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
-							>
-								Get Involved &middot; hello@polar26.com
-							</a>
-							<p className="mt-3 text-xs uppercase tracking-[0.15em] text-muted-foreground">
-								Swish donations: to come
+						<div className="mt-14 border-t border-white/[0.06] pt-10">
+							<p className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
+								Made Possible With
 							</p>
+							<div className="mt-6 grid sm:grid-cols-2 gap-8 sm:gap-10">
+								{GHANA_PARTNERS.map((partner) => (
+									<div key={partner.name}>
+										<p className="text-lg font-display font-bold uppercase text-foreground">
+											{partner.name}
+										</p>
+										<p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+											{partner.role}
+										</p>
+									</div>
+								))}
+							</div>
 						</div>
+					</div>
+
+					<div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
+						{GHANA_PHOTOS.map((photo) => (
+							<div key={photo.file} className="relative aspect-[3/2] overflow-hidden bg-secondary">
+								<Image
+									src={`/images/causeframe/ghana/${photo.file}`}
+									alt={photo.alt}
+									fill
+									sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+									className="object-cover"
+								/>
+							</div>
+						))}
+					</div>
+					<div className="mt-2 sm:mt-3 grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+						{GHANA_PORTRAITS.map((photo) => (
+							<div key={photo.file} className="relative aspect-[3/4] overflow-hidden bg-secondary">
+								<Image
+									src={`/images/causeframe/ghana/${photo.file}`}
+									alt={photo.alt}
+									fill
+									sizes="(max-width: 1024px) 50vw, 25vw"
+									className="object-cover"
+								/>
+							</div>
+						))}
+					</div>
+
+					<GhanaImpactSteps />
+				</div>
+			</section>
+
+			{/* Community needs */}
+			<section className="py-20 sm:py-28 border-t border-white/[0.06]">
+				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+					<div className="grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16">
+						<SectionHeading eyebrow="Community Needs" title="What we saw on the ground" />
+						<p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+							Bikes were the start. Spending time in the communities around Ekumfi, we saw
+							what is needed next. These are concrete, costed projects we want to fund and deliver the same
+							way: in person.
+						</p>
+					</div>
+					<div ref={needsRef} className="mt-12 grid sm:grid-cols-2 gap-8 sm:gap-10">
+						{COMMUNITY_NEEDS.map((need) => (
+							<div key={need.title} className="border-t border-polar-lime/40 pt-5">
+								<div className="flex items-baseline justify-between gap-4">
+									<p className="text-base sm:text-lg font-display font-bold uppercase text-foreground">
+										{need.title}
+									</p>
+									<p className="shrink-0 text-2xl sm:text-3xl font-display font-bold text-polar-lime">
+										{need.cost}
+									</p>
+								</div>
+								<p className="mt-3 text-sm text-muted-foreground leading-relaxed">{need.body}</p>
+							</div>
+						))}
+					</div>
+					<div className="mt-12">
+						<a
+							href="mailto:hello@polar26.com?subject=CauseFrame%20-%20Community%20Needs"
+							className="inline-flex items-center gap-2.5 px-6 py-3 bg-primary text-primary-foreground text-xs font-display font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+						>
+							Fund a project &middot; hello@polar26.com
+						</a>
+					</div>
+				</div>
+			</section>
+
+			{/* For companies */}
+			<section id="for-companies" className="scroll-mt-20 py-20 sm:py-28 border-t border-white/[0.06] bg-card">
+				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+					<div className="grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16">
+						<SectionHeading eyebrow="For Companies" title="Impact you can stand behind" />
+						<p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+							Funding a project like Ghana isn&apos;t charity on the side. Done right, it&apos;s
+							an investment: real change on the ground, and a story your company has earned
+							the right to tell. Through Polar26, every CauseFrame project can come with the
+							PR and CSR work to make that story count.
+						</p>
+					</div>
+					<div ref={companiesRef} className="mt-12 grid sm:grid-cols-3 gap-8 sm:gap-10">
+						{CORPORATE_PILLARS.map((pillar) => (
+							<div key={pillar.title} className="border-t border-polar-lime/40 pt-5">
+								<p className="text-base font-display font-bold uppercase text-foreground">
+									{pillar.title}
+								</p>
+								<p className="mt-2 text-sm text-muted-foreground leading-relaxed">{pillar.body}</p>
+							</div>
+						))}
+					</div>
+					<p className="mt-12 max-w-3xl text-base sm:text-lg text-foreground leading-relaxed">
+						We only partner with companies that want the work to be real. If it&apos;s just
+						for show, we&apos;re not the right fit.
+					</p>
+					<div className="mt-8">
+						<a
+							href="/contact?project=CauseFrame"
+							className="inline-flex items-center gap-2.5 px-6 py-3 bg-primary text-primary-foreground text-xs font-display font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+						>
+							Partner with CauseFrame
+						</a>
 					</div>
 				</div>
 			</section>
@@ -178,8 +285,8 @@ export function CauseFrameContent() {
 					<div ref={journeyRef}>
 						<SectionHeading eyebrow="Since 2025" title="The journey so far" />
 						<p className="mt-6 max-w-3xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-							Before Ghana, CauseFrame worked hands-on with nonprofits across the Balkans and
-							the Caucasus: {CAUSEFRAME.pastWork.map((p, i) => (
+							CauseFrame has worked hands-on with nonprofits across the Balkans, the Caucasus
+							and West Africa: {CAUSEFRAME.pastWork.map((p, i) => (
 								<span key={p.name}>
 									<span className="text-foreground">{p.name}</span> ({p.location})
 									{i < CAUSEFRAME.pastWork.length - 1 ? ", " : "."}
@@ -244,7 +351,7 @@ export function CauseFrameContent() {
 										style={{ objectPosition: founder.focus }}
 									/>
 								</div>
-								<div className="mt-5 flex items-start justify-between gap-4">
+								<div className="mt-5 flex flex-wrap items-start justify-between gap-4">
 									<div>
 										<p className="text-lg font-display font-bold uppercase text-foreground">
 											{founder.name}
@@ -268,23 +375,28 @@ export function CauseFrameContent() {
 				</div>
 			</section>
 
-			{/* Get involved */}
+			{/* What's next */}
 			<section className="py-20 sm:py-28 border-t border-white/[0.06]">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-					<SectionHeading eyebrow="Get Involved" title="Get Involved" />
+					<SectionHeading eyebrow="What's Next" title="Get Involved" />
+					<p className="mt-6 max-w-3xl text-base sm:text-lg text-muted-foreground leading-relaxed">
+						Ghana was the first of many. We&apos;re continuing to deliver bikes and empower
+						movement through sports, one community at a time.
+					</p>
 					<div ref={involvedRef} className="mt-12 grid sm:grid-cols-3 gap-8 sm:gap-10">
 						{[
 							{
-								title: "Support the Trip",
-								body: "Contribute toward the bikes and the journey to Ghana.",
+								title: "Fund a Need",
+								body: "Cover the toilets or the water pump we saw in Ghana.",
 							},
 							{
-								title: "Follow Along",
-								body: "Updates before, during, and after the trip.",
+								title: "Back the Next Delivery",
+								body: "Bikes and sports equipment for the next community.",
 							},
 							{
 								title: "Partner With Us",
-								body: "For companies who want to back a hands-on project.",
+								body: "For companies who want their name on real change, not just a project page.",
+								href: "#for-companies",
 							},
 						].map((item) => (
 							<div key={item.title} className="border-t border-polar-lime/40 pt-5">
@@ -294,15 +406,23 @@ export function CauseFrameContent() {
 								<p className="mt-2 text-sm text-muted-foreground leading-relaxed">
 									{item.body}
 								</p>
+								{"href" in item && (
+									<a
+										href={item.href}
+										className="mt-3 inline-block text-sm text-foreground underline underline-offset-4 hover:text-polar-lime transition-colors"
+									>
+										How it works&nbsp;&uarr;
+									</a>
+								)}
 							</div>
 						))}
 					</div>
 					<div className="mt-12">
 						<a
-							href="mailto:hello@polar26.com?subject=CauseFrame%20-%20Ghana%20Bikes"
+							href="mailto:hello@polar26.com?subject=CauseFrame"
 							className="inline-flex items-center gap-2.5 px-6 py-3 bg-primary text-primary-foreground text-xs font-display font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
 						>
-							hello@polar26.com
+							Get Involved &middot; hello@polar26.com
 						</a>
 					</div>
 				</div>

@@ -4,7 +4,7 @@ import { CauseFrameContent } from "./causeframe-content";
 export const metadata: Metadata = {
   title: "CauseFrame - Nonprofit Initiative Supported by Polar26",
   description:
-    "CauseFrame is a nonprofit initiative co-founded by Patrik Nordström. This October, CauseFrame is donating bicycles to a local after-school program in Ghana.",
+    "CauseFrame is a nonprofit initiative co-founded by Patrik Nordström. In October 2026, CauseFrame delivered 30 bicycles to kids from three communities in Ekumfi, Ghana, with Boys & Girls Club of Ghana.",
   alternates: {
     canonical: "https://polar26.com/causeframe",
   },
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     url: "https://polar26.com/causeframe",
     title: "CauseFrame - Nonprofit Initiative Supported by Polar26",
     description:
-      "CauseFrame is a nonprofit initiative co-founded by Patrik Nordström. This October, CauseFrame is donating bicycles to a local after-school program in Ghana.",
-    images: [{ url: "https://polar26.com/opengraph-image", width: 1200, height: 630, alt: "Polar26 - Creative Agency" }],
+      "CauseFrame is a nonprofit initiative co-founded by Patrik Nordström. In October 2026, CauseFrame delivered 30 bicycles to kids from three communities in Ekumfi, Ghana, with Boys & Girls Club of Ghana.",
+    images: [{ url: "https://polar26.com/images/causeframe/ghana/og.jpg", width: 1200, height: 630, alt: "Patrik and Nathaniel with the kids and bikes on handover day in Ghana" }],
   },
 };
 
@@ -28,7 +28,7 @@ export default function CauseFramePage() {
             "@type": "NGO",
             name: "CauseFrame",
             description:
-              "CauseFrame is a nonprofit initiative delivering hands-on community projects, including bicycle donations to a local after-school program in Ghana.",
+              "CauseFrame is a nonprofit initiative delivering hands-on community projects, including 30 bicycles delivered to kids from three communities in Ekumfi, Ghana.",
             url: "https://polar26.com/causeframe",
             founder: [
               { "@type": "Person", name: "Patrik Nordström" },
