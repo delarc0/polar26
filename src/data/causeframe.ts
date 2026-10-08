@@ -56,7 +56,7 @@ export const GHANA_PARTNERS = [
 ] as const;
 
 export const GHANA_HERO = {
-  file: "founders-with-crowd.webp",
+  file: "hero-founders.webp",
   alt: "Patrik and Nathaniel with the kids and bikes on handover day in Ghana",
 } as const;
 
