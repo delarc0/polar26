@@ -127,7 +127,7 @@ function StepCard({ step, index }: { step: (typeof STEPS)[number]; index: number
 
 	return (
 		<div ref={cardRef} className="relative group z-[1] reveal-init">
-			<span className="absolute -top-8 -left-2 text-[8rem] sm:text-[10rem] font-display font-extrabold uppercase text-white/[0.04] select-none pointer-events-none leading-none">
+			<span className="absolute -top-8 -left-2 text-[8rem] sm:text-[10rem] font-display font-bold uppercase text-white/[0.04] select-none pointer-events-none leading-none">
 				{step.number}
 			</span>
 
@@ -142,10 +142,10 @@ function StepCard({ step, index }: { step: (typeof STEPS)[number]; index: number
 					)}
 				</div>
 
-				<span className="text-xs font-medium tracking-[0.15em] uppercase text-polar-lime/70">
+				<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
 					{step.tag}
 				</span>
-				<h3 className="mt-2 text-2xl sm:text-3xl font-display font-extrabold uppercase">
+				<h3 className="mt-2 text-2xl sm:text-3xl font-display font-bold uppercase">
 					{step.title}
 				</h3>
 				<p className="mt-3 text-sm text-muted-foreground leading-relaxed">
@@ -168,17 +168,17 @@ function StepCard({ step, index }: { step: (typeof STEPS)[number]; index: number
 export function GhanaImpactSteps() {
 	return (
 		<div className="mt-20 sm:mt-24">
-			<div className="text-center max-w-3xl mx-auto">
+			<div className="max-w-3xl">
 				<span className="text-xs font-medium tracking-[0.2em] uppercase text-polar-lime">
 					From Distance To Opportunity
 				</span>
 				<RevealText
 					as="h2"
-					className="mt-4 text-[clamp(2rem,5vw,4rem)] font-display font-extrabold uppercase"
+					className="mt-4 text-[clamp(1.75rem,4.5vw,3rem)] font-display font-bold uppercase"
 				>
 					How A Bike Changes The Equation
 				</RevealText>
-				<p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+				<p className="mt-6 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl">
 					One bike. Three steps. A real shot at staying in school.
 				</p>
 			</div>
