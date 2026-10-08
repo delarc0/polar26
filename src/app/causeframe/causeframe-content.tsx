@@ -76,7 +76,7 @@ export function CauseFrameContent() {
 					</RevealText>
 					<p className="mt-8 max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
 						CauseFrame is a nonprofit initiative that turns support into real, hands-on
-						projects, delivered in person to the people who need them.
+						projects, delivered in person.
 					</p>
 					<div className="mt-12 sm:mt-16 relative aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9] overflow-hidden bg-secondary">
 						<Image
