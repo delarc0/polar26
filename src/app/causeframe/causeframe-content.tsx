@@ -228,6 +228,12 @@ export function CauseFrameContent() {
 									</p>
 								</div>
 								<p className="mt-3 text-sm text-muted-foreground leading-relaxed">{need.body}</p>
+								<a
+									href={`/contact?fund=${need.id}`}
+									className="mt-6 inline-flex items-center gap-2.5 px-6 py-3 bg-primary text-primary-foreground text-xs font-display font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+								>
+									{need.cta}
+								</a>
 							</div>
 						))}
 					</div>

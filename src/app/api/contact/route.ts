@@ -11,6 +11,7 @@ const contactSchema = z.object({
   projectType: z.string().max(100).optional(),
   subject: z.string().max(150).optional(),
   budget: z.string().max(50).optional(),
+  enquiry: z.enum(["partnership", "fund"]).optional(),
   message: z.string().min(1, "Message is required").max(5000),
   turnstileToken: z.string().min(1, "Security check required"),
 });
@@ -124,7 +125,8 @@ export async function POST(req: NextRequest) {
     const subjectLine = parsed.data.subject?.trim();
 
     // Partnership enquiries from /upcoming must name the company they represent.
-    if (subjectLine && !company?.trim()) {
+    // Fund-a-need enquiries from /causeframe can come from individuals.
+    if (subjectLine && parsed.data.enquiry !== "fund" && !company?.trim()) {
       return NextResponse.json(
         { error: "Tell us which company or brand you represent" },
         { status: 400 }

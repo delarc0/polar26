@@ -17,11 +17,13 @@ const schema = z
 		projectType: z.string().optional(),
 		budget: z.string().optional(),
 		subject: z.string().max(150).optional(),
+		enquiry: z.enum(["partnership", "fund"]).optional(),
 		message: z.string().min(1, "Message is required"),
 		turnstileToken: z.string().min(1, "Please complete the security check"),
 	})
 	// Partnership enquiries (a subject set from /upcoming) must say who they represent.
-	.refine((d) => !d.subject || !!d.company?.trim(), {
+	// Fund-a-need enquiries from /causeframe can come from individuals.
+	.refine((d) => !d.subject || d.enquiry === "fund" || !!d.company?.trim(), {
 		path: ["company"],
 		message: "Tell us which company or brand you represent",
 	});
@@ -62,7 +64,6 @@ function FloatingField({
 	);
 }
 
-// `project` is set when arriving from a "Get involved" link on /upcoming.
 function SelectField({
 	id,
 	label,
@@ -100,7 +101,9 @@ function SelectField({
 	);
 }
 
-export function ContactForm({ project }: { project?: string }) {
+// `project` is set when arriving from a "Get involved" link on /upcoming,
+// `need` when arriving from a Community Needs button on /causeframe.
+export function ContactForm({ project, need }: { project?: string; need?: string }) {
 	const [submitted, setSubmitted] = useState(false);
 	const buttonRef = useMagnetic<HTMLButtonElement>(0.2);
 	const turnstileRef = useRef<TurnstileInstance>(null);
@@ -112,7 +115,11 @@ export function ContactForm({ project }: { project?: string }) {
 		reset,
 	} = useForm<FormData>({
 		resolver: zodResolver(schema),
-		defaultValues: { subject: project ? `Partnership: ${project}` : undefined },
+		defaultValues: project
+			? { subject: `Partnership: ${project}`, enquiry: "partnership" }
+			: need
+				? { subject: `Fund a need: ${need}`, enquiry: "fund" }
+				: {},
 	});
 
 	const [error, setError] = useState("");
@@ -178,7 +185,9 @@ export function ContactForm({ project }: { project?: string }) {
 				/>
 			</FloatingField>
 
-			{project && (
+			<input type="hidden" {...register("enquiry")} />
+
+			{(project || need) && (
 				<FloatingField id="subject" label="Subject" error={errors.subject?.message}>
 					<input
 						id="subject"
@@ -191,7 +200,7 @@ export function ContactForm({ project }: { project?: string }) {
 
 			<FloatingField
 				id="company"
-				label={project ? "Company or brand you represent *" : "Company"}
+				label={project ? "Company or brand you represent *" : need ? "Company (optional)" : "Company"}
 				error={errors.company?.message}
 			>
 				<input
@@ -207,7 +216,7 @@ export function ContactForm({ project }: { project?: string }) {
 					<InvestmentSlider onChange={(value) => setValue("budget", value)} />
 					<input type="hidden" {...register("budget")} />
 				</>
-			) : (
+			) : need ? null : (
 				<SelectField
 					id="projectType"
 					label="Project Type"

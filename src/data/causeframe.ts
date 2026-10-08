@@ -78,12 +78,16 @@ export const GHANA_PORTRAITS = [
 
 export const COMMUNITY_NEEDS = [
   {
+    id: "toilets",
     title: "Toilet facilities",
+    cta: "Fund the toilets",
     cost: "€2,000",
     body: "Proper, clean toilets for the kids and families who gather there every day.",
   },
   {
+    id: "water-pump",
     title: "Drinking water pump",
+    cta: "Fund the water pump",
     cost: "€1,500",
     body: "A new pump for safe, reliable drinking water.",
   },
